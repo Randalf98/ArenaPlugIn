@@ -5,7 +5,6 @@ import io.github.randalf.project.arenaparts.ArenaController;
 import io.github.randalf.project.ArenaPlugIn;
 import io.github.randalf.project.arenaparts.ArenaMode;
 import io.github.randalf.project.arenaparts.ArenaSecurity;
-import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;

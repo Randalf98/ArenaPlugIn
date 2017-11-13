@@ -1,6 +1,10 @@
 package io.github.randalf.project.arenaparts;
 
 import io.github.randalf.project.ArenaManager;
+import io.github.randalf.project.ArenaPlugIn;
+import io.github.randalf.project.listener.ArenaListener;
+import io.github.randalf.project.listener.DefaultListener;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.block.ChangeBlockEvent;
 import org.spongepowered.api.text.Text;
@@ -15,23 +19,24 @@ public class ArenaSecurity {
     private ArenaController controller;
     private ArenaArea area;
     private ArenaMode mode;
+    private ArenaListener listener;
+
 
     public ArenaSecurity(ArenaController controller,ArenaArea area, ArenaMode mode, String securityString) {
         this.controller = controller;
         this.area = area;
         this.mode = mode;
-        if(securityString == DEFAULT){
-
+        if(securityString.equals(DEFAULT)){
+            if(securityString.equals(DEFAULT)){
+                listener = new DefaultListener();
+                Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), listener);
+            }
         } else {
             ArenaManager.getInstance().removeArena("Securitystring wasn't in specified order. It was: " + securityString, controller);
         }
     }
 
-    @Listener
-    public void onBlockBreaking(ChangeBlockEvent.Break event) {
-        MessageChannel.TO_ALL.send(Text.of(event.getCause().toString()));
-        event.setCancelled(true);
-
+    public ArenaListener getListener() {
+        return listener;
     }
-
 }

@@ -35,6 +35,7 @@ public class ArenaManager {
     }
 
     public void removeArena(String error, ArenaController arenaController){
+        arenaController.removeListener();
         arenaMap.remove(arenaController.getName());
         MessageChannel.TO_CONSOLE.send(Text.of(error));
     }

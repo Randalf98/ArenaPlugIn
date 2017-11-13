@@ -1,6 +1,7 @@
 package io.github.randalf.project.arenaparts;
 
 import io.github.randalf.project.ArenaPlugIn;
+import io.github.randalf.project.listener.ArenaListener;
 import org.spongepowered.api.Sponge;
 
 public class ArenaController {
@@ -26,7 +27,7 @@ public class ArenaController {
        return this.name;
     }
 
-    public void addListener(){
-        Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), security);
+    public void removeListener() {
+        Sponge.getEventManager().unregisterListeners(security.getListener());
     }
 }
