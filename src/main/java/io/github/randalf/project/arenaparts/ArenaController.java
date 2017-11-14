@@ -30,4 +30,8 @@ public class ArenaController {
     public void removeListener() {
         Sponge.getEventManager().unregisterListeners(security.getListener());
     }
+
+    public void disableSpawning() {
+        spawner.stop();
+    }
 }

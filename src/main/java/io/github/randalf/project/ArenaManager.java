@@ -34,9 +34,18 @@ public class ArenaManager {
         }
     }
 
-    public void removeArena(String error, ArenaController arenaController){
+    public void removeArena(String message, ArenaController arenaController){
         arenaController.removeListener();
+        arenaController.disableSpawning();
         arenaMap.remove(arenaController.getName());
-        MessageChannel.TO_CONSOLE.send(Text.of(error));
+        MessageChannel.TO_CONSOLE.send(Text.of(message));
+    }
+
+    public void deleteArena(String arena) {
+        removeArena("Removed arena by User command", arenaMap.get(arena));
+    }
+
+    public boolean mapContains(String mapName) {
+        return arenaMap.containsKey(mapName);
     }
 }
