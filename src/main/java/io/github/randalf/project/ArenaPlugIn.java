@@ -1,6 +1,10 @@
 package io.github.randalf.project;
 
+import com.google.common.reflect.TypeToken;
+import io.github.randalf.project.arenaparts.Arena;
 import io.github.randalf.project.commands.ArenaStartCommand;
+import io.github.randalf.project.serializer.ArenaSerializer;
+import ninja.leaping.configurate.objectmapping.serialize.TypeSerializers;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.Sponge;
@@ -40,6 +44,7 @@ public class ArenaPlugIn {
     @Listener
     public void onInitialization(GameInitializationEvent event) {
         setupCommands();
+        setupSerializer();
         arenaManager = ArenaManager.getInstance();
         instance = this;
     }
@@ -65,6 +70,10 @@ public class ArenaPlugIn {
 
         Sponge.getCommandManager().register(this, arenaStartCommandSpec, "startArena");
         Sponge.getCommandManager().register(this, arenaStopCommandSpec, "stopArena");
+    }
+
+    private void setupSerializer() {
+        TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Arena.class), new ArenaSerializer());
     }
 
     public ArenaManager getArenaManager() {

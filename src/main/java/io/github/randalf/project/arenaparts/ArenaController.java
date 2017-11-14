@@ -34,4 +34,8 @@ public class ArenaController {
     public void disableSpawning() {
         spawner.stop();
     }
+
+    public void startArena() {
+        spawner.spawnEnemys();
+    }
 }

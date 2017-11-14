@@ -41,6 +41,10 @@ public class ArenaManager {
         MessageChannel.TO_CONSOLE.send(Text.of(message));
     }
 
+    public void startArena(String arenaName){
+        arenaMap.get(arenaName).startArena();
+    }
+
     public void deleteArena(String arena) {
         removeArena("Removed arena by User command", arenaMap.get(arena));
     }
