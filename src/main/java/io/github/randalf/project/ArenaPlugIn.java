@@ -24,8 +24,7 @@ import javax.inject.Singleton;
 public class ArenaPlugIn {
 
     public static final String PLUGIN_ID = "arena";
-
-    public static ArenaPlugIn instance;
+    private static ArenaPlugIn instance;
     private ArenaManager arenaManager;
 
     @Inject

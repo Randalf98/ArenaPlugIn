@@ -36,10 +36,10 @@ public class ArenaSpawner {
     }
     private void spawnEnemy(Location<World> spawnLocation,EntityType entity){
         World world = spawnLocation.getExtent();
-        Entity creeper = world
+        Entity entityToSpawn = world
                 .createEntity(entity, spawnLocation.getPosition());
         SpawnCause spawnCause = SpawnCause.builder().type(SpawnTypes.PLUGIN).build();
-        world.spawnEntity(creeper, Cause.source(spawnCause).build());
+        world.spawnEntity(entityToSpawn, Cause.source(spawnCause).build());
     }
 
     public void stop(){
