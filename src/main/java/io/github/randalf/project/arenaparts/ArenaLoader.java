@@ -4,6 +4,8 @@ import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.world.Location;
 
+import java.util.Collection;
+
 public class ArenaLoader {
     public Arena generateByConfig(String config){
         //Dummy Data before Hocon
@@ -12,7 +14,8 @@ public class ArenaLoader {
         Double width = 0d;
         Double heigt = 0d;
         Double lowestPoint = 0d;
-        Arena arena = new Arena(startpoint, length, width, heigt,lowestPoint);
+        Collection<Location> spawnLocations = null;
+        Arena arena = new Arena(startpoint, length, width, heigt,lowestPoint, spawnLocations);
         return arena;
     }
 }

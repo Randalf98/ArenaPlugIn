@@ -17,7 +17,9 @@ public class ArenaStartCommand implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         src.sendMessage(Text.of("Arena will start soon - if implemented"));
-        ArenaPlugIn.getInstance().getArenaManager().addArena(args.<String>getOne("message").get(), new ArenaController(ArenaArea.WORLD, ArenaMode.DEFAULT, ArenaSecurity.DEFAULT));
+        String arenaName = args.<String>getOne("message").get();
+        ArenaPlugIn.getInstance().getArenaManager().addArena(arenaName, new ArenaController(ArenaArea.WORLD, ArenaMode.DEFAULT, ArenaSecurity.DEFAULT));
+        ArenaPlugIn.getInstance().getArenaManager().startArena(arenaName);
         return CommandResult.success();
     }
 }

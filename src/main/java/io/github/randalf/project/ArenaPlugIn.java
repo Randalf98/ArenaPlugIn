@@ -3,12 +3,14 @@ package io.github.randalf.project;
 import com.google.common.reflect.TypeToken;
 import io.github.randalf.project.arenaparts.Arena;
 import io.github.randalf.project.commands.ArenaStartCommand;
+import io.github.randalf.project.commands.ArenaStopCommand;
 import io.github.randalf.project.serializer.ArenaSerializer;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializers;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandManager;
+import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
@@ -57,6 +59,7 @@ public class ArenaPlugIn {
         CommandSpec arenaStartCommandSpec = CommandSpec.builder()
                 .description(Text.of("Arena Start Command"))
                 .permission("io.github.randalf.startArena")
+                .arguments(GenericArguments.remainingJoinedStrings(Text.of("message")))
                 .executor(new ArenaStartCommand())
                 .build();
 
@@ -64,7 +67,8 @@ public class ArenaPlugIn {
         CommandSpec arenaStopCommandSpec = CommandSpec.builder()
                 .description(Text.of("Arena Stop Command"))
                 .permission("io.github.randalf.stopArena")
-                .executor(new ArenaStartCommand())
+                .arguments(GenericArguments.remainingJoinedStrings(Text.of("message")))
+                .executor(new ArenaStopCommand())
                 .build();
 
         Sponge.getCommandManager().register(this, arenaStartCommandSpec, "startArena");

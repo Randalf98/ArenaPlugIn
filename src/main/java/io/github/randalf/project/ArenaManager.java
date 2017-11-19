@@ -1,7 +1,6 @@
 package io.github.randalf.project;
 
 import io.github.randalf.project.arenaparts.ArenaController;
-import io.github.randalf.project.arenaparts.ArenaSecurity;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.channel.MessageChannel;
 
@@ -10,7 +9,7 @@ import java.util.Random;
 
 public class ArenaManager {
 
-    private HashMap<String , ArenaController> arenaMap;
+    private static HashMap<String , ArenaController> arenaMap;
 
     private static ArenaManager instance = null;
 
@@ -20,6 +19,7 @@ public class ArenaManager {
     public static ArenaManager getInstance() {
         if(instance == null) {
             instance = new ArenaManager();
+            arenaMap = new HashMap<>();
         }
         return instance;
     }
