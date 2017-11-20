@@ -10,26 +10,26 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @ConfigSerializable
-public class Arena {
+public class Area {
 
     @Setting(comment = "Startpoint from the location")
     private Location startPoint;
 
-    @Setting(comment = "Length of the Arena")
+    @Setting(comment = "Length of the Area")
     private Double length;
 
-    @Setting(comment = "Width of the Arena")
+    @Setting(comment = "Width of the Area")
     private Double width;
 
-    @Setting(comment = "Height of the allowed Arena")
+    @Setting(comment = "Height of the allowed Area")
     private Double height;
 
-    @Setting(comment = "Lowest Point in the Arena")
+    @Setting(comment = "Lowest Point in the Area")
     private Double lowestPoint;
 
     private Collection<Location> spawnLocations;
 
-    public Arena(){
+    public Area(){
         //Default values
         setStartPoint(((Player)Sponge.getGame().getServer().getOnlinePlayers().toArray()[0]).getLocation());
         setLength(20.0);
@@ -41,7 +41,7 @@ public class Arena {
         spawnLocations.add(((Player)Sponge.getGame().getServer().getOnlinePlayers().toArray()[0]).getLocation());
     }
 
-    public Arena(Location startPoint, Double length, Double width, Double height, Double lowestPoint, Collection<Location> spawnLocations){
+    public Area(Location startPoint, Double length, Double width, Double height, Double lowestPoint, Collection<Location> spawnLocations){
         setStartPoint(startPoint);
         setLength(length);
         setWidth(width);

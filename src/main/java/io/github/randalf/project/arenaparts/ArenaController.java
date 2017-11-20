@@ -12,7 +12,7 @@ public class ArenaController {
     private ArenaSecurity security;
     private ArenaSpawner spawner;
 
-    public ArenaController(String areaString, String modeString, String securityString){
+    public ArenaController(String areaString, String modeString, String securityString) {
         area = new ArenaArea(this, areaString);
         mode = new ArenaMode(this, modeString);
         security = new ArenaSecurity(this, area, mode ,securityString);

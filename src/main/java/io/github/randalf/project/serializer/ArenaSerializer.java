@@ -1,7 +1,7 @@
 package io.github.randalf.project.serializer;
 
 import com.google.common.reflect.TypeToken;
-import io.github.randalf.project.arenaparts.Arena;
+import io.github.randalf.project.arenaparts.Area;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializer;
@@ -9,25 +9,25 @@ import org.spongepowered.api.world.Location;
 
 import java.util.Collection;
 
-public class ArenaSerializer implements TypeSerializer<Arena>{
+public class ArenaSerializer implements TypeSerializer<Area>{
     @Override
-    public Arena deserialize(TypeToken<?> typeToken, ConfigurationNode configurationNode) throws ObjectMappingException {
+    public Area deserialize(TypeToken<?> typeToken, ConfigurationNode configurationNode) throws ObjectMappingException {
         Location startPoint = configurationNode.getNode("startpoint").getValue(TypeToken.of(Location.class));
         Double length = configurationNode.getNode("length").getDouble();
         Double width = configurationNode.getNode("width").getDouble();
         Double height = configurationNode.getNode("height").getDouble();
         Double lowestPoint = configurationNode.getNode("lowestPoint").getDouble();
         Collection<Location> spawnLocations = configurationNode.getNode("spawnLocations").getValue(TypeToken.of(Collection.class));
-        return new Arena(startPoint, length, width, height, lowestPoint, spawnLocations);
+        return new Area(startPoint, length, width, height, lowestPoint, spawnLocations);
 }
 
     @Override
-    public void serialize(TypeToken<?> typeToken, Arena arena, ConfigurationNode configurationNode) throws ObjectMappingException {
-        configurationNode.getNode("startpoint").setValue(arena.getStartPoint());
-        configurationNode.getNode("length").setValue(arena.getLength());
-        configurationNode.getNode("width").setValue(arena.getWidth());
-        configurationNode.getNode("height").setValue(arena.getHeight());
-        configurationNode.getNode("lowestPoint").setValue(arena.getLowestPoint());
-        configurationNode.getNode("spawnLocations").setValue(arena.getSpawnLocations());
+    public void serialize(TypeToken<?> typeToken, Area area, ConfigurationNode configurationNode) throws ObjectMappingException {
+        configurationNode.getNode("startpoint").setValue(area.getStartPoint());
+        configurationNode.getNode("length").setValue(area.getLength());
+        configurationNode.getNode("width").setValue(area.getWidth());
+        configurationNode.getNode("height").setValue(area.getHeight());
+        configurationNode.getNode("lowestPoint").setValue(area.getLowestPoint());
+        configurationNode.getNode("spawnLocations").setValue(area.getSpawnLocations());
     }
 }
