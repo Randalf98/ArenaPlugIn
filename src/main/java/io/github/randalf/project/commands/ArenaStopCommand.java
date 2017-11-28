@@ -19,7 +19,7 @@ public class ArenaStopCommand implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         src.sendMessage(Text.of("Arena will stop now - if implemented"));
-        String mapName = args.<String>getOne("message").get();
+        String mapName = args.<String>getOne("arenaName").get();
         if(ArenaPlugIn.getInstance().getArenaManager().mapContains(mapName)){
             ArenaPlugIn.getInstance().getArenaManager().deleteArena(mapName);
         } else {

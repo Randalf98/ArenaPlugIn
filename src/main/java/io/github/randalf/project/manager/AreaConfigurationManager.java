@@ -1,5 +1,6 @@
 package io.github.randalf.project.manager;
 
+import com.google.common.reflect.TypeToken;
 import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.ArenaController;
 import io.github.randalf.project.serializer.AreaSerializer;
@@ -27,16 +28,17 @@ public class AreaConfigurationManager {
 
     public AreaConfigurationManager(String objectName, Area area){
         this.area = area;
-        configPath = FileSystems.getDefault().getPath("area", objectName + ".conf");
+        configPath = FileSystems.getDefault().getPath("config", "area\\" + objectName + ".conf");
         if(!configPath.toFile().exists()){
-            configPath.toFile().mkdirs();
+            configPath.toFile().getParentFile().mkdirs();
         }
         configLoader = HoconConfigurationLoader.builder().setPath(configPath).build();
     }
 
     public void save(){
         try {
-            new AreaSerializer().serialize(null, area, configurationNode);
+            configurationNode = configLoader.load();
+            new AreaSerializer().serialize(TypeToken.of(Area.class), area, configurationNode);
             configLoader.save(configurationNode);
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,7 +48,7 @@ public class AreaConfigurationManager {
     public void load(){
         try {
             configurationNode = configLoader.load();
-            area = new AreaSerializer().deserialize(null, configurationNode);
+            area = new AreaSerializer().deserialize(TypeToken.of(Area.class), configurationNode);
         } catch (Exception e) {
             e.printStackTrace();
         }

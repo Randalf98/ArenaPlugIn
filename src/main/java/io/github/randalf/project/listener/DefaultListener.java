@@ -4,6 +4,8 @@ import com.flowpowered.math.vector.Vector3i;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.block.ChangeBlockEvent;
+import org.spongepowered.api.event.filter.cause.Root;
+import org.spongepowered.api.event.filter.type.Include;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.channel.MessageChannel;
 import org.spongepowered.api.world.Chunk;
@@ -20,29 +22,16 @@ public class DefaultListener extends ArenaListener {
     }
 
     @Listener
-    public void onBlockBreaking(ChangeBlockEvent.Break event) {
-        if(event.getCause().first(Player.class).isPresent()){
-            Player player = event.getCause().first(Player.class).get();
-            Vector3i playerPosition = player.getLocation().getChunkPosition();
-            for (Vector3i chunk: areaChunks){
-                if (chunk.equals(playerPosition)){
-                    MessageChannel.TO_ALL.send(Text.of(event.getCause().toString()));
-                    event.setCancelled(true);
-                }
-            }
-        }
-    }
-
-    @Listener
-    public void onBlockPlace(ChangeBlockEvent.Place event) {
-        if (event.getCause().first(Player.class).isPresent()) {
-            Player player = event.getCause().first(Player.class).get();
-            Vector3i playerPosition = player.getLocation().getChunkPosition();
-            for (Vector3i chunk: areaChunks){
-                if (chunk.equals(playerPosition)){
-                    MessageChannel.TO_ALL.send(Text.of(event.getCause().toString()));
-                    event.setCancelled(true);
-                }
+    @Include({
+            ChangeBlockEvent.Break.class,
+            ChangeBlockEvent.Place.class
+    })
+    public void onBlockBreakingAndPlacing(ChangeBlockEvent event, @Root Player player) {
+        Vector3i playerPosition = player.getLocation().getChunkPosition();
+        for (Vector3i chunk: areaChunks){
+            if (chunk.equals(playerPosition)){
+                MessageChannel.TO_ALL.send(Text.of(event.getCause().toString()));
+                event.setCancelled(true);
             }
         }
     }

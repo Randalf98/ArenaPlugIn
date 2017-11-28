@@ -16,6 +16,7 @@ repositories {
 group = 'io.github.randalf98'
 version = '0.1'
 description = 'An example plugin'
+libsDirName = "H:\\Programming\\Sponge\\mods"
 
 dependencies {
     compile 'org.spongepowered:spongeapi:7.0.0-SNAPSHOT'

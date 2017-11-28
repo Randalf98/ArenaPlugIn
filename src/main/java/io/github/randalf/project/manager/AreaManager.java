@@ -73,7 +73,7 @@ public class AreaManager {
         File directory = configPath.toFile();
 
         File[] fList = directory.listFiles();
-        for (File file : fList){
+        for (File file : fList != null ? fList : new File[0]){
             if (file.isFile()){
                 try {
                     AreaConfigurationManager acm = new AreaConfigurationManager(file.getName(), null);

@@ -22,7 +22,8 @@ public class AreaSerializer implements TypeSerializer<Area>{
 
     @Override
     public void serialize(TypeToken<?> typeToken, Area area, ConfigurationNode configurationNode) throws ObjectMappingException {
-        configurationNode.getNode("startpoint").setValue(area.getStartPoint());
+        Location startpoint = area.getStartPoint();
+        configurationNode.getNode("startPoint").setValue(startpoint.getPosition());
         configurationNode.getNode("areaChunks").setValue(area.getAreaChunks());
         configurationNode.getNode("spawnLocations").setValue(area.getSpawnLocations());
     }
