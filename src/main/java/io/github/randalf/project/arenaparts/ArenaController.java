@@ -2,18 +2,26 @@ package io.github.randalf.project.arenaparts;
 
 import io.github.randalf.project.ArenaPlugIn;
 import io.github.randalf.project.listener.ArenaListener;
+import io.github.randalf.project.manager.AreaManager;
+import io.github.randalf.project.manager.ArenaManager;
 import org.spongepowered.api.Sponge;
+
+import javax.inject.Inject;
 
 public class ArenaController {
 
     private String name;
-    private ArenaArea area;
+    private Area area;
     private ArenaMode mode;
     private ArenaSecurity security;
     private ArenaSpawner spawner;
 
+    @Inject
+    AreaManager areaManager;
+
     public ArenaController(String areaString, String modeString, String securityString) {
-        area = new ArenaArea(this, areaString);
+
+        area = areaManager.getArea(areaString);
         mode = new ArenaMode(this, modeString);
         security = new ArenaSecurity(this, area, mode ,securityString);
         spawner = new ArenaSpawner(this, area, mode);
@@ -29,6 +37,7 @@ public class ArenaController {
 
     public void removeListener() {
         Sponge.getEventManager().unregisterListeners(security.getListener());
+        Sponge.getEventManager().unregisterListeners(spawner.getListener());
     }
 
     public void disableSpawning() {

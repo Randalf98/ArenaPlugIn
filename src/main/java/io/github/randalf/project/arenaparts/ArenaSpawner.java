@@ -1,5 +1,10 @@
 package io.github.randalf.project.arenaparts;
 
+import io.github.randalf.project.ArenaPlugIn;
+import io.github.randalf.project.listener.ArenaListener;
+import io.github.randalf.project.listener.DefaultListener;
+import io.github.randalf.project.listener.SpawningListener;
+import io.github.randalf.project.manager.ArenaManager;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntityType;
@@ -13,22 +18,23 @@ import java.util.Collection;
 public class ArenaSpawner {
 
     private ArenaController controller;
-    private ArenaArea area;
+    private Area area;
     private ArenaMode mode;
+    private ArenaListener listener;
 
     private boolean shouldSpawn = true;
 
-    public ArenaSpawner(ArenaController Controller, ArenaArea area, ArenaMode mode) {
+    public ArenaSpawner(ArenaController Controller, Area area, ArenaMode mode) {
         this.controller = controller;
         this.area = area;
         this.mode = mode;
+        this.listener = new SpawningListener(this, area.getAreaChunks());
+        Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), listener);
     }
 
     public void spawnEnemys(){
         if(shouldSpawn){
-            Collection<Player> players = Sponge.getGame().getServer().getOnlinePlayers();
-            Player p = (Player) players.toArray()[0];
-            spawnEnemy(p.getLocation(), EntityTypes.CHICKEN);
+            spawnEnemy((Location<World>)area.getSpawnLocations().toArray()[0], EntityTypes.CHICKEN);
         }
     }
     private void spawnEnemy(Location<World> spawnLocation,EntityType entity){
@@ -40,5 +46,9 @@ public class ArenaSpawner {
 
     public void stop(){
         shouldSpawn = false;
+    }
+
+    public ArenaListener getListener(){
+        return listener;
     }
 }

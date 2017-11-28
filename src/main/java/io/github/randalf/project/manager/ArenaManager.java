@@ -1,4 +1,4 @@
-package io.github.randalf.project;
+package io.github.randalf.project.manager;
 
 import io.github.randalf.project.arenaparts.ArenaController;
 import org.spongepowered.api.text.Text;
