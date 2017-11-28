@@ -1,5 +1,6 @@
 package io.github.randalf.project.arenaparts;
 
+import com.flowpowered.math.vector.Vector3i;
 import ninja.leaping.configurate.objectmapping.Setting;
 import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
 import org.spongepowered.api.Sponge;
@@ -9,6 +10,7 @@ import org.spongepowered.api.world.Location;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 
 @ConfigSerializable
 public class Area {
@@ -16,10 +18,10 @@ public class Area {
     @Setting(comment = "Startpoint from the location")
     private Location startPoint;
 
-    @Setting(comment = "The Chunks of the arena")
-    private Collection<Chunk> areaChunks;
+    @Setting(comment = "The Chunks of the area")
+    private Collection<Vector3i> areaChunks;
 
-    @Setting(comment = "The spawn locations of the arena")
+    @Setting(comment = "The spawn locations of the area")
     private Collection<Location> spawnLocations;
 
     public Area(){
@@ -27,8 +29,11 @@ public class Area {
         Player player = ((Player)Sponge.getGame().getServer().getOnlinePlayers().toArray()[0]);
         setStartPoint(player.getLocation());
 
-        Collection<Chunk> areaChunks = new ArrayList<>();
-        areaChunks.add((player.getWorld().getChunk(player.getLocation().getChunkPosition())).get());
+        Collection<Vector3i> areaChunks = new ArrayList<>();
+        Optional<Chunk> optChunk = player.getWorld().getChunk(player.getLocation().getChunkPosition());
+        if (optChunk.isPresent()){
+            areaChunks.add(optChunk.get().getPosition());
+        }
         setAreaChunks(areaChunks);
 
         Collection<Location> spawnLocations = new ArrayList<>();
@@ -36,7 +41,7 @@ public class Area {
         setSpawnLocations(spawnLocations);
     }
 
-    public Area(Location startPoint, Collection<Chunk> areaChunks, Collection<Location> spawnLocations){
+    public Area(Location startPoint, Collection<Vector3i> areaChunks, Collection<Location> spawnLocations){
         setStartPoint(startPoint);
         setAreaChunks(areaChunks);
         setSpawnLocations(spawnLocations);
@@ -50,15 +55,15 @@ public class Area {
         this.startPoint = startPoint;
     }
 
-    public Collection<Chunk> getAreaChunks() {
+    public Collection<Vector3i> getAreaChunks() {
         return areaChunks;
     }
 
-    public void setAreaChunks(Collection<Chunk> areaChunks) {
+    public void setAreaChunks(Collection<Vector3i> areaChunks) {
         this.areaChunks = areaChunks;
     }
 
-    public void addChunk(Chunk chunk){
+    public void addChunk(Vector3i chunk){
         if(!areaChunks.contains(chunk)){
             areaChunks.add(chunk);
         }

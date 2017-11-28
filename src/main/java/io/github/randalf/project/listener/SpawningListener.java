@@ -14,9 +14,9 @@ import java.util.Collection;
 public class SpawningListener extends ArenaListener {
 
     private ArenaSpawner spawner;
-    private Collection<Chunk> areaChunks;
+    private Collection<Vector3i> areaChunks;
 
-    public SpawningListener(ArenaSpawner spawner, Collection<Chunk> areaChunks) {
+    public SpawningListener(ArenaSpawner spawner, Collection<Vector3i> areaChunks) {
         super();
         this.spawner = spawner;
         this.areaChunks = areaChunks;
@@ -27,8 +27,8 @@ public class SpawningListener extends ArenaListener {
         if(event.getCause().first(Player.class).isPresent()){
             Player player = event.getCause().first(Player.class).get();
             Vector3i playerPosition = player.getLocation().getChunkPosition();
-            for (Chunk chunk: areaChunks){
-                if (chunk.containsBlock(playerPosition)){
+            for (Vector3i chunk: areaChunks){
+                if (chunk.equals(playerPosition)){
                     MessageChannel.TO_ALL.send(Text.of(event.getCause().toString()));
                     spawner.spawnEnemys();
                 }

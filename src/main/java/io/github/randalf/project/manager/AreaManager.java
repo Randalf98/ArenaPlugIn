@@ -1,5 +1,6 @@
 package io.github.randalf.project.manager;
 
+import com.flowpowered.math.vector.Vector3i;
 import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.ArenaArea;
 import org.spongepowered.api.entity.living.player.Player;
@@ -36,9 +37,11 @@ public class AreaManager {
             if(!AreaConfigurationManager.configExists(areaName)){
                 Location startPoint = player.getLocation();
 
-                Collection<Chunk> areaChunks = new ArrayList<>();
+                Collection<Vector3i> areaChunks = new ArrayList<>();
                 Optional<Chunk> optionalChunk = player.getWorld().getChunk(player.getLocation().getChunkPosition());
-                optionalChunk.ifPresent(areaChunks::add);
+                if(optionalChunk.isPresent()){
+                    areaChunks.add(optionalChunk.get().getPosition());
+                }
 
                 Collection<Location> spawnLocations = new ArrayList<>();
                 spawnLocations.add(player.getLocation());
@@ -87,6 +90,8 @@ public class AreaManager {
     public void addChunkToArena(String areaName, Player player) {
         Area area = getArea(areaName);
         Optional<Chunk> optionalChunk = player.getWorld().getChunk(player.getLocation().getChunkPosition());
-        optionalChunk.ifPresent(area::addChunk);
+        if(optionalChunk.isPresent()){
+            area.addChunk(optionalChunk.get().getPosition());
+        }
     }
 }

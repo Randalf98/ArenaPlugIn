@@ -12,9 +12,9 @@ import java.util.Collection;
 
 public class DefaultListener extends ArenaListener {
 
-    private Collection<Chunk> areaChunks;
+    private Collection<Vector3i> areaChunks;
 
-    public DefaultListener(Collection<Chunk> areaChunks) {
+    public DefaultListener(Collection<Vector3i> areaChunks) {
         super();
         this.areaChunks =areaChunks;
     }
@@ -24,8 +24,8 @@ public class DefaultListener extends ArenaListener {
         if(event.getCause().first(Player.class).isPresent()){
             Player player = event.getCause().first(Player.class).get();
             Vector3i playerPosition = player.getLocation().getChunkPosition();
-            for (Chunk chunk: areaChunks){
-                if (chunk.containsBlock(playerPosition)){
+            for (Vector3i chunk: areaChunks){
+                if (chunk.equals(playerPosition)){
                     MessageChannel.TO_ALL.send(Text.of(event.getCause().toString()));
                     event.setCancelled(true);
                 }
@@ -38,12 +38,13 @@ public class DefaultListener extends ArenaListener {
         if (event.getCause().first(Player.class).isPresent()) {
             Player player = event.getCause().first(Player.class).get();
             Vector3i playerPosition = player.getLocation().getChunkPosition();
-            for (Chunk chunk: areaChunks){
-                if (chunk.containsBlock(playerPosition)){
+            for (Vector3i chunk: areaChunks){
+                if (chunk.equals(playerPosition)){
                     MessageChannel.TO_ALL.send(Text.of(event.getCause().toString()));
                     event.setCancelled(true);
                 }
             }
         }
     }
+
 }

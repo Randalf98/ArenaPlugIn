@@ -1,5 +1,6 @@
 package io.github.randalf.project.serializer;
 
+import com.flowpowered.math.vector.Vector3i;
 import com.google.common.reflect.TypeToken;
 import io.github.randalf.project.arenaparts.Area;
 import ninja.leaping.configurate.ConfigurationNode;
@@ -14,7 +15,7 @@ public class AreaSerializer implements TypeSerializer<Area>{
     @Override
     public Area deserialize(TypeToken<?> typeToken, ConfigurationNode configurationNode) throws ObjectMappingException {
         Location startPoint = configurationNode.getNode("startpoint").getValue(TypeToken.of(Location.class));
-        Collection<Chunk> areaChunks = configurationNode.getNode("areaChunks").getValue(TypeToken.of(Collection.class));
+        Collection<Vector3i> areaChunks = configurationNode.getNode("areaChunks").getValue(TypeToken.of(Collection.class));
         Collection<Location> spawnLocations = configurationNode.getNode("spawnLocations").getValue(TypeToken.of(Collection.class));
         return new Area(startPoint, areaChunks, spawnLocations);
 }
