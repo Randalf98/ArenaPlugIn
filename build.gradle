@@ -13,8 +13,6 @@ repositories {
     }
 }
 
-group = 'io.github.randalf98'
-version = '0.1'
 description = 'An example plugin'
 libsDirName = "H:\\Programming\\Sponge\\mods"
 

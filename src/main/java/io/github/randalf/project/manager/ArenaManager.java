@@ -25,13 +25,7 @@ public class ArenaManager {
     }
 
     public void addArena(String arenaName, ArenaController arenaController){
-        while(arenaMap.containsKey(arenaName)){
-            arenaName += Integer.toString((new Random()).nextInt((9-1)+1)+1);
-        }
-        if(!arenaMap.containsValue(arenaController)){
-            arenaController.setName(arenaName);
-            arenaMap.put(arenaName, arenaController);
-        }
+        arenaMap.put(arenaName, arenaController);
     }
 
     public void removeArena(String message, ArenaController arenaController){

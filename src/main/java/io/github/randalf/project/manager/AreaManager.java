@@ -1,5 +1,6 @@
 package io.github.randalf.project.manager;
 
+import com.flowpowered.math.vector.Vector3d;
 import com.flowpowered.math.vector.Vector3i;
 import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.ArenaArea;
@@ -10,10 +11,7 @@ import org.spongepowered.api.world.Location;
 import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.*;
 
 public class AreaManager {
 
@@ -35,18 +33,18 @@ public class AreaManager {
     public void createArea(String areaName,Player player){
         if (!areaMap.containsKey(areaName)){
             if(!AreaConfigurationManager.configExists(areaName)){
-                Location startPoint = player.getLocation();
+                Vector3d startPoint = player.getLocation().getPosition();
 
                 Collection<Vector3i> areaChunks = new ArrayList<>();
                 Optional<Chunk> optionalChunk = player.getWorld().getChunk(player.getLocation().getChunkPosition());
-                if(optionalChunk.isPresent()){
-                    areaChunks.add(optionalChunk.get().getPosition());
-                }
+                optionalChunk.ifPresent(chunk -> areaChunks.add(chunk.getPosition()));
 
-                Collection<Location> spawnLocations = new ArrayList<>();
-                spawnLocations.add(player.getLocation());
+                UUID worldUUID = player.getLocation().getExtent().getUniqueId();
 
-                Area newArea = new Area(startPoint, areaChunks, spawnLocations);
+                Collection<Vector3d> spawnLocations = new ArrayList<>();
+                spawnLocations.add(player.getLocation().getPosition());
+
+                Area newArea = new Area(startPoint, worldUUID, areaChunks, spawnLocations);
 
                 areaMap.put(areaName, newArea);
 
@@ -90,8 +88,6 @@ public class AreaManager {
     public void addChunkToArena(String areaName, Player player) {
         Area area = getArea(areaName);
         Optional<Chunk> optionalChunk = player.getWorld().getChunk(player.getLocation().getChunkPosition());
-        if(optionalChunk.isPresent()){
-            area.addChunk(optionalChunk.get().getPosition());
-        }
+        optionalChunk.ifPresent(chunk -> area.addChunk(chunk.getPosition()));
     }
 }

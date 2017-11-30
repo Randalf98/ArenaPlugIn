@@ -20,15 +20,11 @@ public class ArenaController {
     AreaManager areaManager;
 
     public ArenaController(String areaString, String modeString, String securityString) {
-
+        name = areaString;
         area = areaManager.getArea(areaString);
         mode = new ArenaMode(this, modeString);
         security = new ArenaSecurity(this, area, mode ,securityString);
         spawner = new ArenaSpawner(this, area, mode);
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getName() {

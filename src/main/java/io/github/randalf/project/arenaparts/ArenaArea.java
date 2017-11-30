@@ -8,7 +8,7 @@ public class ArenaArea {
     public static ArenaController controller;
     private String area;
 
-    public ArenaArea(ArenaController controller, String areaString) {
+    public ArenaArea(ArenaController controller, String areaString){
         this.controller = controller;
         if(areaString.equals(WORLD)){
             if(areaString.equals(WORLD)){

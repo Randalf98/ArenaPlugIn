@@ -24,7 +24,7 @@ public class ArenaSpawner {
 
     private boolean shouldSpawn = true;
 
-    public ArenaSpawner(ArenaController Controller, Area area, ArenaMode mode) {
+    public ArenaSpawner(ArenaController Controller, Area area, ArenaMode mode){
         this.controller = controller;
         this.area = area;
         this.mode = mode;
