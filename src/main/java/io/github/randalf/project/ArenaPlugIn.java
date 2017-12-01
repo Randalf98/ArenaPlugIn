@@ -1,5 +1,7 @@
 package io.github.randalf.project;
 
+import com.flowpowered.math.vector.Vector3d;
+import com.flowpowered.math.vector.Vector3i;
 import com.google.common.reflect.TypeToken;
 import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.commands.AreaAddChunkCommand;
@@ -8,6 +10,8 @@ import io.github.randalf.project.commands.ArenaStartCommand;
 import io.github.randalf.project.commands.ArenaStopCommand;
 import io.github.randalf.project.manager.ArenaManager;
 import io.github.randalf.project.serializer.AreaSerializer;
+import io.github.randalf.project.serializer.Vector3dSerializer;
+import io.github.randalf.project.serializer.Vector3iSerializer;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializers;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
@@ -97,6 +101,8 @@ public class ArenaPlugIn {
 
     private void setupSerializer() {
         TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Area.class), new AreaSerializer());
+        TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Vector3d.class), new Vector3dSerializer());
+        TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Vector3i.class), new Vector3iSerializer());
     }
 
     public ArenaManager getArenaManager() {
