@@ -16,6 +16,7 @@ public class ArenaManager {
     protected ArenaManager() {
         // Exists only to defeat instantiation.
     }
+
     public static ArenaManager getInstance() {
         if(instance == null) {
             instance = new ArenaManager();

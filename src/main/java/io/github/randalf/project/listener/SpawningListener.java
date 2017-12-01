@@ -1,25 +1,29 @@
 package io.github.randalf.project.listener;
 
 import com.flowpowered.math.vector.Vector3i;
+import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.ArenaSpawner;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.DestructEntityEvent;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.channel.MessageChannel;
 import org.spongepowered.api.world.Chunk;
+import org.spongepowered.api.world.World;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public class SpawningListener extends ArenaListener {
 
     private ArenaSpawner spawner;
-    private Collection<Vector3i> areaChunks;
+    private Area area;
 
-    public SpawningListener(ArenaSpawner spawner, Collection<Vector3i> areaChunks) {
+    public SpawningListener(ArenaSpawner spawner, Area area) {
         super();
         this.spawner = spawner;
-        this.areaChunks = areaChunks;
+        this.area = area;
     }
 
     @Listener
@@ -27,10 +31,15 @@ public class SpawningListener extends ArenaListener {
         if(event.getCause().first(Player.class).isPresent()){
             Player player = event.getCause().first(Player.class).get();
             Vector3i playerPosition = player.getLocation().getChunkPosition();
-            for (Vector3i chunk: areaChunks){
-                if (chunk.equals(playerPosition)){
-                    MessageChannel.TO_ALL.send(Text.of(event.getCause().toString()));
-                    spawner.spawnEnemys();
+            for (Vector3i chunk: area.getAreaChunks()){
+                Optional<World> optionalWorld = Sponge.getServer().getWorld(area.getWorldUUID());
+                World world;
+                if (optionalWorld.isPresent()){
+                    world = optionalWorld.get();
+                    if(world.getChunk(chunk).get().containsBlock(playerPosition)){
+                        MessageChannel.TO_ALL.send(Text.of(event.getCause().toString()));
+                        spawner.spawnEnemys();
+                    }
                 }
             }
         }
