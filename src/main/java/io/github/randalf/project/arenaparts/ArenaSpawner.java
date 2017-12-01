@@ -5,9 +5,11 @@ import io.github.randalf.project.ArenaPlugIn;
 import io.github.randalf.project.listener.ArenaListener;
 import io.github.randalf.project.listener.SpawningListener;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntityType;
 import org.spongepowered.api.entity.EntityTypes;
+import org.spongepowered.api.text.Text;
 import org.spongepowered.api.world.World;
 
 import java.util.Optional;
@@ -42,6 +44,10 @@ public class ArenaSpawner {
             World world = optionalWorld.get();
             Entity entityToSpawn = world
                     .createEntity(entity, optionalLocation.get());
+            entityToSpawn.offer(Keys.HEIGHT, 50f);
+            entityToSpawn.offer(Keys.GLOWING, true);
+            entityToSpawn.offer(Keys.HEALTH, 0.5);
+            entityToSpawn.offer(Keys.DISPLAY_NAME, (Text.of("Little Chicken")));
             world.spawnEntity(entityToSpawn);
         }
     }
