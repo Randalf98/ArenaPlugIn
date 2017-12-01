@@ -2,19 +2,13 @@ package io.github.randalf.project.manager;
 
 import com.google.common.reflect.TypeToken;
 import io.github.randalf.project.arenaparts.Area;
-import io.github.randalf.project.arenaparts.ArenaController;
 import io.github.randalf.project.serializer.AreaSerializer;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
-import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import org.spongepowered.api.config.DefaultConfig;
-
 import javax.inject.Inject;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 
 public class AreaConfigurationManager {
     @Inject

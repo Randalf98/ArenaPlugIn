@@ -9,10 +9,7 @@ import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.DestructEntityEvent;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.channel.MessageChannel;
-import org.spongepowered.api.world.Chunk;
 import org.spongepowered.api.world.World;
-
-import java.util.Collection;
 import java.util.Optional;
 
 public class SpawningListener extends ArenaListener {

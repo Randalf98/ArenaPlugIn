@@ -1,6 +1,5 @@
 package io.github.randalf.project.commands;
 
-import io.github.randalf.project.arenaparts.ArenaArea;
 import io.github.randalf.project.arenaparts.ArenaController;
 import io.github.randalf.project.ArenaPlugIn;
 import io.github.randalf.project.arenaparts.ArenaMode;

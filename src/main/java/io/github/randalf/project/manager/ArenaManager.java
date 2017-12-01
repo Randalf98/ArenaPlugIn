@@ -3,9 +3,7 @@ package io.github.randalf.project.manager;
 import io.github.randalf.project.arenaparts.ArenaController;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.channel.MessageChannel;
-
 import java.util.HashMap;
-import java.util.Random;
 
 public class ArenaManager {
 

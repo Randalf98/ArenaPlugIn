@@ -1,9 +1,6 @@
 package io.github.randalf.project.arenaparts;
 
-import io.github.randalf.project.ArenaPlugIn;
-import io.github.randalf.project.listener.ArenaListener;
 import io.github.randalf.project.manager.AreaManager;
-import io.github.randalf.project.manager.ArenaManager;
 import org.spongepowered.api.Sponge;
 
 import javax.inject.Inject;

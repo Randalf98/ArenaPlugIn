@@ -1,7 +1,6 @@
 package io.github.randalf.project.arenaparts;
 
 import io.github.randalf.project.manager.ArenaManager;
-import io.github.randalf.project.manager.AreaConfigurationManager;
 
 public class ArenaArea {
     public static final String WORLD = "world";

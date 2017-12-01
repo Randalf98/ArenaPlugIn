@@ -1,15 +1,10 @@
 package io.github.randalf.project.serializer;
 
-import com.flowpowered.math.vector.Vector3d;
 import com.flowpowered.math.vector.Vector3i;
 import com.google.common.reflect.TypeToken;
-import io.github.randalf.project.arenaparts.Area;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializer;
-
-import java.util.Collection;
-import java.util.UUID;
 
 /**
  * Created by b7hunnn on 01.12.2017.

@@ -7,7 +7,6 @@ import io.github.randalf.project.arenaparts.Area;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializer;
-
 import java.util.Collection;
 import java.util.UUID;
 

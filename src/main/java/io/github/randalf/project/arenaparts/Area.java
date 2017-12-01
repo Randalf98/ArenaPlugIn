@@ -7,7 +7,6 @@ import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.world.Chunk;
-import org.spongepowered.api.world.Location;
 
 import java.util.ArrayList;
 import java.util.Collection;

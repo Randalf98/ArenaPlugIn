@@ -3,10 +3,8 @@ package io.github.randalf.project.manager;
 import com.flowpowered.math.vector.Vector3d;
 import com.flowpowered.math.vector.Vector3i;
 import io.github.randalf.project.arenaparts.Area;
-import io.github.randalf.project.arenaparts.ArenaArea;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.world.Chunk;
-import org.spongepowered.api.world.Location;
 
 import java.io.File;
 import java.nio.file.FileSystems;
