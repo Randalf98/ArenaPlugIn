@@ -65,14 +65,14 @@ public class AreaManager {
 
     private void loadAllAreas(){
         areaMap = new HashMap<>();
-        Path configPath = FileSystems.getDefault().getPath("area");
+        Path configPath = FileSystems.getDefault().getPath("config/area");
         File directory = configPath.toFile();
 
         File[] fList = directory.listFiles();
         for (File file : fList != null ? fList : new File[0]){
-            if (file.isFile()){
+            if (file.canRead()){
                 try {
-                    AreaConfigurationManager acm = new AreaConfigurationManager(file.getName(), null);
+                    AreaConfigurationManager acm = new AreaConfigurationManager(file.getName().replaceAll(".conf", ""), null);
                     acm.load();
                     Area area = acm.getArea();
                     areaMap.put(file.getName(), area);

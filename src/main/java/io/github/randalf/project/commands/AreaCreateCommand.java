@@ -1,5 +1,6 @@
 package io.github.randalf.project.commands;
 
+import io.github.randalf.project.ArenaPlugIn;
 import io.github.randalf.project.manager.AreaManager;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
