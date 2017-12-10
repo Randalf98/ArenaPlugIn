@@ -9,14 +9,14 @@ import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 
-public class AreaAddChunkCommand implements CommandExecutor {
+public class AreaAddSpawnPointCommand implements CommandExecutor {
 
-@Override
-public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
+    @Override
+    public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         src.sendMessage(Text.of("Chunk will be added soon - if implemented"));
         String areaName = args.<String>getOne("areaName").get();
         Player player = (Player) src;
-        AreaManager.getInstance().addChunkToArena(areaName, player);
+        AreaManager.getInstance().addSpawnPointToArea(areaName, player);
         return CommandResult.success();
-        }
-        }
+    }
+}

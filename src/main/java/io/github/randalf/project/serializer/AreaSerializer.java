@@ -33,11 +33,13 @@ public class AreaSerializer implements TypeSerializer<Area>{
     public void serialize(TypeToken<?> typeToken, Area area, ConfigurationNode configurationNode) throws ObjectMappingException {
         configurationNode.getNode("startPoint").setValue(TypeToken.of(Vector3d.class), area.getStartPoint());
         configurationNode.getNode("worldUUID").setValue(TypeToken.of(UUID.class),area.getWorldUUID());
+        int i = 0;
         for(Vector3i areaChunk: area.getAreaChunks()){
-            configurationNode.getNode("areaChunks").getNode("chunk").setValue(TypeToken.of(Vector3i.class), areaChunk);
+            configurationNode.getNode("areaChunks").getNode("chunk"+i++).setValue(TypeToken.of(Vector3i.class), areaChunk);
         }
+        i = 0;
         for(Vector3d location: area.getSpawnLocations()){
-            configurationNode.getNode("spawnLocations").getNode("location").setValue(TypeToken.of(Vector3d.class), location);
+            configurationNode.getNode("spawnLocations").getNode("location"+i++).setValue(TypeToken.of(Vector3d.class), location);
         }
     }
 }

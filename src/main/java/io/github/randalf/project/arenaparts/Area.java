@@ -51,6 +51,34 @@ public class Area {
         setSpawnLocations(spawnLocations);
     }
 
+    public boolean addChunk(Vector3i chunk){
+        if(!areaChunks.contains(chunk)){
+            areaChunks.add(chunk);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addSpawnLocation(Vector3d spawnLocation){
+        if(!spawnLocations.contains(spawnLocation)){
+            spawnLocations.add(spawnLocation);
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Player> getPlayerInArea() {
+        ArrayList<Player> playerList = new ArrayList<>();
+        for(Vector3i chunk: areaChunks){
+            for (Player p : Sponge.getServer().getOnlinePlayers()){
+                if(p.getWorld().getUniqueId().equals(worldUUID) && p.getLocation().getChunkPosition().equals(chunk)){
+                    playerList.add(p);
+                }
+            }
+        }
+        return playerList;
+    }
+
     public Vector3d getStartPoint() {
         return startPoint;
     }
@@ -75,23 +103,11 @@ public class Area {
         this.areaChunks = areaChunks;
     }
 
-    public void addChunk(Vector3i chunk){
-        if(!areaChunks.contains(chunk)){
-            areaChunks.add(chunk);
-        }
-    }
-
     public Collection<Vector3d> getSpawnLocations() {
         return spawnLocations;
     }
 
     public void setSpawnLocations(Collection<Vector3d> spawnLocations) {
         this.spawnLocations = spawnLocations;
-    }
-
-    public void addSpawnLocation(Vector3d spawnLocation){
-        if(!spawnLocations.contains(spawnLocation)){
-            spawnLocations.add(spawnLocation);
-        }
     }
 }

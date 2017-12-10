@@ -33,7 +33,7 @@ public class SpawningListener extends ArenaListener {
                 World world;
                 if (optionalWorld.isPresent()){
                     world = optionalWorld.get();
-                    if(world.getChunk(chunk).get().containsBlock(playerPosition)){
+                    if(world.getChunk(chunk).get().getPosition().equals(playerPosition)){
                         MessageChannel.TO_ALL.send(Text.of(event.getCause().toString()));
                         spawner.spawnEnemys();
                     }

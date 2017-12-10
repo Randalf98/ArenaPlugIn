@@ -4,10 +4,7 @@ import com.flowpowered.math.vector.Vector3d;
 import com.flowpowered.math.vector.Vector3i;
 import com.google.common.reflect.TypeToken;
 import io.github.randalf.project.arenaparts.Area;
-import io.github.randalf.project.commands.AreaAddChunkCommand;
-import io.github.randalf.project.commands.AreaCreateCommand;
-import io.github.randalf.project.commands.ArenaStartCommand;
-import io.github.randalf.project.commands.ArenaStopCommand;
+import io.github.randalf.project.commands.*;
 import io.github.randalf.project.manager.ArenaManager;
 import io.github.randalf.project.serializer.AreaSerializer;
 import io.github.randalf.project.serializer.Vector3dSerializer;
@@ -93,10 +90,19 @@ public class ArenaPlugIn {
                 .executor(new AreaAddChunkCommand())
                 .build();
 
+        //Command Spec for adding a Chunk to a Area
+        CommandSpec areaAddSpawnPointCommandSpec = CommandSpec.builder()
+                .description(Text.of("Add Spawnpoint Command"))
+                .permission("io.github.randalf.addSpawnPointToArea")
+                .arguments(GenericArguments.remainingJoinedStrings(Text.of("areaName")))
+                .executor(new AreaAddSpawnPointCommand())
+                .build();
+
         Sponge.getCommandManager().register(this, arenaStartCommandSpec, "startArena");
         Sponge.getCommandManager().register(this, arenaStopCommandSpec, "stopArena");
         Sponge.getCommandManager().register(this, areaCreateCommandSpec, "createArea");
         Sponge.getCommandManager().register(this, areaAddChunkCommandSpec, "addChunkToArea");
+        Sponge.getCommandManager().register(this, areaAddSpawnPointCommandSpec, "addSpawnPointToArea");
     }
 
     private void setupSerializer() {
