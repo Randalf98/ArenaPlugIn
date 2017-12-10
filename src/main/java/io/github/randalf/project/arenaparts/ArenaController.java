@@ -40,4 +40,48 @@ public class ArenaController {
     public void startArena() {
         spawner.spawnEnemys();
     }
+
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArenaMode getMode() {
+        return mode;
+    }
+
+    public void setMode(ArenaMode mode) {
+        this.mode = mode;
+    }
+
+    public ArenaSecurity getSecurity() {
+        return security;
+    }
+
+    public void setSecurity(ArenaSecurity security) {
+        this.security = security;
+    }
+
+    public ArenaSpawner getSpawner() {
+        return spawner;
+    }
+
+    public void setSpawner(ArenaSpawner spawner) {
+        this.spawner = spawner;
+    }
+
+    public AreaManager getAreaManager() {
+        return areaManager;
+    }
+
+    public void setAreaManager(AreaManager areaManager) {
+        this.areaManager = areaManager;
+    }
 }

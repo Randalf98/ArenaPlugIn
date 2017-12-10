@@ -20,15 +20,13 @@ import java.util.*;
 public class ArenaSpawner {
 
     private ArenaController controller;
-    private Area area;
     private ArenaMode mode;
     private ArenaListener listener;
     private boolean shouldSpawn = true;
     private List<Entity> entitiesList;
 
-    ArenaSpawner(ArenaController Controller, Area area, ArenaMode mode){
+    ArenaSpawner(ArenaController controller, Area area, ArenaMode mode){
         this.controller = controller;
-        this.area = area;
         this.mode = mode;
         this.listener = new SpawningListener(this, area);
         Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), listener);
@@ -37,10 +35,9 @@ public class ArenaSpawner {
 
     public void spawnEnemys(){
         if(shouldSpawn){
-            Optional<World> optionalWorld = Sponge.getServer().getWorld(area.getWorldUUID());
             ArrayList<Vector3d> spawnLocations = new ArrayList<>();
-            spawnLocations.addAll(area.getSpawnLocations());
-            Vector3d Location = getBestSpawnLocation(spawnLocations, area.getPlayerInArea());
+            spawnLocations.addAll(controller.getArea().getSpawnLocations());
+            Vector3d Location = getBestSpawnLocation(spawnLocations, controller.getArea().getPlayerInArea());
             cleanEntitiesList();
             while(entitiesList.size()<10){
                 spawnEnemy(Location, EntityTypes.SNOWMAN);
@@ -49,7 +46,7 @@ public class ArenaSpawner {
     }
 
     private void spawnEnemy(Vector3d location, EntityType entity) {
-        Optional<World> optionalWorld = Sponge.getServer().getWorld(area.getWorldUUID());
+        Optional<World> optionalWorld = Sponge.getServer().getWorld(controller.getArea().getWorldUUID());
         if (optionalWorld.isPresent()){
             World world = optionalWorld.get();
             Entity entityToSpawn = world
@@ -63,8 +60,8 @@ public class ArenaSpawner {
     }
 
     private void spawnEnemy(EntityType entity){
-        Optional<World> optionalWorld = Sponge.getServer().getWorld(area.getWorldUUID());
-        Optional<Vector3d> optionalLocation = area.getSpawnLocations().stream().findFirst();
+        Optional<World> optionalWorld = Sponge.getServer().getWorld(controller.getArea().getWorldUUID());
+        Optional<Vector3d> optionalLocation = controller.getArea().getSpawnLocations().stream().findFirst();
         if (optionalWorld.isPresent() && optionalLocation.isPresent()){
             World world = optionalWorld.get();
             Entity entityToSpawn = world
@@ -79,7 +76,6 @@ public class ArenaSpawner {
 
     private Vector3d getBestSpawnLocation(ArrayList<Vector3d> spawnLocations, ArrayList<Player> playerInArea) {
         Vector3d furthestLocation = null;
-        Map<Double, Vector3d> distances = new HashMap<>();
         Double furthestDistance = null;
         for(Vector3d v : spawnLocations){
             Double d = 0d;
@@ -95,16 +91,13 @@ public class ArenaSpawner {
     }
 
     private void cleanEntitiesList() {
-        Iterator iterator = entitiesList.iterator();
         List<Entity> entitiesToRemove = new ArrayList<>();
         for (Entity e : entitiesList){
             if(((Living)e).getHealthData().health().get().equals(0.0d)){
                 entitiesToRemove.add(e);
             }
         }
-        for (Entity e : entitiesToRemove){
-            entitiesList.remove(e);
-        }
+        entitiesList.removeAll(entitiesToRemove);
     }
 
     void stop(){
