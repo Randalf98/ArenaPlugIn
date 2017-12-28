@@ -1,5 +1,6 @@
 package io.github.randalf.project.arenaparts;
 
+import io.github.randalf.project.arenaparts.spawner.ArenaSpawner;
 import io.github.randalf.project.manager.ArenaManager;
 
 public class ArenaMode {

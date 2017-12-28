@@ -1,10 +1,8 @@
 package io.github.randalf.project.arenaparts;
 
+import io.github.randalf.project.arenaparts.spawner.ArenaSpawner;
 import io.github.randalf.project.manager.AreaManager;
 import org.spongepowered.api.Sponge;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 
 public class ArenaController {
 

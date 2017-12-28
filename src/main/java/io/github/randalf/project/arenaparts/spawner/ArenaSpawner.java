@@ -1,8 +1,11 @@
-package io.github.randalf.project.arenaparts;
+package io.github.randalf.project.arenaparts.spawner;
 
 import com.flowpowered.math.vector.Vector3d;
 import com.flowpowered.math.vector.Vector3i;
 import io.github.randalf.project.ArenaPlugIn;
+import io.github.randalf.project.arenaparts.Area;
+import io.github.randalf.project.arenaparts.ArenaController;
+import io.github.randalf.project.arenaparts.ArenaMode;
 import io.github.randalf.project.listener.ArenaListener;
 import io.github.randalf.project.listener.SpawningListener;
 import org.spongepowered.api.Sponge;
@@ -25,7 +28,7 @@ public class ArenaSpawner {
     private boolean shouldSpawn = true;
     private List<Entity> entitiesList;
 
-    ArenaSpawner(ArenaController controller, Area area, ArenaMode mode){
+    public ArenaSpawner(ArenaController controller, Area area, ArenaMode mode){
         this.controller = controller;
         this.mode = mode;
         this.listener = new SpawningListener(this, area);
@@ -100,11 +103,11 @@ public class ArenaSpawner {
         entitiesList.removeAll(entitiesToRemove);
     }
 
-    void stop(){
+    public void stop(){
         shouldSpawn = false;
     }
 
-    ArenaListener getListener(){
+    public ArenaListener getListener(){
         return listener;
     }
 }
