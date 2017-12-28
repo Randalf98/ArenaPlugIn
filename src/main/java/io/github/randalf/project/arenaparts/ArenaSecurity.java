@@ -1,5 +1,6 @@
 package io.github.randalf.project.arenaparts;
 
+import io.github.randalf.project.arenaparts.spawner.SpawnMode;
 import io.github.randalf.project.manager.ArenaManager;
 import io.github.randalf.project.ArenaPlugIn;
 import io.github.randalf.project.listener.ArenaListener;
@@ -14,11 +15,11 @@ public class ArenaSecurity {
     public static final String DEFAULT = "default";
     private ArenaController controller;
     private Area area;
-    private ArenaMode mode;
+    private SpawnMode mode;
     private ArenaListener listener;
 
 
-    public ArenaSecurity(ArenaController controller, Area area, ArenaMode mode, String securityString) {
+    public ArenaSecurity(ArenaController controller, Area area, SpawnMode mode, String securityString) {
         this.controller = controller;
         this.area = area;
         this.mode = mode;

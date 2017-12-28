@@ -1,6 +1,8 @@
 package io.github.randalf.project.arenaparts;
 
 import io.github.randalf.project.arenaparts.spawner.ArenaSpawner;
+import io.github.randalf.project.arenaparts.spawner.FloodMode;
+import io.github.randalf.project.arenaparts.spawner.SpawnMode;
 import io.github.randalf.project.manager.AreaManager;
 import org.spongepowered.api.Sponge;
 
@@ -8,16 +10,16 @@ public class ArenaController {
 
     private String name;
     private Area area;
-    private ArenaMode mode;
+    private SpawnMode mode;
     private ArenaSecurity security;
     private ArenaSpawner spawner;
     private AreaManager areaManager;
 
-    public ArenaController(String areaString, String modeString, String securityString) {
+    public ArenaController(String areaString, String securityString) {
         name = areaString;
         areaManager = AreaManager.getInstance();
         area = areaManager.getArea(name);
-        mode = new ArenaMode(this, modeString);
+        mode = new FloodMode(this);
         security = new ArenaSecurity(this, area, mode ,securityString);
         spawner = new ArenaSpawner(this, area, mode);
     }
@@ -51,11 +53,11 @@ public class ArenaController {
         this.name = name;
     }
 
-    public ArenaMode getMode() {
+    public SpawnMode getMode() {
         return mode;
     }
 
-    public void setMode(ArenaMode mode) {
+    public void setMode(SpawnMode mode) {
         this.mode = mode;
     }
 

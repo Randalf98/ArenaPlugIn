@@ -2,8 +2,8 @@ package io.github.randalf.project.commands;
 
 import io.github.randalf.project.arenaparts.ArenaController;
 import io.github.randalf.project.ArenaPlugIn;
-import io.github.randalf.project.arenaparts.ArenaMode;
 import io.github.randalf.project.arenaparts.ArenaSecurity;
+import io.github.randalf.project.arenaparts.spawner.SpawnMode;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -20,7 +20,7 @@ public class ArenaStartCommand implements CommandExecutor {
         if (args.<String>getOne("arenaName").isPresent()) {
             arenaName = args.<String>getOne("arenaName").get();
         }
-        ArenaPlugIn.getInstance().getArenaManager().addArena(arenaName, new ArenaController(arenaName, ArenaMode.DEFAULT, ArenaSecurity.DEFAULT));
+        ArenaPlugIn.getInstance().getArenaManager().addArena(arenaName, new ArenaController(arenaName, ArenaSecurity.DEFAULT));
         ArenaPlugIn.getInstance().getArenaManager().startArena(arenaName);
         return CommandResult.success();
     }
