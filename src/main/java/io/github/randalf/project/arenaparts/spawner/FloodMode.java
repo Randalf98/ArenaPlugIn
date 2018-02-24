@@ -18,8 +18,8 @@ import java.util.Optional;
 public class FloodMode implements SpawnMode {
 
     private ArenaController controller;
-    private List<Entity> entitiesList;
     private Entity entity;
+    private List<Entity> entitiesList;
 
     public FloodMode(ArenaController controller){
         this.controller = controller;
