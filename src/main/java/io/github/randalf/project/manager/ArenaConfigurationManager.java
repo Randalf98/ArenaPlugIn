@@ -14,7 +14,7 @@ public class ArenaConfigurationManager extends ObjectConfigurationManager{
     private Path configRoot;
 
     private CommentedConfigurationNode configurationNode;
-    private Arena arena;
+    private Arena arena = (Arena) object;
     private Path configPath;
     private static final String OBJECT_TYPE = "Arena";
 

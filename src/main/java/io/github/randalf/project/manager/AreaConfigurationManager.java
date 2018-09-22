@@ -16,9 +16,8 @@ public class AreaConfigurationManager extends ObjectConfigurationManager{
     private Path configRoot;
 
     private CommentedConfigurationNode configurationNode;
-    private Area area;
-    private Path configPath;
     private static final String OBJECT_TYPE = "Area";
+    private Area area = (Area) object;
 
     public AreaConfigurationManager(String objectName, Area area){
         super(OBJECT_TYPE, objectName, area);

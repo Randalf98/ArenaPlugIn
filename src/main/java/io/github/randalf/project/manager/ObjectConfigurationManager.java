@@ -1,6 +1,5 @@
 package io.github.randalf.project.manager;
 
-import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import org.spongepowered.api.config.DefaultConfig;
 
@@ -13,7 +12,7 @@ public abstract class ObjectConfigurationManager {
     @DefaultConfig(sharedRoot = false)
 
     protected HoconConfigurationLoader configLoader;
-    private Object object;
+    protected Object object;
 
     public ObjectConfigurationManager(String objectType, String objectName, Object object){
         this.object = object;
