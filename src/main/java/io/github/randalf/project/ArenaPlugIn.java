@@ -75,6 +75,14 @@ public class ArenaPlugIn {
                 .build();
 
         //Command Spec for creating a Area
+        CommandSpec arenaCreateCommandSpec = CommandSpec.builder()
+                .description(Text.of("Arena Create Command"))
+                .permission("io.github.randalf.createArena")
+                .arguments(GenericArguments.string(Text.of("arenaName")),GenericArguments.string(Text.of("areaName")))
+                .executor(new ArenaCreateCommand())
+                .build();
+
+        //Command Spec for creating a Area
         CommandSpec areaCreateCommandSpec = CommandSpec.builder()
                 .description(Text.of("Area Create Command"))
                 .permission("io.github.randalf.createArea")
@@ -100,6 +108,7 @@ public class ArenaPlugIn {
 
         Sponge.getCommandManager().register(this, arenaStartCommandSpec, "startArena");
         Sponge.getCommandManager().register(this, arenaStopCommandSpec, "stopArena");
+        Sponge.getCommandManager().register(this, arenaCreateCommandSpec, "createArena");
         Sponge.getCommandManager().register(this, areaCreateCommandSpec, "createArea");
         Sponge.getCommandManager().register(this, areaAddChunkCommandSpec, "addChunkToArea");
         Sponge.getCommandManager().register(this, areaAddSpawnPointCommandSpec, "addSpawnPointToArea");

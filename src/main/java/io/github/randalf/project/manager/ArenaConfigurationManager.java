@@ -1,33 +1,31 @@
 package io.github.randalf.project.manager;
 
 import com.google.common.reflect.TypeToken;
-import io.github.randalf.project.arenaparts.Area;
-import io.github.randalf.project.serializer.AreaSerializer;
+import io.github.randalf.project.arenaparts.Arena;
+import io.github.randalf.project.serializer.ArenaSerializer;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
-import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import org.spongepowered.api.config.DefaultConfig;
 import javax.inject.Inject;
-import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
-public class AreaConfigurationManager extends ObjectConfigurationManager{
+public class ArenaConfigurationManager extends ObjectConfigurationManager{
     @Inject
     @DefaultConfig(sharedRoot = false)
     private Path configRoot;
 
     private CommentedConfigurationNode configurationNode;
-    private Area area;
+    private Arena arena;
     private Path configPath;
-    private static final String OBJECT_TYPE = "Area";
+    private static final String OBJECT_TYPE = "Arena";
 
-    public AreaConfigurationManager(String objectName, Area area){
-        super(OBJECT_TYPE, objectName, area);
+    public ArenaConfigurationManager(String objectName, Arena arena){
+        super(OBJECT_TYPE, objectName, arena);
     }
 
     public void save(){
         try {
             configurationNode = configLoader.load();
-            new AreaSerializer().serialize(TypeToken.of(Area.class), area, configurationNode);
+            new ArenaSerializer().serialize(TypeToken.of(Arena.class), arena, configurationNode);
             configLoader.save(configurationNode);
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,13 +35,13 @@ public class AreaConfigurationManager extends ObjectConfigurationManager{
     public void load(){
         try {
             configurationNode = configLoader.load();
-            area = new AreaSerializer().deserialize(TypeToken.of(Area.class), configurationNode);
+            arena = new ArenaSerializer().deserialize(TypeToken.of(Arena.class), configurationNode);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public Area getArea() {
-        return area;
+    public Arena getArena() {
+        return arena;
     }
 }

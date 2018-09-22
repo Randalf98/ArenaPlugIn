@@ -1,14 +1,13 @@
 package io.github.randalf.project.arenaparts.spawner;
 
 import com.flowpowered.math.vector.Vector3d;
-import io.github.randalf.project.arenaparts.ArenaController;
+import io.github.randalf.project.arenaparts.Arena;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
 import java.util.ArrayList;
@@ -17,15 +16,15 @@ import java.util.Optional;
 
 public class FloodMode implements SpawnMode {
 
-    private ArenaController controller;
+    private Arena arena;
     private Entity entity;
     private List<Entity> entitiesList;
 
-    public FloodMode(ArenaController controller){
-        this.controller = controller;
+    public FloodMode(Arena arena){
+        this.arena = arena;
         entitiesList = new ArrayList<>();
-        Optional<World> optionalWorld = Sponge.getServer().getWorld(controller.getArea().getWorldUUID());
-        Optional<Vector3d> optionalLocation = controller.getArea().getSpawnLocations().stream().findFirst();
+        Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getArea().getWorldUUID());
+        Optional<Vector3d> optionalLocation = arena.getArea().getSpawnLocations().stream().findFirst();
         if (optionalWorld.isPresent() && optionalLocation.isPresent()){
             World world = optionalWorld.get();
             entity = world
@@ -39,7 +38,7 @@ public class FloodMode implements SpawnMode {
 
     @Override
     public List<Entity> getNextEntities(Vector3d location) {
-        Optional<World> optionalWorld = Sponge.getServer().getWorld(controller.getArea().getWorldUUID());
+        Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getArea().getWorldUUID());
         List<Entity> entitiesToBeSpawned = new ArrayList<>();
         if(optionalWorld.isPresent()){
             cleanEntitiesList();

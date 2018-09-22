@@ -13,14 +13,14 @@ import javax.inject.Singleton;
 public class ArenaSecurity {
 
     public static final String DEFAULT = "default";
-    private ArenaController controller;
+    private Arena arena;
     private Area area;
     private SpawnMode mode;
     private ArenaListener listener;
 
 
-    public ArenaSecurity(ArenaController controller, Area area, SpawnMode mode, String securityString) {
-        this.controller = controller;
+    public ArenaSecurity(Arena arena, Area area, SpawnMode mode, String securityString) {
+        this.arena = arena;
         this.area = area;
         this.mode = mode;
         if(securityString.equals(DEFAULT)){
@@ -29,7 +29,7 @@ public class ArenaSecurity {
                 Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), listener);
             }
         } else {
-            ArenaManager.getInstance().removeArena("Securitystring wasn't in specified order. It was: " + securityString, controller);
+            ArenaManager.getInstance().removeArena("Securitystring wasn't in specified order. It was: " + securityString, this.arena);
         }
     }
 

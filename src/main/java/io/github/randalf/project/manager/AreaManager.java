@@ -31,7 +31,7 @@ public class AreaManager {
 
     public void createArea(String areaName,Player player){
         if (!areaMap.containsKey(areaName)){
-            if(!AreaConfigurationManager.configExists(areaName)){
+            if(!AreaConfigurationManager.configExists("Area", areaName)){
                 Vector3d startPoint = player.getLocation().getPosition();
 
                 Collection<Vector3i> areaChunks = new ArrayList<>();
@@ -44,8 +44,6 @@ public class AreaManager {
                 spawnLocations.add(player.getLocation().getPosition());
 
                 Area newArea = new Area(startPoint, worldUUID, areaChunks, spawnLocations);
-
-                areaMap.put(areaName, newArea);
 
                 saveArea(areaName, newArea);
             }
