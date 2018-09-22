@@ -16,6 +16,7 @@ public class AreaSerializer implements TypeSerializer<Area>{
 
     @Override
     public Area deserialize(TypeToken<?> typeToken, ConfigurationNode configurationNode) throws ObjectMappingException {
+        String areaName = configurationNode.getNode("areaName").getValue(TypeToken.of(String.class));
         Vector3d startPoint = configurationNode.getNode("startPoint").getValue(TypeToken.of(Vector3d.class));
         UUID worldUUID = configurationNode.getNode("worldUUID").getValue(TypeToken.of(UUID.class));
         Collection<Vector3i> areaChunks = new ArrayList<>();
@@ -26,11 +27,12 @@ public class AreaSerializer implements TypeSerializer<Area>{
         for (Map.Entry<Object, ? extends ConfigurationNode> map : configurationNode.getNode("spawnLocations").getChildrenMap().entrySet()){
             spawnLocations.add(map.getValue().getValue(TypeToken.of(Vector3d.class)));
         }
-        return new Area(startPoint, worldUUID, areaChunks, spawnLocations);
+        return new Area(areaName, startPoint, worldUUID, areaChunks, spawnLocations);
     }
 
     @Override
     public void serialize(TypeToken<?> typeToken, Area area, ConfigurationNode configurationNode) throws ObjectMappingException {
+        configurationNode.getNode("areaName").setValue(TypeToken.of(String.class), area.getAreaName());
         configurationNode.getNode("startPoint").setValue(TypeToken.of(Vector3d.class), area.getStartPoint());
         configurationNode.getNode("worldUUID").setValue(TypeToken.of(UUID.class),area.getWorldUUID());
         int i = 0;

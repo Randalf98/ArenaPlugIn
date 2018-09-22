@@ -16,6 +16,9 @@ import java.util.UUID;
 @ConfigSerializable
 public class Area {
 
+    @Setting(comment = "Name of the area")
+    private String areaName;
+
     @Setting(comment = "Startpoint from the location")
     private Vector3d startPoint;
 
@@ -44,7 +47,8 @@ public class Area {
         setSpawnLocations(spawnLocations);
     }
 
-    public Area(Vector3d startPoint, UUID worldUUID, Collection<Vector3i> areaChunks, Collection<Vector3d> spawnLocations){
+    public Area(String areaName, Vector3d startPoint, UUID worldUUID, Collection<Vector3i> areaChunks, Collection<Vector3d> spawnLocations){
+        setAreaName(areaName);
         setStartPoint(startPoint);
         setWorldUUID(worldUUID);
         setAreaChunks(areaChunks);
@@ -77,6 +81,14 @@ public class Area {
             }
         }
         return playerList;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
     }
 
     public Vector3d getStartPoint() {

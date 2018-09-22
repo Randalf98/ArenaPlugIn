@@ -8,25 +8,23 @@ import org.spongepowered.api.Sponge;
 
 public class Arena {
         private String arenaName;
-        private String areaName;
-        private String name;
         private Area area;
         private SpawnMode mode;
         private ArenaSecurity security;
         private ArenaSpawner spawner;
         private AreaManager areaManager;
 
-        public Arena(String ArebaString, String areaString) {
-            name = areaString;
+        public Arena(String arenaName, String areaString) {
+            this.arenaName = arenaName;
             areaManager = AreaManager.getInstance();
-            area = areaManager.getArea(name);
+            area = areaManager.getArea(areaString);
             mode = new FloodMode(this);
             security = new ArenaSecurity(this, area, mode ,"default");
             spawner = new ArenaSpawner(this, area, mode);
         }
 
         public String getName() {
-            return this.name;
+            return this.arenaName;
         }
 
         public void removeListener() {
@@ -50,8 +48,12 @@ public class Arena {
             this.area = area;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public String getArenaName() {
+            return arenaName;
+        }
+
+        public void setArenaName(String name) {
+            this.arenaName = arenaName;
         }
 
         public SpawnMode getMode() {

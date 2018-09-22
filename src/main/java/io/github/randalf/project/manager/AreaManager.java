@@ -43,7 +43,7 @@ public class AreaManager {
                 Collection<Vector3d> spawnLocations = new ArrayList<>();
                 spawnLocations.add(player.getLocation().getPosition());
 
-                Area newArea = new Area(startPoint, worldUUID, areaChunks, spawnLocations);
+                Area newArea = new Area(areaName, startPoint, worldUUID, areaChunks, spawnLocations);
 
                 saveArea(areaName, newArea);
             }
