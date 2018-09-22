@@ -11,6 +11,14 @@ import org.spongepowered.api.text.Text;
 
 public class AreaAddSpawnPointCommand implements CommandExecutor {
 
+    /**
+     * Command implementing CommandExecutor.
+     * Adds a spawnpoint to a given area.
+     * Get's the AreaManager and adds a spawnpoint at the players location.
+     *
+     * @see CommandExecutor#execute(CommandSource, CommandContext);
+     */
+
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         src.sendMessage(Text.of("Chunk will be added soon - if implemented"));

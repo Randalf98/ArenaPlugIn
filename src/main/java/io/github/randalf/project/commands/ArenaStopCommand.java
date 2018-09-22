@@ -11,6 +11,13 @@ import org.spongepowered.api.text.Text;
 
 public class ArenaStopCommand implements CommandExecutor {
 
+    /**
+     * Command implementing CommandExecutor.Command implementing CommandExecutor.
+     * Stops an arena if it exists.
+     * Get's the AreaManager and starts the arena if it exists.
+     *
+     * @see CommandExecutor#execute(CommandSource, CommandContext);
+     */
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         src.sendMessage(Text.of("Arena will stop now - if implemented"));

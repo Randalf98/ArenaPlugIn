@@ -11,12 +11,19 @@ import org.spongepowered.api.text.Text;
 
 public class AreaAddChunkCommand implements CommandExecutor {
 
-@Override
-public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
+    /**
+     * Command implementing CommandExecutor.
+     * Adds chunk to a given Area
+     * Get's the areaName and the player who executed the command and adds the chunk to the area
+     *
+     * @see CommandExecutor#execute(CommandSource, CommandContext);
+     */
+    @Override
+    public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         src.sendMessage(Text.of("Chunk will be added soon - if implemented"));
         String areaName = args.<String>getOne("areaName").get();
         Player player = (Player) src;
         AreaManager.getInstance().addChunkToArena(areaName, player);
         return CommandResult.success();
-        }
-        }
+    }
+}
