@@ -1,24 +1,33 @@
 package io.github.randalf.project.manager;
 
+import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.Arena;
+import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.channel.MessageChannel;
+
+import javax.inject.Singleton;
+import java.io.File;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.HashMap;
 
+@Singleton
 public class ArenaManager {
 
-    private static HashMap<String , Arena> arenaMap;
+    private HashMap<String , Arena> arenaMap;
 
-    private static ArenaManager instance = null;
+    private static ArenaManager instance;
 
     protected ArenaManager() {
         // Exists only to defeat instantiation.
     }
 
-    public static ArenaManager getInstance() {
+    public static synchronized  ArenaManager getInstance() {
         if(instance == null) {
             instance = new ArenaManager();
-            arenaMap = new HashMap<>();
+            instance.loadAllArenas();
         }
         return instance;
     }
@@ -40,6 +49,26 @@ public class ArenaManager {
 
     public boolean mapContains(String arenaName) {
         return arenaMap.containsKey(arenaName);
+    }
+
+    private void loadAllArenas(){
+        arenaMap = new HashMap<>();
+        Path configPath = FileSystems.getDefault().getPath("config/Arena");
+        File directory = configPath.toFile();
+
+        File[] fList = directory.listFiles();
+        for (File file : fList != null ? fList : new File[0]){
+            if (file.canRead()){
+                try {
+                    ArenaConfigurationManager acm = new ArenaConfigurationManager(file.getName().replaceAll(".conf", ""), null);
+                    acm.load();
+                    Arena arena = acm.getArena();
+                    arenaMap.put(file.getName().replaceAll(".conf", ""), arena);
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            }
+        }
     }
 
     public void createArena(String arenaName, String areaName) {

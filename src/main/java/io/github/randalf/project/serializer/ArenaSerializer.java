@@ -26,6 +26,6 @@ public class ArenaSerializer implements TypeSerializer<Arena>{
     @Override
     public void serialize(TypeToken<?> typeToken, Arena arena, ConfigurationNode configurationNode) throws ObjectMappingException {
         configurationNode.getNode("arenaName").setValue(TypeToken.of(String.class), arena.getName());
-        configurationNode.getNode("area").setValue(TypeToken.of(String.class), arena.getArea().getAreaName());
+        configurationNode.getNode("areaName").setValue(TypeToken.of(String.class), arena.getArea().getAreaName());
     }
 }

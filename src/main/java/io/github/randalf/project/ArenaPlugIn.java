@@ -30,7 +30,6 @@ public class ArenaPlugIn {
 
     public static final String PLUGIN_ID = "arena";
     private static ArenaPlugIn instance;
-    private ArenaManager arenaManager;
 
     @Inject
     Game game;
@@ -47,10 +46,9 @@ public class ArenaPlugIn {
 
     @Listener
     public void onInitialization(GameInitializationEvent event) {
+        instance = this;
         setupCommands();
         setupSerializer();
-        arenaManager = ArenaManager.getInstance();
-        instance = this;
     }
 
     public static ArenaPlugIn getInstance(){
@@ -121,6 +119,6 @@ public class ArenaPlugIn {
     }
 
     public ArenaManager getArenaManager() {
-        return arenaManager;
+        return ArenaManager.getInstance();
     }
 }
