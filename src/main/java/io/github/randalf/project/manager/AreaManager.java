@@ -74,7 +74,7 @@ public class AreaManager {
                     AreaConfigurationManager acm = new AreaConfigurationManager(file.getName().replaceAll(".conf", ""), null);
                     acm.load();
                     Area area = acm.getArea();
-                    areaMap.put(file.getName(), area);
+                    areaMap.put(file.getName().replaceAll(".conf", ""), area);
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
@@ -101,5 +101,9 @@ public class AreaManager {
 
     public void saveArea(String areaName, Area area){
         new AreaConfigurationManager(areaName, area).save();
+    }
+
+    public Set <String> getAreaNames() {
+        return areaMap.keySet();
     }
 }

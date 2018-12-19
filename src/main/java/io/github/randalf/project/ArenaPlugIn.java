@@ -104,12 +104,37 @@ public class ArenaPlugIn {
                 .executor(new AreaAddSpawnPointCommand())
                 .build();
 
+        //Command Spec for adding a Chunk to a Area
+        CommandSpec listAreasCommandSpec = CommandSpec.builder()
+                .description(Text.of("List Areas Command"))
+                .permission("io.github.randalf.listAreas")
+                .executor(new ListAreaCommand())
+                .build();
+
+        //Command Spec for adding a Chunk to a Area
+        CommandSpec listArenasCommandSpec = CommandSpec.builder()
+                .description(Text.of("List Arenas Command"))
+                .permission("io.github.randalf.listArenas")
+                .executor(new ListArenaCommand())
+                .build();
+
+        //Command Spec for adding a Chunk to a Area
+        CommandSpec arenaInformationCommandSpec = CommandSpec.builder()
+                .description(Text.of("Arena Information Command"))
+                .permission("io.github.randalf.arenaInformation")
+                .arguments(GenericArguments.remainingJoinedStrings(Text.of("arenaName")))
+                .executor(new ArenaInformationCommand())
+                .build();
+
         Sponge.getCommandManager().register(this, arenaStartCommandSpec, "startArena");
         Sponge.getCommandManager().register(this, arenaStopCommandSpec, "stopArena");
         Sponge.getCommandManager().register(this, arenaCreateCommandSpec, "createArena");
         Sponge.getCommandManager().register(this, areaCreateCommandSpec, "createArea");
         Sponge.getCommandManager().register(this, areaAddChunkCommandSpec, "addChunkToArea");
         Sponge.getCommandManager().register(this, areaAddSpawnPointCommandSpec, "addSpawnPointToArea");
+        Sponge.getCommandManager().register(this, listAreasCommandSpec, "listAreas");
+        Sponge.getCommandManager().register(this, listArenasCommandSpec, "listArenas");
+        Sponge.getCommandManager().register(this, arenaInformationCommandSpec, "arenaInformation");
     }
 
     private void setupSerializer() {

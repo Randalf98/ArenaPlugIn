@@ -12,6 +12,7 @@ import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Set;
 
 @Singleton
 public class ArenaManager {
@@ -96,5 +97,9 @@ public class ArenaManager {
 
     public void saveArena(String arenaName, Arena arena){
         new ArenaConfigurationManager(arenaName, arena).save();
+    }
+
+    public Set<String> getArenaNames() {
+        return arenaMap.keySet();
     }
 }
