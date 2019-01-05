@@ -27,17 +27,22 @@ public class Arena {
             return this.arenaName;
         }
 
-        public void removeListener() {
+        private void removeListener() {
             Sponge.getEventManager().unregisterListeners(security.getListener());
             Sponge.getEventManager().unregisterListeners(spawner.getListener());
         }
 
-        public void disableSpawning() {
+        private void disableSpawning() {
             spawner.stop();
         }
 
         public void startArena() {
             spawner.spawnEnemys();
+        }
+
+        public void stopArena(){
+            removeListener();
+            disableSpawning();
         }
 
         public Area getArea() {

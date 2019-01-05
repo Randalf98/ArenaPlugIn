@@ -4,9 +4,7 @@ import com.flowpowered.math.vector.Vector3d;
 import io.github.randalf.project.arenaparts.Arena;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
-import org.spongepowered.api.data.manipulator.mutable.PotionEffectData;
 import org.spongepowered.api.data.manipulator.mutable.entity.FlammableData;
-import org.spongepowered.api.data.manipulator.mutable.entity.SizeData;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.entity.living.Living;
@@ -21,11 +19,11 @@ public class FloodMode implements SpawnMode {
 
     private Arena arena;
     private Entity entity;
-    private List<Entity> entitiesList;
+    private List<Entity> toBeSpawnedEntitiesList;
 
     public FloodMode(Arena arena){
         this.arena = arena;
-        entitiesList = new ArrayList<>();
+        toBeSpawnedEntitiesList = new ArrayList<>();
         Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getArea().getWorldUUID());
         Optional<Vector3d> optionalLocation = arena.getArea().getSpawnLocations().stream().findFirst();
         if (optionalWorld.isPresent() && optionalLocation.isPresent()){
@@ -33,6 +31,8 @@ public class FloodMode implements SpawnMode {
             entity = world
                     .createEntity(EntityTypes.ZOMBIE, optionalLocation.get());
             entity.offer(Keys.DISPLAY_NAME, (Text.of("Zomboid")));
+            entity.offer(Keys.IS_AFLAME, false);
+
         }
     }
 
@@ -43,10 +43,10 @@ public class FloodMode implements SpawnMode {
         if(optionalWorld.isPresent()){
             cleanEntitiesList();
             entity.setLocation(optionalWorld.get().getLocation(location));
-            while(entitiesList.size()<10) {
+            while(toBeSpawnedEntitiesList.size()<10) {
                 Entity entityToBeSpawned = ((Entity) entity.copy());
                 entitiesToBeSpawned.add(entityToBeSpawned);
-                entitiesList.add(entityToBeSpawned);
+                toBeSpawnedEntitiesList.add(entityToBeSpawned);
             }
         }
         return entitiesToBeSpawned;
@@ -54,11 +54,11 @@ public class FloodMode implements SpawnMode {
 
     private void cleanEntitiesList() {
         List<Entity> entitiesToRemove = new ArrayList<>();
-        for (Entity e : entitiesList){
+        for (Entity e : toBeSpawnedEntitiesList){
             if(((Living)e).getHealthData().health().get().equals(0.0d)){
                 entitiesToRemove.add(e);
             }
         }
-        entitiesList.removeAll(entitiesToRemove);
+        toBeSpawnedEntitiesList.removeAll(entitiesToRemove);
     }
 }

@@ -33,10 +33,8 @@ public class ArenaManager {
         return instance;
     }
 
-    public void removeArena(String message, Arena arena){
-        arena.removeListener();
-        arena.disableSpawning();
-        arenaMap.remove(arena.getName());
+    public void stopArena(String message, Arena arena){
+        arena.stopArena();
         MessageChannel.TO_CONSOLE.send(Text.of(message));
     }
 
@@ -44,8 +42,8 @@ public class ArenaManager {
         arenaMap.get(arenaName).startArena();
     }
 
-    public void deleteArena(String arenaNane) {
-        removeArena("Removed arena by User command", arenaMap.get(arenaNane));
+    public void stopArena(String arenaNane) {
+        stopArena("Removed arena by User command", arenaMap.get(arenaNane));
     }
 
     public boolean mapContains(String arenaName) {

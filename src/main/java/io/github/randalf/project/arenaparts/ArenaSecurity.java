@@ -29,7 +29,7 @@ public class ArenaSecurity {
                 Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), listener);
             }
         } else {
-            ArenaManager.getInstance().removeArena("Securitystring wasn't in specified order. It was: " + securityString, this.arena);
+            ArenaManager.getInstance().stopArena("Securitystring wasn't in specified order. It was: " + securityString, this.arena);
         }
     }
 

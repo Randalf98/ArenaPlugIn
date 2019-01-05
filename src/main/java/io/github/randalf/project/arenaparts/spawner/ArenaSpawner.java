@@ -19,11 +19,13 @@ public class ArenaSpawner {
     private ArenaListener listener;
     private boolean shouldSpawn = true;
     private SpawnMode mode;
+    private List<Entity> entitiesList;
 
     public ArenaSpawner(Arena arena, Area area, SpawnMode mode){
         this.arena = arena;
         this.listener = new SpawningListener(this, area);
         this.mode = mode;
+        entitiesList = new ArrayList<Entity>();
         Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), listener);
     }
 
@@ -36,6 +38,7 @@ public class ArenaSpawner {
                 Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getArea().getWorldUUID());
                 if (optionalWorld.isPresent()){
                     World world = optionalWorld.get();
+                    entitiesList.add(e);
                     world.spawnEntity(e);
                 }
             }
@@ -65,4 +68,8 @@ public class ArenaSpawner {
     public ArenaListener getListener(){
         return listener;
     }
+
+    public Arena getArena(){return arena;}
+
+    public List<Entity> getEntitiesList(){return entitiesList;}
 }
