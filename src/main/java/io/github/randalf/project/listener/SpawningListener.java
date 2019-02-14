@@ -35,23 +35,12 @@ public class SpawningListener extends ArenaListener {
     @Listener
     public void onDeadEntity(DestructEntityEvent event) {
         Entity  e = event.getTargetEntity();
-        if(spawner.getEntitiesList().contains(e)){
+        if(spawner.getEntitiesList().contains(e) && event.getCause().first(Player.class).isPresent()){
             Player player = event.getCause().first(Player.class).get();
             Vector3i playerPosition = player.getLocation().getChunkPosition();
             if (area.contains(playerPosition)){
                 spawner.spawnEnemys();
             }
-
-            /* for (Vector3i chunk: area.getAreaChunks()){
-               Optional<World> optionalWorld = Sponge.getServer().getWorld(area.getWorldUUID());
-                World world;
-                if (optionalWorld.isPresent()){
-                    world = optionalWorld.get();
-                    if(world.getChunk(chunk).get().getPosition().equals(playerPosition)){
-                        spawner.spawnEnemys();
-                    }
-                }
-            }*/
         }
         try{
             spawner.getEntitiesList().remove(event.getTargetEntity());

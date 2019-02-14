@@ -6,6 +6,7 @@ import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.manipulator.mutable.entity.FlammableData;
 import org.spongepowered.api.entity.Entity;
+import org.spongepowered.api.entity.EntityType;
 import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.text.Text;
@@ -19,21 +20,13 @@ public class FloodMode implements SpawnMode {
 
     private Arena arena;
     private Entity entity;
+    private EntityType entityType = EntityTypes.ZOMBIE;
     private List<Entity> toBeSpawnedEntitiesList;
 
     public FloodMode(Arena arena){
         this.arena = arena;
         toBeSpawnedEntitiesList = new ArrayList<>();
-        Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getArea().getWorldUUID());
-        Optional<Vector3d> optionalLocation = arena.getArea().getSpawnLocations().stream().findFirst();
-        if (optionalWorld.isPresent() && optionalLocation.isPresent()){
-            World world = optionalWorld.get();
-            entity = world
-                    .createEntity(EntityTypes.ZOMBIE, optionalLocation.get());
-            entity.offer(Keys.DISPLAY_NAME, (Text.of("Zomboid")));
-            entity.offer(Keys.IS_AFLAME, false);
-
-        }
+        createEntity();
     }
 
     @Override
@@ -60,5 +53,21 @@ public class FloodMode implements SpawnMode {
             }
         }
         toBeSpawnedEntitiesList.removeAll(entitiesToRemove);
+    }
+
+    public void createEntity(){
+        Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getArea().getWorldUUID());
+        Optional<Vector3d> optionalLocation = arena.getArea().getSpawnLocations().stream().findFirst();
+        if (optionalWorld.isPresent() && optionalLocation.isPresent()){
+            World world = optionalWorld.get();
+            entity = world.createEntity(entityType, optionalLocation.get());
+            entity.offer(Keys.DISPLAY_NAME, (Text.of(entityType.getName())));
+            entity.offer(Keys.IS_AFLAME, false);
+        }
+    }
+
+    public void setEntityType(String entityType){
+        this.entityType = Entitys.getEntity(entityType);
+        createEntity();
     }
 }
