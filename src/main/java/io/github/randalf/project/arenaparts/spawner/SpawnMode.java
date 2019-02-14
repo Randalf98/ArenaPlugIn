@@ -13,5 +13,4 @@ public interface SpawnMode {
     public default List<Entity> getEntitiesList(){
         return toBeSpawnedEntitiesList;
     }
-    public void setEntityType(String s);
 }

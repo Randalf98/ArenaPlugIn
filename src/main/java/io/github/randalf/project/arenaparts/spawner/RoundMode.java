@@ -13,9 +13,4 @@ public class RoundMode implements SpawnMode {
     public List<Entity> getNextEntities(Vector3d location) {
         return null;
     }
-
-    @Override
-    public void setEntityType(String s) {}
-
-
 }

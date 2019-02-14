@@ -22,6 +22,7 @@ public class FloodMode implements SpawnMode {
     private Entity entity;
     private EntityType entityType = EntityTypes.ZOMBIE;
     private List<Entity> toBeSpawnedEntitiesList;
+    private int entityAmount = 10;
 
     public FloodMode(Arena arena){
         this.arena = arena;
@@ -36,7 +37,7 @@ public class FloodMode implements SpawnMode {
         if(optionalWorld.isPresent()){
             cleanEntitiesList();
             entity.setLocation(optionalWorld.get().getLocation(location));
-            while(toBeSpawnedEntitiesList.size()<10) {
+            while(toBeSpawnedEntitiesList.size()<entityAmount) {
                 Entity entityToBeSpawned = ((Entity) entity.copy());
                 entitiesToBeSpawned.add(entityToBeSpawned);
                 toBeSpawnedEntitiesList.add(entityToBeSpawned);
@@ -69,5 +70,9 @@ public class FloodMode implements SpawnMode {
     public void setEntityType(String entityType){
         this.entityType = Entitys.getEntity(entityType);
         createEntity();
+    }
+
+    public void setEntityAmount(int entityAmount){
+        this.entityAmount = entityAmount;
     }
 }
