@@ -38,8 +38,12 @@ public class SpawningListener extends ArenaListener {
         if(spawner.getEntitiesList().contains(e)){
             Player player = event.getCause().first(Player.class).get();
             Vector3i playerPosition = player.getLocation().getChunkPosition();
-            for (Vector3i chunk: area.getAreaChunks()){
-                Optional<World> optionalWorld = Sponge.getServer().getWorld(area.getWorldUUID());
+            if (area.contains(playerPosition)){
+                spawner.spawnEnemys();
+            }
+
+            /* for (Vector3i chunk: area.getAreaChunks()){
+               Optional<World> optionalWorld = Sponge.getServer().getWorld(area.getWorldUUID());
                 World world;
                 if (optionalWorld.isPresent()){
                     world = optionalWorld.get();
@@ -47,7 +51,7 @@ public class SpawningListener extends ArenaListener {
                         spawner.spawnEnemys();
                     }
                 }
-            }
+            }*/
         }
         try{
             spawner.getEntitiesList().remove(event.getTargetEntity());

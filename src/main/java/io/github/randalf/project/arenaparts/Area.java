@@ -83,6 +83,10 @@ public class Area {
         return playerList;
     }
 
+    public boolean contains(Vector3i playerPosition){
+        return areaChunks.contains(playerPosition);
+    }
+
     public String getAreaName() {
         return areaName;
     }
