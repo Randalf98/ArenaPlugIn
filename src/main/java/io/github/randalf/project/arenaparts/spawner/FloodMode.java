@@ -4,7 +4,6 @@ import com.flowpowered.math.vector.Vector3d;
 import io.github.randalf.project.arenaparts.Arena;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.data.key.Keys;
-import org.spongepowered.api.data.manipulator.mutable.entity.FlammableData;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntityType;
 import org.spongepowered.api.entity.EntityTypes;
@@ -26,6 +25,14 @@ public class FloodMode implements SpawnMode {
 
     public FloodMode(Arena arena){
         this.arena = arena;
+        toBeSpawnedEntitiesList = new ArrayList<>();
+        createEntity();
+    }
+
+    public FloodMode(Arena arena, EntityType et, int entityAmount){
+        this.arena = arena;
+        this.entityAmount = entityAmount;
+        this.entityType = et;
         toBeSpawnedEntitiesList = new ArrayList<>();
         createEntity();
     }
@@ -72,7 +79,15 @@ public class FloodMode implements SpawnMode {
         createEntity();
     }
 
+    public EntityType getEntityType(){
+        return this.entityType;
+    }
+
     public void setEntityAmount(int entityAmount){
         this.entityAmount = entityAmount;
+    }
+
+    public int getEntityAmount(){
+        return this.entityAmount;
     }
 }

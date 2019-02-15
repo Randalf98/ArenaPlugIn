@@ -5,6 +5,7 @@ import io.github.randalf.project.arenaparts.spawner.FloodMode;
 import io.github.randalf.project.arenaparts.spawner.SpawnMode;
 import io.github.randalf.project.manager.AreaManager;
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.entity.EntityType;
 
 public class Arena {
         private String arenaName;
@@ -19,6 +20,19 @@ public class Arena {
             areaManager = AreaManager.getInstance();
             area = areaManager.getArea(areaString);
             mode = new FloodMode(this);
+            security = new ArenaSecurity(this, area, mode ,"default");
+            spawner = new ArenaSpawner(this, area, mode);
+        }
+
+        public Arena(String arenaName, String areaString,String modus, EntityType et, int enemyAmount) {
+            this.arenaName = arenaName;
+            areaManager = AreaManager.getInstance();
+            area = areaManager.getArea(areaString);
+            if(modus.equals("FloodMode")){
+                mode = new FloodMode(this, et , enemyAmount);
+            } else {
+                mode = new FloodMode(this);
+            }
             security = new ArenaSecurity(this, area, mode ,"default");
             spawner = new ArenaSpawner(this, area, mode);
         }
