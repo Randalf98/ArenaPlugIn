@@ -126,6 +126,23 @@ public class ArenaPlugIn {
                 .executor(new ArenaInformationCommand())
                 .build();
 
+        //Command Spec for creating a Area
+        CommandSpec arenaSetFloodModeEntityTypeCommandSpec = CommandSpec.builder()
+                .description(Text.of("Sets Flood Mode Entity Type"))
+                .permission("io.github.randalf.setEntityType")
+                .arguments(GenericArguments.string(Text.of("arenaName")),GenericArguments.string(Text.of("entityType")))
+                .executor(new ArenaSetFloodModeEntityTypeCommand())
+                .build();
+
+        //Command Spec for creating a Area
+        CommandSpec arenaSetFloodModeEntityAmountCommandSpec = CommandSpec.builder()
+                .description(Text.of("Sets Flood Mode Entity Amount"))
+                .permission("io.github.randalf.setEntityAmount")
+                .arguments(GenericArguments.string(Text.of("arenaName")),GenericArguments.string(Text.of("entityAmount")))
+                .executor(new ArenaSetFloodModeEntityAmountCommand())
+                .build();
+
+
         Sponge.getCommandManager().register(this, arenaStartCommandSpec, "startArena");
         Sponge.getCommandManager().register(this, arenaStopCommandSpec, "stopArena");
         Sponge.getCommandManager().register(this, arenaCreateCommandSpec, "createArena");
@@ -135,6 +152,8 @@ public class ArenaPlugIn {
         Sponge.getCommandManager().register(this, listAreasCommandSpec, "listAreas");
         Sponge.getCommandManager().register(this, listArenasCommandSpec, "listArenas");
         Sponge.getCommandManager().register(this, arenaInformationCommandSpec, "arenaInformation");
+        Sponge.getCommandManager().register(this, arenaSetFloodModeEntityTypeCommandSpec, "setEntityType");
+        Sponge.getCommandManager().register(this, arenaSetFloodModeEntityAmountCommandSpec, "setEntityAmount");
     }
 
     private void setupSerializer() {

@@ -73,14 +73,16 @@ public class Area {
 
     public ArrayList<Player> getPlayerInArea() {
         ArrayList<Player> playerList = new ArrayList<>();
-        for(Vector3i chunk: areaChunks){
-            for (Player p : Sponge.getServer().getOnlinePlayers()){
-                if(p.getWorld().getUniqueId().equals(worldUUID) && p.getLocation().getChunkPosition().equals(chunk)){
-                    playerList.add(p);
-                }
+        for (Player p : Sponge.getServer().getOnlinePlayers()){
+            if(contains(p.getLocation().getChunkPosition())){
+                playerList.add(p);
             }
         }
         return playerList;
+    }
+
+    public boolean contains(Vector3i playerPosition){
+        return areaChunks.contains(playerPosition);
     }
 
     public String getAreaName() {

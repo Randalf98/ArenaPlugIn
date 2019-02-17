@@ -47,15 +47,18 @@ public class ArenaSpawner {
 
     private Vector3d getBestSpawnLocation(ArrayList<Vector3d> spawnLocations, ArrayList<Player> playerInArea) {
         Vector3d furthestLocation = null;
+        Double furthestDistanceInVector = null;
         Double furthestDistance = null;
         for(Vector3d v : spawnLocations){
-            Double d = 0d;
             for (Player p : playerInArea){
-                d += p.getLocation().getPosition().distance(v);
+                double distance = p.getLocation().getPosition().distanceSquared(v);
+                if (furthestDistanceInVector == null || distance > furthestDistanceInVector) {
+                    furthestDistanceInVector = distance;
+                }
             }
-            if (furthestDistance == null || d > furthestDistance) {
-                furthestDistance = d;
-                furthestLocation = v;
+            if (furthestDistance == null || furthestDistanceInVector > furthestDistance){
+                furthestDistance = furthestDistanceInVector;
+                furthestLocation=v;
             }
         }
         return furthestLocation;

@@ -42,8 +42,8 @@ public class ArenaManager {
         arenaMap.get(arenaName).startArena();
     }
 
-    public void stopArena(String arenaNane) {
-        stopArena("Removed arena by User command", arenaMap.get(arenaNane));
+    public void stopArena(String arenaName) {
+        stopArena("Removed arena by User command", arenaMap.get(arenaName));
     }
 
     public boolean mapContains(String arenaName) {
