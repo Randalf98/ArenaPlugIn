@@ -2,18 +2,12 @@ package io.github.randalf.project.commands;
 
 import io.github.randalf.project.ArenaPlugIn;
 import io.github.randalf.project.arenaparts.Arena;
-import io.github.randalf.project.manager.AreaManager;
-import io.github.randalf.project.manager.ArenaManager;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.text.Text;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * Created by randalf on 28.11.2017.
  */

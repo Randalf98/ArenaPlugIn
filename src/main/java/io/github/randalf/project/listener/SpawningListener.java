@@ -3,23 +3,14 @@ package io.github.randalf.project.listener;
 import com.flowpowered.math.vector.Vector3i;
 import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.spawner.ArenaSpawner;
-import org.spongepowered.api.Sponge;
-import org.spongepowered.api.data.key.Key;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.cause.entity.damage.DamageType;
 import org.spongepowered.api.event.cause.entity.damage.DamageTypes;
 import org.spongepowered.api.event.cause.entity.damage.source.DamageSource;
 import org.spongepowered.api.event.entity.DamageEntityEvent;
 import org.spongepowered.api.event.entity.DestructEntityEvent;
-import org.spongepowered.api.event.entity.IgniteEntityEvent;
-import org.spongepowered.api.event.entity.TargetEntityEvent;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.channel.MessageChannel;
-import org.spongepowered.api.world.World;
-import java.util.Optional;
 
 public class SpawningListener extends ArenaListener {
 

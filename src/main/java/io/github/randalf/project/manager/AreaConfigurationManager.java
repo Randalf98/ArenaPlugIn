@@ -4,10 +4,8 @@ import com.google.common.reflect.TypeToken;
 import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.serializer.AreaSerializer;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
-import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import org.spongepowered.api.config.DefaultConfig;
 import javax.inject.Inject;
-import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
 public class AreaConfigurationManager extends ObjectConfigurationManager{

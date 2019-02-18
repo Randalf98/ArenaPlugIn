@@ -10,7 +10,7 @@ public interface SpawnMode {
     List<Entity> toBeSpawnedEntitiesList = new ArrayList<>();
     List<Entity> getNextEntities(Vector3d location);
 
-    public default List<Entity> getEntitiesList(){
+    default List<Entity> getEntitiesList(){
         return toBeSpawnedEntitiesList;
     }
 }

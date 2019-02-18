@@ -1,12 +1,8 @@
 package io.github.randalf.project.manager;
 
-import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.Arena;
-import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.channel.MessageChannel;
-
 import javax.inject.Singleton;
 import java.io.File;
 import java.nio.file.FileSystems;
