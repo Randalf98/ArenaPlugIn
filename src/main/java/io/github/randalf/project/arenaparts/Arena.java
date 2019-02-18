@@ -14,6 +14,7 @@ public class Arena {
         private ArenaSecurity security;
         private ArenaSpawner spawner;
         private AreaManager areaManager;
+        private boolean active;
 
         public Arena(String arenaName, String areaString) {
             this.arenaName = arenaName;
@@ -51,10 +52,12 @@ public class Arena {
         }
 
         public void startArena() {
-            spawner.spawnEnemys();
+            active = true;
+            spawner.start();
         }
 
         public void stopArena(){
+            active = false;
             removeListener();
             disableSpawning();
         }

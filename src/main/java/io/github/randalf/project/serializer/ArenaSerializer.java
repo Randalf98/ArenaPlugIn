@@ -8,8 +8,6 @@ import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializer;
 import org.spongepowered.api.entity.EntityType;
 
-import java.util.regex.Pattern;
-
 public class ArenaSerializer implements TypeSerializer<Arena>{
 
     @Override
