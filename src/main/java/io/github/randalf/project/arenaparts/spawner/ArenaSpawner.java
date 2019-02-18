@@ -68,6 +68,11 @@ public class ArenaSpawner {
         shouldSpawn = false;
     }
 
+    public void start(){
+        shouldSpawn = true;
+        spawnEnemys();
+    }
+
     public ArenaListener getListener(){
         return listener;
     }

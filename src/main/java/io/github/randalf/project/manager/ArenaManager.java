@@ -39,7 +39,7 @@ public class ArenaManager {
     }
 
     public void stopArena(String arenaName) {
-        stopArena("Removed arena by User command", arenaMap.get(arenaName));
+        stopArena("Stopped arena by User command", arenaMap.get(arenaName));
     }
 
     public boolean mapContains(String arenaName) {
@@ -48,7 +48,7 @@ public class ArenaManager {
 
     private void loadAllArenas(){
         arenaMap = new HashMap<>();
-        Path configPath = FileSystems.getDefault().getPath("config/Arena");
+        Path configPath = FileSystems.getDefault().getPath("config/arena");
         File directory = configPath.toFile();
 
         File[] fList = directory.listFiles();
