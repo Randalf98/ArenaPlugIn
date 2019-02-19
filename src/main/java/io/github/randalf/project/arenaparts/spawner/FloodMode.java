@@ -69,8 +69,6 @@ public class FloodMode implements SpawnMode {
         if (optionalWorld.isPresent() && optionalLocation.isPresent()){
             World world = optionalWorld.get();
             entity = world.createEntity(entityType, optionalLocation.get());
-            entity.offer(Keys.DISPLAY_NAME, (Text.of(entityType.getName())));
-            entity.offer(Keys.IS_AFLAME, false);
         }
     }
 

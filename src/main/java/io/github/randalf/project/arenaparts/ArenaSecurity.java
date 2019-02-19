@@ -4,7 +4,7 @@ import io.github.randalf.project.arenaparts.spawner.SpawnMode;
 import io.github.randalf.project.manager.ArenaManager;
 import io.github.randalf.project.ArenaPlugIn;
 import io.github.randalf.project.listener.ArenaListener;
-import io.github.randalf.project.listener.DefaultListener;
+import io.github.randalf.project.listener.AreaManipulationListener;
 import org.spongepowered.api.Sponge;
 
 import javax.inject.Singleton;
@@ -25,7 +25,7 @@ public class ArenaSecurity {
         this.mode = mode;
         if(securityString.equals(DEFAULT)){
             if(securityString.equals(DEFAULT)){
-                listener = new DefaultListener(area.getAreaChunks());
+                listener = new AreaManipulationListener(area.getAreaChunks());
                 Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), listener);
             }
         } else {
