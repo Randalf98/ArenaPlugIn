@@ -109,17 +109,22 @@ public class Arena {
 
         public void setOption(ArenaOptions option, boolean activation){
             if(activation){
+                ArenaListener listener = null;
                 switch(option) {
                     case BURNING:
-                        arenaListeners.put(BURNING, new PreventBurningListener(spawner, area));
+                        listener = new PreventBurningListener(spawner, area);
+                        arenaListeners.put(BURNING, listener);
+                        break;
                     case DROP:
-                        arenaListeners.put(DROP,new PreventDroppingListener(spawner, area));
+                        listener = new PreventDroppingListener(spawner, area);
+                        arenaListeners.put(DROP,listener);
+                        break;
                     case XP:
-                        arenaListeners.put(XP , new PreventXPDroppingListener(spawner, area));
+                        listener = new PreventXPDroppingListener(spawner, area);
+                        arenaListeners.put(XP , listener);
+                        break;
                 }
-                for(ArenaListener listener:arenaListeners.values()){
-                    addListener(listener);
-                }
+                addListener(listener);
             }
         }
 
