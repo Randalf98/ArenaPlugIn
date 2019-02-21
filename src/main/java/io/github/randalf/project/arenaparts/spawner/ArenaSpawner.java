@@ -28,7 +28,6 @@ public class ArenaSpawner {
         this.listener = new SpawningListener(this, area);
         this.mode = mode;
         entitiesList = new ArrayList<Entity>();
-        Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), listener);
     }
 
     public void spawnEnemys(){

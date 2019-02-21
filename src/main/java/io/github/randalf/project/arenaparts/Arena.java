@@ -80,10 +80,13 @@ public class Arena {
             return this.arenaName;
         }
 
-        private void addListener(ArenaListener arenaListener){
-            Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(),arenaListener);
+        private void addListener() {
+            Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), security.getListener());
+            Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), spawner.getListener());
+            for(ArenaListener listener:arenaListeners.values()){
+                Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), listener);
+            }
         }
-
         private void removeListener() {
             Sponge.getEventManager().unregisterListeners(security.getListener());
             Sponge.getEventManager().unregisterListeners(spawner.getListener());
@@ -98,6 +101,7 @@ public class Arena {
 
         public void startArena() {
             active = true;
+            addListener();
             spawner.start();
         }
 
@@ -112,19 +116,15 @@ public class Arena {
                 ArenaListener listener = null;
                 switch(option) {
                     case BURNING:
-                        listener = new PreventBurningListener(spawner, area);
-                        arenaListeners.put(BURNING, listener);
+                        arenaListeners.put(BURNING, new PreventBurningListener(spawner, area));
                         break;
                     case DROP:
-                        listener = new PreventDroppingListener(spawner, area);
-                        arenaListeners.put(DROP,listener);
+                        arenaListeners.put(DROP, new PreventDroppingListener(spawner, area));
                         break;
                     case XP:
-                        listener = new PreventXPDroppingListener(spawner, area);
-                        arenaListeners.put(XP , listener);
+                        arenaListeners.put(XP , new PreventXPDroppingListener(spawner, area));
                         break;
                 }
-                addListener(listener);
             }
         }
 

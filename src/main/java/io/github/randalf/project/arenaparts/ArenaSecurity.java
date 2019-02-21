@@ -26,7 +26,6 @@ public class ArenaSecurity {
         if(securityString.equals(DEFAULT)){
             if(securityString.equals(DEFAULT)){
                 listener = new AreaManipulationListener(area.getAreaChunks());
-                Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), listener);
             }
         } else {
             ArenaManager.getInstance().stopArena("Securitystring wasn't in specified order. It was: " + securityString, this.arena);
