@@ -47,7 +47,7 @@ public class ArenaSpawner {
     }
 
     private Vector3d getBestSpawnLocation(ArrayList<Vector3d> spawnLocations, ArrayList<Player> playerInArea) {
-        Vector3d furthestLocation = null;
+        Vector3d furthestLocation = spawnLocations.get(0);
         double meanDistance = 0;
         for(Vector3d v : spawnLocations){
             double meanDistanceForLocation = 0;
