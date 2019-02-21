@@ -4,8 +4,7 @@ import com.flowpowered.math.vector.Vector3d;
 import io.github.randalf.project.ArenaPlugIn;
 import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.Arena;
-import io.github.randalf.project.listener.ArenaListener;
-import io.github.randalf.project.listener.SpawningListener;
+import io.github.randalf.project.listener.*;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.living.player.Player;
@@ -20,13 +19,15 @@ public class ArenaSpawner {
     private boolean shouldSpawn = true;
     private SpawnMode mode;
     private List<Entity> entitiesList;
+    private String additionalOptions;
+    private int lastDiedEntity;
+    private List<ArenaListener> arenaListeners;
 
     public ArenaSpawner(Arena arena, Area area, SpawnMode mode){
         this.arena = arena;
         this.listener = new SpawningListener(this, area);
         this.mode = mode;
         entitiesList = new ArrayList<Entity>();
-        Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), listener);
     }
 
     public void spawnEnemys(){
@@ -46,7 +47,7 @@ public class ArenaSpawner {
     }
 
     private Vector3d getBestSpawnLocation(ArrayList<Vector3d> spawnLocations, ArrayList<Player> playerInArea) {
-        Vector3d furthestLocation = null;
+        Vector3d furthestLocation = spawnLocations.get(0);
         double meanDistance = 0;
         for(Vector3d v : spawnLocations){
             double meanDistanceForLocation = 0;
@@ -62,6 +63,14 @@ public class ArenaSpawner {
         return furthestLocation;
     }
 
+    public void addOption(String option){
+
+    }
+
+    public void removeOption(String option){
+
+    }
+
     public void stop(){
         shouldSpawn = false;
     }
@@ -71,6 +80,14 @@ public class ArenaSpawner {
         spawnEnemys();
     }
 
+    public void setLastDiedEntity(Entity entity){
+        this.lastDiedEntity = entity.hashCode();
+    }
+
+    public boolean isLastDiedEntity(Entity entity){
+        return this.lastDiedEntity == entity.hashCode();
+    }
+
     public ArenaListener getListener(){
         return listener;
     }
@@ -78,4 +95,8 @@ public class ArenaSpawner {
     public Arena getArena(){return arena;}
 
     public List<Entity> getEntitiesList(){return entitiesList;}
+
+    public boolean checkEntity(Entity entity){
+        return entity.getType().equals(((FloodMode)mode).getEntityType());
+    }
 }

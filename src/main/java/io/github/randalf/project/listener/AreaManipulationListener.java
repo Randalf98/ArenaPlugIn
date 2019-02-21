@@ -11,11 +11,11 @@ import org.spongepowered.api.text.channel.MessageChannel;
 
 import java.util.Collection;
 
-public class DefaultListener extends ArenaListener {
+public class AreaManipulationListener extends ArenaListener {
 
     private Collection<Vector3i> areaChunks;
 
-    public DefaultListener(Collection<Vector3i> areaChunks) {
+    public AreaManipulationListener(Collection<Vector3i> areaChunks) {
         super();
         this.areaChunks =areaChunks;
     }

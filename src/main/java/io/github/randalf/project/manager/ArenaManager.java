@@ -69,9 +69,7 @@ public class ArenaManager {
     public void createArena(String arenaName, String areaName) {
         if (!arenaMap.containsKey(arenaName)){
             if(!ArenaConfigurationManager.configExists("Arena",arenaName)){
-
                 Arena newArena = new Arena(arenaName, areaName);
-
                 saveArena(arenaName, newArena);
             }
             Arena arena = getArena(areaName);

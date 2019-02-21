@@ -88,7 +88,6 @@ public class ArenaPlugIn {
                 .executor(new AreaCreateCommand())
                 .build();
 
-        //Command Spec for adding a Chunk to a Area
         CommandSpec areaAddChunkCommandSpec = CommandSpec.builder()
                 .description(Text.of("Add Chunk Command"))
                 .permission("io.github.randalf.addChunkToArea")
@@ -96,7 +95,6 @@ public class ArenaPlugIn {
                 .executor(new AreaAddChunkCommand())
                 .build();
 
-        //Command Spec for adding a Chunk to a Area
         CommandSpec areaAddSpawnPointCommandSpec = CommandSpec.builder()
                 .description(Text.of("Add Spawnpoint Command"))
                 .permission("io.github.randalf.addSpawnPointToArea")
@@ -104,21 +102,18 @@ public class ArenaPlugIn {
                 .executor(new AreaAddSpawnPointCommand())
                 .build();
 
-        //Command Spec for adding a Chunk to a Area
         CommandSpec listAreasCommandSpec = CommandSpec.builder()
                 .description(Text.of("List Areas Command"))
                 .permission("io.github.randalf.listAreas")
                 .executor(new ListAreaCommand())
                 .build();
 
-        //Command Spec for adding a Chunk to a Area
         CommandSpec listArenasCommandSpec = CommandSpec.builder()
                 .description(Text.of("List Arenas Command"))
                 .permission("io.github.randalf.listArenas")
                 .executor(new ListArenaCommand())
                 .build();
 
-        //Command Spec for adding a Chunk to a Area
         CommandSpec arenaInformationCommandSpec = CommandSpec.builder()
                 .description(Text.of("Arena Information Command"))
                 .permission("io.github.randalf.arenaInformation")
@@ -126,7 +121,6 @@ public class ArenaPlugIn {
                 .executor(new ArenaInformationCommand())
                 .build();
 
-        //Command Spec for creating a Area
         CommandSpec arenaSetFloodModeEntityTypeCommandSpec = CommandSpec.builder()
                 .description(Text.of("Sets Flood Mode Entity Type"))
                 .permission("io.github.randalf.setEntityType")
@@ -134,12 +128,25 @@ public class ArenaPlugIn {
                 .executor(new ArenaSetFloodModeEntityTypeCommand())
                 .build();
 
-        //Command Spec for creating a Area
         CommandSpec arenaSetFloodModeEntityAmountCommandSpec = CommandSpec.builder()
                 .description(Text.of("Sets Flood Mode Entity Amount"))
                 .permission("io.github.randalf.setEntityAmount")
                 .arguments(GenericArguments.string(Text.of("arenaName")),GenericArguments.string(Text.of("entityAmount")))
                 .executor(new ArenaSetFloodModeEntityAmountCommand())
+                .build();
+
+        CommandSpec arenaAddOptionCommandSpec = CommandSpec.builder()
+                .description(Text.of("Adds an option to the arena"))
+                .permission("io.github.randalf.addOption")
+                .arguments(GenericArguments.string(Text.of("arenaName")),GenericArguments.string(Text.of("arenaOption")))
+                .executor(new ArenaAddOptionCommand())
+                .build();
+
+        CommandSpec arenaRemoveOptionCommandSpec = CommandSpec.builder()
+                .description(Text.of("Removes an option to the arena"))
+                .permission("io.github.randalf.removeOption")
+                .arguments(GenericArguments.string(Text.of("arenaName")),GenericArguments.string(Text.of("arenaOption")))
+                .executor(new ArenaRemoveOptionCommand())
                 .build();
 
 
@@ -154,6 +161,8 @@ public class ArenaPlugIn {
         Sponge.getCommandManager().register(this, arenaInformationCommandSpec, "arenaInformation");
         Sponge.getCommandManager().register(this, arenaSetFloodModeEntityTypeCommandSpec, "setEntityType");
         Sponge.getCommandManager().register(this, arenaSetFloodModeEntityAmountCommandSpec, "setEntityAmount");
+        Sponge.getCommandManager().register(this, arenaAddOptionCommandSpec, "addOption");
+        Sponge.getCommandManager().register(this, arenaRemoveOptionCommandSpec, "removeOption");
     }
 
     private void setupSerializer() {
