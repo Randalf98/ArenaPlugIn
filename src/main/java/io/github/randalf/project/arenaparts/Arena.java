@@ -81,18 +81,26 @@ public class Arena {
         }
 
         private void addListener() {
-            Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), security.getListener());
-            Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), spawner.getListener());
+            registerListener(security.getListener());
+            registerListener(spawner.getListener());
             for(ArenaListener listener:arenaListeners.values()){
-                Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), listener);
+                registerListener(listener);
             }
         }
         private void removeListener() {
-            Sponge.getEventManager().unregisterListeners(security.getListener());
-            Sponge.getEventManager().unregisterListeners(spawner.getListener());
+            unregisterListener(security.getListener());
+            unregisterListener(spawner.getListener());
             for(ArenaListener listener:arenaListeners.values()){
-                Sponge.getEventManager().unregisterListeners(listener);
+                unregisterListener(listener);
             }
+        }
+
+        private void registerListener(ArenaListener listener){
+            Sponge.getEventManager().registerListeners(ArenaPlugIn.getInstance(), listener);
+        }
+
+        private void unregisterListener(ArenaListener listener){
+            Sponge.getEventManager().unregisterListeners(listener);
         }
 
         private void disableSpawning() {
@@ -111,20 +119,34 @@ public class Arena {
             disableSpawning();
         }
 
+        public ArenaListener getListener(ArenaOptions option){
+            switch(option) {
+                case BURNING:
+                    return (new PreventBurningListener(spawner, area));
+                case DROP:
+                    return (new PreventDroppingListener(spawner, area));
+                case XP:
+                    return (new PreventXPDroppingListener(spawner, area));
+            }
+            return null;
+        }
+
         public void setOption(ArenaOptions option, boolean activation){
             if(activation){
-                ArenaListener listener = null;
-                switch(option) {
-                    case BURNING:
-                        arenaListeners.put(BURNING, new PreventBurningListener(spawner, area));
-                        break;
-                    case DROP:
-                        arenaListeners.put(DROP, new PreventDroppingListener(spawner, area));
-                        break;
-                    case XP:
-                        arenaListeners.put(XP , new PreventXPDroppingListener(spawner, area));
-                        break;
-                }
+                arenaListeners.put(option, getListener(option));
+            }
+        }
+
+        public void addOption(ArenaOptions option){
+            ArenaListener listener = getListener(option);
+            arenaListeners.put(option, listener);
+            registerListener(listener);
+        }
+
+        public void removeOption(ArenaOptions option){
+            if (arenaListeners.containsKey(option)) {
+                unregisterListener(arenaListeners.get(option));
+                arenaListeners.remove(option);
             }
         }
 

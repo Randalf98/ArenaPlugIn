@@ -1,6 +1,7 @@
 package io.github.randalf.project.commands;
 
 import io.github.randalf.project.arenaparts.ArenaOptions;
+import io.github.randalf.project.manager.ArenaConfigurationManager;
 import io.github.randalf.project.manager.ArenaManager;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -12,9 +13,10 @@ public class ArenaRemoveOptionCommand implements CommandExecutor {
 
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        String arenaName = args.<String>getOne("areaName").get();
-        String option = args.<String>getOne("option").get();
-        ArenaManager.getInstance().getArena(arenaName).setOption(ArenaOptions.valueOf(option), false);
+        String arenaName = args.<String>getOne("arenaName").get();
+        String option = args.<String>getOne("arenaOption").get();
+        ArenaManager.getInstance().getArena(arenaName).removeOption(ArenaOptions.valueOf(option));
+        new ArenaConfigurationManager(arenaName, ArenaManager.getInstance().getArena(arenaName)).save();
         return CommandResult.success();
     }
 }
