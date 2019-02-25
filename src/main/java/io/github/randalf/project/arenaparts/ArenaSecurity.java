@@ -2,11 +2,8 @@ package io.github.randalf.project.arenaparts;
 
 import io.github.randalf.project.arenaparts.spawner.SpawnMode;
 import io.github.randalf.project.manager.ArenaManager;
-import io.github.randalf.project.ArenaPlugIn;
 import io.github.randalf.project.listener.ArenaListener;
 import io.github.randalf.project.listener.AreaManipulationListener;
-import org.spongepowered.api.Sponge;
-
 import javax.inject.Singleton;
 
 @Singleton
@@ -24,9 +21,7 @@ public class ArenaSecurity {
         this.area = area;
         this.mode = mode;
         if(securityString.equals(DEFAULT)){
-            if(securityString.equals(DEFAULT)){
-                listener = new AreaManipulationListener(area.getAreaChunks());
-            }
+            listener = new AreaManipulationListener(area.getAreaChunks());
         } else {
             ArenaManager.getInstance().stopArena("Securitystring wasn't in specified order. It was: " + securityString, this.arena);
         }

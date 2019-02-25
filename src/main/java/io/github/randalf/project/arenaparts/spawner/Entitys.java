@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Entitys {
 
-    private static Map<String, EntityType> entityMap = new HashMap<String, EntityType>();
+    private static Map<String, EntityType> entityMap = new HashMap<>();
     static {
         entityMap.put("BAT",EntityTypes.BAT);
         entityMap.put("BLAZE",EntityTypes.BLAZE);

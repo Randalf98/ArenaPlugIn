@@ -1,7 +1,6 @@
 package io.github.randalf.project.arenaparts.spawner;
 
 import com.flowpowered.math.vector.Vector3d;
-import io.github.randalf.project.ArenaPlugIn;
 import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.Arena;
 import io.github.randalf.project.listener.*;
@@ -19,15 +18,13 @@ public class ArenaSpawner {
     private boolean shouldSpawn = true;
     private SpawnMode mode;
     private List<Entity> entitiesList;
-    private String additionalOptions;
     private int lastDiedEntity;
-    private List<ArenaListener> arenaListeners;
 
     public ArenaSpawner(Arena arena, Area area, SpawnMode mode){
         this.arena = arena;
         this.listener = new SpawningListener(this, area);
         this.mode = mode;
-        entitiesList = new ArrayList<Entity>();
+        entitiesList = new ArrayList<>();
     }
 
     public void spawnEnemys(){
@@ -61,14 +58,6 @@ public class ArenaSpawner {
             }
         }
         return furthestLocation;
-    }
-
-    public void addOption(String option){
-
-    }
-
-    public void removeOption(String option){
-
     }
 
     public void stop(){

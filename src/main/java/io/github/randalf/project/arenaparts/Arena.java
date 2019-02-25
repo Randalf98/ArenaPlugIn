@@ -11,12 +11,8 @@ import io.github.randalf.project.listener.PreventXPDroppingListener;
 import io.github.randalf.project.manager.AreaManager;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.EntityType;
-
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Set;
-
-import static io.github.randalf.project.arenaparts.ArenaOptions.*;
 
 public class Arena {
         private String arenaName;
@@ -170,32 +166,12 @@ public class Arena {
             return mode;
         }
 
-        public void setMode(SpawnMode mode) {
-            this.mode = mode;
-        }
-
-        public ArenaSecurity getSecurity() {
-            return security;
-        }
-
-        public void setSecurity(ArenaSecurity security) {
-            this.security = security;
-        }
-
         public ArenaSpawner getSpawner() {
             return spawner;
         }
 
         public void setSpawner(ArenaSpawner spawner) {
             this.spawner = spawner;
-        }
-
-        public AreaManager getAreaManager() {
-            return areaManager;
-        }
-
-        public void setAreaManager(AreaManager areaManager) {
-            this.areaManager = areaManager;
         }
 
         public Set getOptions(){

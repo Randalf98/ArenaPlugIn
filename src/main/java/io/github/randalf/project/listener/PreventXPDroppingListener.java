@@ -10,12 +10,10 @@ import org.spongepowered.api.event.entity.SpawnEntityEvent;
 public class PreventXPDroppingListener extends ArenaListener {
 
     private ArenaSpawner spawner;
-    private Area area;
 
     public PreventXPDroppingListener(ArenaSpawner spawner, Area area) {
         super();
         this.spawner = spawner;
-        this.area = area;
     }
 
     /*
