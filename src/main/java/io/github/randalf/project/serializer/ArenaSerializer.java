@@ -8,10 +8,14 @@ import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializer;
 import org.spongepowered.api.entity.EntityType;
-
 import java.util.EnumSet;
 import java.util.Set;
 
+/**
+ * TypeSerializer for Arena.class
+ *
+ * @see ninja.leaping.configurate.objectmapping.serialize.TypeSerializer
+ */
 public class ArenaSerializer implements TypeSerializer<Arena>{
 
     @Override

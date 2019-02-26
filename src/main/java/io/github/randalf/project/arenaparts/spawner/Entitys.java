@@ -2,10 +2,12 @@ package io.github.randalf.project.arenaparts.spawner;
 
 import org.spongepowered.api.entity.EntityType;
 import org.spongepowered.api.entity.EntityTypes;
-
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The entity class holds the resembling strings to the entitytypes
+ */
 public class Entitys {
 
     private static Map<String, EntityType> entityMap = new HashMap<>();
@@ -60,6 +62,11 @@ public class Entitys {
         entityMap.put("ZOMBIE_VILLAGER", EntityTypes.ZOMBIE_VILLAGER);
     }
 
+    /**
+     * Getter for the EntityType resembling the given string
+     * @param entityType string which should be a valid entitytype
+     * @return the correct entitytype
+     */
     public static EntityType getEntity(String entityType){
         return entityMap.get(entityType.toUpperCase());
     }

@@ -6,6 +6,9 @@ import io.github.randalf.project.listener.ArenaListener;
 import io.github.randalf.project.listener.AreaManipulationListener;
 import javax.inject.Singleton;
 
+/**
+ * Singleton containing security restrictments
+ */
 @Singleton
 public class ArenaSecurity {
 
@@ -15,7 +18,9 @@ public class ArenaSecurity {
     private SpawnMode mode;
     private ArenaListener listener;
 
-
+    /**
+     * Constructor for basic functionality
+     */
     public ArenaSecurity(Arena arena, Area area, SpawnMode mode, String securityString) {
         this.arena = arena;
         this.area = area;
@@ -27,6 +32,11 @@ public class ArenaSecurity {
         }
     }
 
+
+    /**
+     * Getter for the listener
+     * @return the securityListener
+     */
     public ArenaListener getListener() {
         return listener;
     }

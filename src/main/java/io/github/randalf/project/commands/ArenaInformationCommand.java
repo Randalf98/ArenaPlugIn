@@ -8,16 +8,14 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.text.Text;
+
 /**
- * Created by randalf on 28.11.2017.
+ * CommandExecutor for getting the information of an arena
  */
 public class ArenaInformationCommand implements CommandExecutor {
 
     /**
-     * Command implementing CommandExecutor.
      * Lists information of a given arena
-     * Get's the ArenaManager and lists the existing arenas
-     *
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
     @Override

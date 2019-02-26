@@ -7,17 +7,26 @@ import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.entity.SpawnEntityEvent;
 
+/**
+ * Listener used to detect the spawning of entities and denying to spawn entities which are part of an arena
+ */
 public class PreventXPDroppingListener extends ArenaListener {
 
     private ArenaSpawner spawner;
 
+    /**
+     * Constructor for achieving the functionality of the listener
+     * @param spawner spawner object of the arena
+     * @param area arena object of the arena
+     */
     public PreventXPDroppingListener(ArenaSpawner spawner, Area area) {
         super();
         this.spawner = spawner;
     }
 
-    /*
-    On creation of Entity Presets this has to be set to the entity.
+    /**
+     * Listener to react when an event of an entity spawning occurs
+     * @param event the SpawnEntityEvent containing all necessary information to evaluate if the to be spawned entity is from type EXP_ORB
      */
     @Listener
     public void onXPDrop(SpawnEntityEvent event) {

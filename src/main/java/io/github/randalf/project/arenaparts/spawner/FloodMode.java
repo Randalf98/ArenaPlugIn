@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Mode for a flood arena
+ * Will spawn always enemies until they reach a specific amount
+ */
 public class FloodMode implements SpawnMode {
 
     private Arena arena;
@@ -21,12 +25,22 @@ public class FloodMode implements SpawnMode {
     private List<Entity> toBeSpawnedEntitiesList;
     private int entityAmount = 10;
 
+    /**
+     * Basic Constructor
+     * @param arena the arena which gets the mode assigned
+     */
     public FloodMode(Arena arena){
         this.arena = arena;
         toBeSpawnedEntitiesList = new ArrayList<>();
         createEntity();
     }
 
+    /**
+     * Constructor with specific values
+     * @param arena the arena which gets the mode assigned
+     * @param et the enemy type which will be flooded
+     * @param entityAmount the maximum amount of enemies
+     */
     public FloodMode(Arena arena, EntityType et, int entityAmount){
         this.arena = arena;
         this.entityAmount = entityAmount;
@@ -35,6 +49,11 @@ public class FloodMode implements SpawnMode {
         createEntity();
     }
 
+    /**
+     * Returns a list of entities which will be spawned
+     * @param location spawnpoint location
+     * @return list of enemies which will be spawned
+     */
     @Override
     public List<Entity> getNextEntities(Vector3d location) {
         Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getArea().getWorldUUID());
@@ -51,6 +70,9 @@ public class FloodMode implements SpawnMode {
         return entitiesToBeSpawned;
     }
 
+    /**
+     * Removes all dead entities from the list
+     */
     private void cleanEntitiesList() {
         List<Entity> entitiesToRemove = new ArrayList<>();
         for (Entity e : toBeSpawnedEntitiesList){
@@ -61,7 +83,10 @@ public class FloodMode implements SpawnMode {
         toBeSpawnedEntitiesList.removeAll(entitiesToRemove);
     }
 
-    public void createEntity(){
+    /**
+     * Create the entity which will work as base for all spawning enemies
+     */
+    private void createEntity(){
         Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getArea().getWorldUUID());
         Optional<Vector3d> optionalLocation = arena.getArea().getSpawnLocations().stream().findFirst();
         if (optionalWorld.isPresent() && optionalLocation.isPresent()){
@@ -70,19 +95,35 @@ public class FloodMode implements SpawnMode {
         }
     }
 
+    /**
+     * Setter for the entityType and recreates base entity
+     * @param entityType string of the entity which should be set as entitytype
+     */
     public void setEntityType(String entityType){
         this.entityType = Entitys.getEntity(entityType);
         createEntity();
     }
 
+    /**
+     * Getter for the entityType
+     * @return EntityType value of the arena
+     */
     public EntityType getEntityType(){
         return this.entityType;
     }
 
+    /**
+     * Setter for the amount of entities
+     * @param entityAmount int value of the maximum of entities
+     */
     public void setEntityAmount(int entityAmount){
         this.entityAmount = entityAmount;
     }
 
+    /**
+     * Getter for the amount of entities
+     * @return int representation of the maximum amount
+     */
     public int getEntityAmount(){
         return this.entityAmount;
     }

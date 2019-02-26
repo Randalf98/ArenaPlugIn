@@ -9,13 +9,13 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.text.Text;
 
+/**
+ * CommandExecutor for stopping an arena
+ */
 public class ArenaStopCommand implements CommandExecutor {
 
     /**
-     * Command implementing CommandExecutor.Command implementing CommandExecutor.
-     * Stops an arena if it exists.
-     * Get's the AreaManager and starts the arena if it exists.
-     *
+     * Get's the ArenaManager and stops the arena if it exists.
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
     @Override

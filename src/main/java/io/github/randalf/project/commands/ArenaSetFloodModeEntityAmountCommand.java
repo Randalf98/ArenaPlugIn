@@ -9,12 +9,13 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 
+/**
+ * CommandExecutor for setting the entity amount in an arena
+ */
 public class ArenaSetFloodModeEntityAmountCommand implements CommandExecutor {
 
     /**
-     * Command implementing CommandExecutor.
      * Sets amount of Entitys to be spawned in FloodMode
-     *
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
     @Override

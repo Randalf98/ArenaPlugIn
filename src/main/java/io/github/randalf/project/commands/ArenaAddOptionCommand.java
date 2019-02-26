@@ -9,9 +9,15 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 
-
+/**
+ * CommandExecutor for adding an option to a given arena
+ */
 public class ArenaAddOptionCommand implements CommandExecutor {
 
+    /**
+     * Adds an option from a given arena
+     * @see CommandExecutor#execute(CommandSource, CommandContext);
+     */
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         String arenaName = args.<String>getOne("arenaName").get();

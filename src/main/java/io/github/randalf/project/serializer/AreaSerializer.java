@@ -7,9 +7,13 @@ import io.github.randalf.project.arenaparts.Area;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializer;
-
 import java.util.*;
 
+/**
+ * TypeSerializer for Area.class
+ *
+ * @see ninja.leaping.configurate.objectmapping.serialize.TypeSerializer
+ */
 public class AreaSerializer implements TypeSerializer<Area>{
 
     @Override

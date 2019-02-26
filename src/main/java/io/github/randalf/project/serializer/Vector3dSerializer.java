@@ -6,6 +6,11 @@ import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializer;
 
+/**
+ * TypeSerializer for Vector3d.class
+ *
+ * @see ninja.leaping.configurate.objectmapping.serialize.TypeSerializer
+ */
 public class Vector3dSerializer implements TypeSerializer<Vector3d> {
     @Override
     public Vector3d deserialize(TypeToken<?> typeToken, ConfigurationNode configurationNode) throws ObjectMappingException {

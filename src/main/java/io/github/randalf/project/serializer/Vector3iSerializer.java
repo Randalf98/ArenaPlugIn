@@ -6,7 +6,13 @@ import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import ninja.leaping.configurate.objectmapping.serialize.TypeSerializer;
 
+/**
+ * TypeSerializer for Vector3i.class
+ *
+ * @see ninja.leaping.configurate.objectmapping.serialize.TypeSerializer
+ */
 public class Vector3iSerializer implements TypeSerializer<Vector3i> {
+
     @Override
     public Vector3i deserialize(TypeToken<?> typeToken, ConfigurationNode configurationNode) throws ObjectMappingException {
         Double xCoordinate = configurationNode.getNode("xCoordinate").getValue(TypeToken.of(Double.class));

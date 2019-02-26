@@ -8,13 +8,13 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.text.Text;
 
+/**
+ * CommandExecutor for creating an arena
+ */
 public class ArenaCreateCommand implements CommandExecutor {
 
     /**
-     * Command implementing CommandExecutor.
-     * Creates an arena.
      * Get's the ArenaManager and create and saves the new arena with a given area.
-     *
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
     @Override

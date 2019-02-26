@@ -10,6 +10,9 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Set;
 
+/**
+ * Singleton which deals as a serverwide supplier of arena objects
+ */
 @Singleton
 public class ArenaManager {
 
@@ -17,11 +20,16 @@ public class ArenaManager {
 
     private static ArenaManager instance;
 
-    protected ArenaManager() {
-        // Exists only to defeat instantiation.
-    }
+    /**
+     * Protected Constructor exists only to defeat instantiation.
+     */
+    protected ArenaManager() {}
 
-    public static synchronized  ArenaManager getInstance() {
+    /**
+     * Synchronized getter of the singleton instance of arenamanager
+     * @return the instance of arenamanager
+     */
+    public static synchronized ArenaManager getInstance() {
         if(instance == null) {
             instance = new ArenaManager();
             instance.loadAllArenas();
@@ -29,23 +37,44 @@ public class ArenaManager {
         return instance;
     }
 
+    /**
+     * Stops the arena and sends a message into the console
+     * @param message message around the stopping circumstances
+     * @param arena the stopping arena
+     */
     public void stopArena(String message, Arena arena){
         arena.stopArena();
         MessageChannel.TO_CONSOLE.send(Text.of(message));
     }
 
+    /**
+     * Starting an arena based on the given arenaname
+     * @param arenaName name of the arena
+     */
     public void startArena(String arenaName){
         arenaMap.get(arenaName).startArena();
     }
 
+    /**
+     * Stopping an arena based on the given arenaname
+     * @param arenaName name of the arena
+     */
     public void stopArena(String arenaName) {
         stopArena("Stopped arena by User command", arenaMap.get(arenaName));
     }
 
+    /**
+     * Checks if an arenaName has a correlating arena in the arenamap
+     * @param arenaName the name which will be checked
+     * @return boolean value if the map contains the arenaName
+     */
     public boolean mapContains(String arenaName) {
         return arenaMap.containsKey(arenaName);
     }
 
+    /**
+     * loads the arenas out of the existing config files
+     */
     private void loadAllArenas(){
         arenaMap = new HashMap<>();
         Path configPath = FileSystems.getDefault().getPath("config/arena");
@@ -66,17 +95,27 @@ public class ArenaManager {
         }
     }
 
+    /**
+     * Checks the given arenaname and creates a new arena
+     * @param arenaName the name for the new arena
+     * @param areaName the name for the linked area
+     */
     public void createArena(String arenaName, String areaName) {
         if (!arenaMap.containsKey(arenaName)){
             if(!ArenaConfigurationManager.configExists("Arena",arenaName)){
                 Arena newArena = new Arena(arenaName, areaName);
                 saveArena(arenaName, newArena);
             }
-            Arena arena = getArena(areaName);
+            Arena arena = getArena(arenaName);
             arenaMap.put(arenaName, arena);
         }
     }
 
+    /**
+     * Checks the given arenaname and returns the related arena
+     * @param arenaName the name of the arena
+     * @return the arena object stored in the arenaMap
+     */
     public Arena getArena(String arenaName){
         if (arenaMap.containsKey(arenaName)) {
             return arenaMap.get(arenaName);
@@ -87,10 +126,19 @@ public class ArenaManager {
         }
     }
 
+    /**
+     * Saves the arena with the arenaName
+     * @param arenaName the name of the arena
+     * @param arena the arena which will be saved
+     */
     public void saveArena(String arenaName, Arena arena){
         new ArenaConfigurationManager(arenaName, arena).save();
     }
 
+    /**
+     * Gets all keys from the arenaMap
+     * @return the keyset of the arenaMap
+     */
     public Set<String> getArenaNames() {
         return arenaMap.keySet();
     }

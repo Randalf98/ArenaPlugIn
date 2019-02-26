@@ -11,17 +11,29 @@ import org.spongepowered.api.event.cause.entity.damage.source.EntityDamageSource
 import org.spongepowered.api.event.cause.entity.damage.source.IndirectEntityDamageSource;
 import org.spongepowered.api.event.entity.DestructEntityEvent;
 
+/**
+ * Listener used to detect the death of entities and let new entitys spawn
+ */
 public class SpawningListener extends ArenaListener {
 
     private ArenaSpawner spawner;
     private Area area;
 
+    /**
+     * Constructor for achieving the functionality of the listener
+     * @param spawner spawner object of the arena
+     * @param area arena object of the arena
+     */
     public SpawningListener(ArenaSpawner spawner, Area area) {
         super();
         this.spawner = spawner;
         this.area = area;
     }
 
+    /**
+     * Listener to react when an entity gets a destruction event
+     * @param event the DestructEntityEvent containing all necessary information to evaluate the death of an entity
+     */
     @Listener
     public void onDeadEntity(DestructEntityEvent event) {
         Entity  e = event.getTargetEntity();
