@@ -44,7 +44,7 @@ public class ArenaSerializer implements TypeSerializer<Arena>{
         configurationNode.getNode("areaName").setValue(TypeToken.of(String.class), arena.getArea().getAreaName());
         String mode = arena.getMode().getClass().getSimpleName();
         configurationNode.getNode("arenaMode").setValue(TypeToken.of(String.class), mode);
-        Set<ArenaOptions> arenaOptions = arena.getOptions();
+        Set<ArenaOptions> arenaOptions = arena.getALM().getOptions();
         for(ArenaOptions arenaOption: ArenaOptions.values()){
             configurationNode.getNode("arenaOptions").getNode(arenaOption.name()).setValue(TypeToken.of(Boolean.class), arenaOptions.contains(arenaOption));
         }

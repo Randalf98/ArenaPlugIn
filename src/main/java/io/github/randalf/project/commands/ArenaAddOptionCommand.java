@@ -22,7 +22,7 @@ public class ArenaAddOptionCommand implements CommandExecutor {
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         String arenaName = args.<String>getOne("arenaName").get();
         String option = args.<String>getOne("arenaOption").get();
-        ArenaManager.getInstance().getArena(arenaName).addOption(ArenaOptions.valueOf(option));
+        ArenaManager.getInstance().getArena(arenaName).getALM().addOption(ArenaOptions.valueOf(option));
         new ArenaConfigurationManager(arenaName, ArenaManager.getInstance().getArena(arenaName)).save();
         return CommandResult.success();
     }

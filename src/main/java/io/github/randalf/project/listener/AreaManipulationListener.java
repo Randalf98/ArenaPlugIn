@@ -1,27 +1,27 @@
 package io.github.randalf.project.listener;
 
 import com.flowpowered.math.vector.Vector3i;
+import io.github.randalf.project.arenaparts.Area;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.block.ChangeBlockEvent;
 import org.spongepowered.api.event.filter.cause.Root;
 import org.spongepowered.api.event.filter.type.Include;
-import java.util.Collection;
 
 /**
  * Listener used to detect and prevent manipulation of the area
  */
 public class AreaManipulationListener extends ArenaListener {
 
-    private Collection<Vector3i> areaChunks;
+    private Area area;
 
     /**
      * Constructor for achieving the functionality of the listener
-     * @param areaChunks spawner object of the arena
+     * @param area spawner object of the arena
      */
-    public AreaManipulationListener(Collection<Vector3i> areaChunks) {
+    public AreaManipulationListener(Area area) {
         super();
-        this.areaChunks =areaChunks;
+        this.area = area;
     }
 
     /**
@@ -36,7 +36,7 @@ public class AreaManipulationListener extends ArenaListener {
     })
     public void onBlockBreakingAndPlacing(ChangeBlockEvent event, @Root Player player) {
         Vector3i playerPosition = player.getLocation().getChunkPosition();
-        for (Vector3i chunk: areaChunks){
+        for (Vector3i chunk: area.getAreaChunks()){
             if (chunk.equals(playerPosition)){
                 event.setCancelled(true);
             }
