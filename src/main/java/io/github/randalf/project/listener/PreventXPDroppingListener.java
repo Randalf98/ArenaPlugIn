@@ -33,7 +33,7 @@ public class PreventXPDroppingListener extends ArenaListener {
         if (event.getSource() instanceof Entity){
             Entity entity = (Entity)event.getSource();
             if (spawner.checkEntity(entity)){
-                if (spawner.isLastDiedEntity(entity)){
+                if (spawner.isLastDiedEntity(entity) &&  !event.getEntities().isEmpty()){
                     if (((Entity) event.getEntities().get(0)).getType() == EntityTypes.EXPERIENCE_ORB) {
                         event.setCancelled(true);
                     }

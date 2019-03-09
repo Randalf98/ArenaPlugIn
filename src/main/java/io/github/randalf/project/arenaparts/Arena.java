@@ -210,7 +210,9 @@ public class Arena {
     public void addOption(ArenaOptions option){
         ArenaListener listener = getListener(option);
         arenaListeners.put(option, listener);
-        registerListener(listener);
+        if(active) {
+            registerListener(listener);
+        }
     }
 
     /**

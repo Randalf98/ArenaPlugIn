@@ -19,9 +19,9 @@ public class ArenaCreateCommand implements CommandExecutor {
      */
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        src.sendMessage(Text.of("Arena will be created soon - if implemented"));
         String arenaName = args.<String>getOne("arenaName").get();
         String areaName = args.<String>getOne("areaName").get();
+        src.sendMessage(Text.of("Arena " + areaName + " will be created for the area " + areaName));
         ArenaManager.getInstance().createArena(arenaName,areaName);
         return CommandResult.success();
     }
