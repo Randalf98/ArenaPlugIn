@@ -1,7 +1,6 @@
 package io.github.randalf.project.listener;
 
-import io.github.randalf.project.arenaparts.Area;
-import io.github.randalf.project.arenaparts.spawner.ArenaSpawner;
+import io.github.randalf.project.arenaparts.Arena;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.event.Listener;
@@ -14,18 +13,12 @@ import org.spongepowered.api.event.entity.DamageEntityEvent;
  */
 public class PreventBurningListener extends ArenaListener {
 
-    private ArenaSpawner spawner;
-    private Area area;
-
     /**
      * Constructor for achieving the functionality of the listener
-     * @param spawner spawner object of the arena
-     * @param area arena object of the arena
+     * @param arena arena object
      */
-    public PreventBurningListener(ArenaSpawner spawner, Area area) {
-        super();
-        this.spawner = spawner;
-        this.area = area;
+    public PreventBurningListener(Arena arena) {
+        super(arena);
     }
 
     /**
@@ -35,7 +28,7 @@ public class PreventBurningListener extends ArenaListener {
     @Listener
     public void onFire(DamageEntityEvent event){
         Entity e = event.getTargetEntity();
-        if(spawner.getEntitiesList().contains(e) && ((DamageSource)event.getCause().root()).getType() == DamageTypes.FIRE){
+        if(arena.getSpawner().getEntitiesList().contains(e) && ((DamageSource)event.getCause().root()).getType() == DamageTypes.FIRE){
             event.setCancelled(true);
             e.offer(Keys.IS_AFLAME, false);
         }

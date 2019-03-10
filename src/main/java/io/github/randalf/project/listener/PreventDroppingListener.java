@@ -1,7 +1,6 @@
 package io.github.randalf.project.listener;
 
-import io.github.randalf.project.arenaparts.Area;
-import io.github.randalf.project.arenaparts.spawner.ArenaSpawner;
+import io.github.randalf.project.arenaparts.Arena;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.item.inventory.DropItemEvent;
@@ -12,18 +11,12 @@ import org.spongepowered.api.event.item.inventory.DropItemEvent;
  */
 public class PreventDroppingListener extends ArenaListener {
 
-    private ArenaSpawner spawner;
-    private Area area;
-
     /**
      * Constructor for achieving the functionality of the listener
-     * @param spawner spawner object of the arena
-     * @param area arena object of the arena
+     * @param arena arena object
      */
-    public PreventDroppingListener(ArenaSpawner spawner, Area area) {
-        super();
-        this.spawner = spawner;
-        this.area = area;
+    public PreventDroppingListener(Arena arena) {
+        super(arena);
     }
 
     /**
@@ -32,7 +25,7 @@ public class PreventDroppingListener extends ArenaListener {
      */
     @Listener
     public void onItemDrop(DropItemEvent event){
-        if(spawner.isLastDiedEntity((Entity) event.getSource())){
+        if(arena.getSpawner().isLastDiedEntity((Entity) event.getSource())){
             event.setCancelled(true);
         }
     }

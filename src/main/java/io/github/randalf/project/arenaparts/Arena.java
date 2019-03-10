@@ -32,7 +32,7 @@ public class Arena {
         areaManager = AreaManager.getInstance();
         area = areaManager.getArea(areaString);
         mode = new FloodMode(this);
-        spawner = new ArenaSpawner(this, area, mode);
+        spawner = new ArenaSpawner(this, mode);
         EnumMap<ArenaOptions, ArenaListener> arenaListeners = new EnumMap<>(ArenaOptions.class);
         arenaListenerManager = new ArenaListenerManager(this, arenaListeners);
     }
@@ -48,7 +48,7 @@ public class Arena {
         areaManager = AreaManager.getInstance();
         area = areaManager.getArea(areaString);
         mode = new FloodMode(this);
-        spawner = new ArenaSpawner(this, area, mode);
+        spawner = new ArenaSpawner(this, mode);
         EnumMap<ArenaOptions, ArenaListener> arenaListeners = new EnumMap<>(ArenaOptions.class);
         arenaListenerManager = new ArenaListenerManager(this, arenaListeners);
         for(ArenaOptions option: options)
@@ -72,7 +72,7 @@ public class Arena {
         } else {
             mode = new FloodMode(this);
         }
-        spawner = new ArenaSpawner(this, area, mode);
+        spawner = new ArenaSpawner(this, mode);
     }
 
     /**
@@ -93,7 +93,7 @@ public class Arena {
         } else {
             mode = new FloodMode(this);
         }
-        spawner = new ArenaSpawner(this, area, mode);
+        spawner = new ArenaSpawner(this, mode);
         EnumMap<ArenaOptions, ArenaListener> arenaListeners = new EnumMap<>(ArenaOptions.class);
         arenaListenerManager = new ArenaListenerManager(this, arenaListeners);
         for(ArenaOptions option: options)

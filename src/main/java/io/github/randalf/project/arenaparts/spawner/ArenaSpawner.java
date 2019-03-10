@@ -30,9 +30,9 @@ public class ArenaSpawner {
      * @param area the area from the area
      * @param mode the mode from the arena
      */
-    public ArenaSpawner(Arena arena, Area area, SpawnMode mode){
+    public ArenaSpawner(Arena arena, SpawnMode mode){
         this.arena = arena;
-        this.listener = new SpawningListener(this, area);
+        this.listener = new SpawningListener(arena);
         this.mode = mode;
         entitiesList = new ArrayList<>();
         lastDiedEntities = new UUID[10];
@@ -110,7 +110,7 @@ public class ArenaSpawner {
      * @return boolean if the hashcode resembles
      */
     public boolean isLastDiedEntity(Entity entity){
-        return ArrayUtils.contains(lastDiedEntities, entity.hashCode());
+        return ArrayUtils.contains(lastDiedEntities, entity.getUniqueId());
     }
 
     /**
