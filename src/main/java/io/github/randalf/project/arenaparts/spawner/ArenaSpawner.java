@@ -130,11 +130,4 @@ public class ArenaSpawner {
      * @return EntityList
      */
     public List<Entity> getEntitiesList(){return entitiesList;}
-
-    /**
-     * Checks if the given entity has the appropiate entity type
-     * @param entity entity which needs to be checked
-     * @return boolean value which checks the entity type
-     */
-    public boolean checkEntity(Entity entity){return entity.getType().equals(((FloodMode)mode).getEntityType());}
 }
