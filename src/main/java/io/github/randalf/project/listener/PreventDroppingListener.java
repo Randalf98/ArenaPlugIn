@@ -2,8 +2,10 @@ package io.github.randalf.project.listener;
 
 import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.spawner.ArenaSpawner;
+import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.item.inventory.DropItemEvent;
+
 
 /**
  * Listener used to detect and prevent items from dropping in the arena
@@ -30,6 +32,8 @@ public class PreventDroppingListener extends ArenaListener {
      */
     @Listener
     public void onItemDrop(DropItemEvent event){
-        event.setCancelled(true);
+        if(spawner.isLastDiedEntity((Entity) event.getSource())){
+            event.setCancelled(true);
+        }
     }
 }
