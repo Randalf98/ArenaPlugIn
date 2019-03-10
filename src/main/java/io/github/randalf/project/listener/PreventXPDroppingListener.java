@@ -1,6 +1,7 @@
 package io.github.randalf.project.listener;
 
 import io.github.randalf.project.arenaparts.Area;
+import io.github.randalf.project.arenaparts.Arena;
 import io.github.randalf.project.arenaparts.spawner.ArenaSpawner;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntityTypes;
@@ -12,16 +13,12 @@ import org.spongepowered.api.event.entity.SpawnEntityEvent;
  */
 public class PreventXPDroppingListener extends ArenaListener {
 
-    private ArenaSpawner spawner;
-
     /**
      * Constructor for achieving the functionality of the listener
-     * @param spawner spawner object of the arena
-     * @param area arena object of the arena
+     * @param arena arena object
      */
-    public PreventXPDroppingListener(ArenaSpawner spawner, Area area) {
-        super();
-        this.spawner = spawner;
+    public PreventXPDroppingListener(Arena arena) {
+        super(arena);
     }
 
     /**
@@ -32,11 +29,9 @@ public class PreventXPDroppingListener extends ArenaListener {
     public void onXPDrop(SpawnEntityEvent event) {
         if (event.getSource() instanceof Entity){
             Entity entity = (Entity)event.getSource();
-            if (spawner.checkEntity(entity)){
-                if (spawner.isLastDiedEntity(entity) &&  !event.getEntities().isEmpty()){
-                    if (((Entity) event.getEntities().get(0)).getType() == EntityTypes.EXPERIENCE_ORB) {
-                        event.setCancelled(true);
-                    }
+            if (arena.getSpawner().isLastDiedEntity(entity) &&  !event.getEntities().isEmpty()){
+                if (((Entity) event.getEntities().get(0)).getType() == EntityTypes.EXPERIENCE_ORB) {
+                    event.setCancelled(true);
                 }
             }
         }

@@ -2,6 +2,7 @@ package io.github.randalf.project.listener;
 
 import com.flowpowered.math.vector.Vector3i;
 import io.github.randalf.project.arenaparts.Area;
+import io.github.randalf.project.arenaparts.Arena;
 import io.github.randalf.project.arenaparts.spawner.ArenaSpawner;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntityTypes;
@@ -16,18 +17,12 @@ import org.spongepowered.api.event.entity.DestructEntityEvent;
  */
 public class SpawningListener extends ArenaListener {
 
-    private ArenaSpawner spawner;
-    private Area area;
-
     /**
      * Constructor for achieving the functionality of the listener
-     * @param spawner spawner object of the arena
-     * @param area arena object of the arena
+     * @param arena arena object
      */
-    public SpawningListener(ArenaSpawner spawner, Area area) {
-        super();
-        this.spawner = spawner;
-        this.area = area;
+    public SpawningListener(Arena arena) {
+        super(arena);
     }
 
     /**
@@ -37,7 +32,7 @@ public class SpawningListener extends ArenaListener {
     @Listener
     public void onDeadEntity(DestructEntityEvent event) {
         Entity  e = event.getTargetEntity();
-        if(spawner.getEntitiesList().contains(e) && (event.getCause().first(EntityDamageSource.class).isPresent() || event.getCause().first(IndirectEntityDamageSource.class).isPresent())){
+        if(arena.getSpawner().getEntitiesList().contains(e) && (event.getCause().first(EntityDamageSource.class).isPresent() || event.getCause().first(IndirectEntityDamageSource.class).isPresent())){
             Player player = null;
             if(event.getCause().first(IndirectEntityDamageSource.class).isPresent()){
                 player = (Player)event.getCause().first(IndirectEntityDamageSource.class).get().getIndirectSource();
@@ -46,14 +41,14 @@ public class SpawningListener extends ArenaListener {
             }
             if(player != null){
                 Vector3i playerPosition = player.getLocation().getChunkPosition();
-                if (area.contains(playerPosition)){
-                    spawner.spawnEnemys();
+                if (arena.getArea().contains(playerPosition)){
+                    arena.getSpawner().spawnEnemys();
                 }
-                spawner.setLastDiedEntity(e);
+                arena.getSpawner().setLastDiedEntity(e);
             }
         }
         try{
-            spawner.getEntitiesList().remove(e);
+            arena.getSpawner().getEntitiesList().remove(e);
         } catch(Exception ignored){}
     }
 }

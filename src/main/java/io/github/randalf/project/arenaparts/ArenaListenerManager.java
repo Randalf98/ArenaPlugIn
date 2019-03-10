@@ -25,13 +25,13 @@ public class ArenaListenerManager {
     public ArenaListener getListener(ArenaOptions option){
         switch(option) {
             case BURNING:
-                return (new PreventBurningListener(arena.getSpawner(), arena.getArea()));
+                return (new PreventBurningListener(arena));
             case DROP:
-                return (new PreventDroppingListener(arena.getSpawner(), arena.getArea()));
+                return (new PreventDroppingListener(arena));
             case XP:
-                return (new PreventXPDroppingListener(arena.getSpawner(), arena.getArea()));
+                return (new PreventXPDroppingListener(arena));
             case BUILDING:
-                return (new AreaManipulationListener(arena.getArea()));
+                return (new AreaManipulationListener(arena));
         }
         return null;
     }
