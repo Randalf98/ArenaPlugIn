@@ -4,6 +4,7 @@ import com.flowpowered.math.vector.Vector3d;
 import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.Arena;
 import io.github.randalf.project.listener.*;
+import org.apache.commons.lang3.ArrayUtils;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.living.player.Player;
@@ -20,7 +21,8 @@ public class ArenaSpawner {
     private boolean shouldSpawn = true;
     private SpawnMode mode;
     private List<Entity> entitiesList;
-    private int lastDiedEntity;
+    private int[] lastDiedEntities;
+    private int counter;
 
     /**
      * Basic constructor for the spawner
@@ -33,6 +35,8 @@ public class ArenaSpawner {
         this.listener = new SpawningListener(this, area);
         this.mode = mode;
         entitiesList = new ArrayList<>();
+        lastDiedEntities = new int[10];
+        counter = 0;
     }
 
     /**
@@ -94,14 +98,20 @@ public class ArenaSpawner {
      * Setter for the hashcode for the last died entity
      * @param entity Entity
      */
-    public void setLastDiedEntity(Entity entity){this.lastDiedEntity = entity.hashCode();}
+    public void setLastDiedEntity(Entity entity){
+        lastDiedEntities[counter] = entity.hashCode();
+        counter++;
+        if(counter == 10){counter = 0;}
+    }
 
     /**
      * Check if entity is the same as the last entity which died
      * @param entity the entity which should get checked
      * @return boolean if the hashcode resembles
      */
-    public boolean isLastDiedEntity(Entity entity){return this.lastDiedEntity == entity.hashCode();}
+    public boolean isLastDiedEntity(Entity entity){
+        return ArrayUtils.contains(lastDiedEntities, entity.hashCode());
+    }
 
     /**
      * Getter for the listener
