@@ -8,6 +8,9 @@ import org.spongepowered.api.config.DefaultConfig;
 import javax.inject.Inject;
 import java.nio.file.Path;
 
+/**
+ * ConfigurationManager for Area de/serialization
+ */
 public class AreaConfigurationManager extends ObjectConfigurationManager{
     @Inject
     @DefaultConfig(sharedRoot = false)
@@ -17,10 +20,18 @@ public class AreaConfigurationManager extends ObjectConfigurationManager{
     private static final String OBJECT_TYPE = "Area";
     private Area area = (Area) object;
 
+    /**
+     * Constructor for ACM
+     * @param objectName Name of the given area
+     * @param area area which should get saved or loaded
+     */
     public AreaConfigurationManager(String objectName, Area area){
         super(OBJECT_TYPE, objectName, area);
     }
 
+    /**
+     * Saves the given object into a config
+     */
     public void save(){
         try {
             configurationNode = configLoader.load();
@@ -31,6 +42,9 @@ public class AreaConfigurationManager extends ObjectConfigurationManager{
         }
     }
 
+    /**
+     * Loads the object from a given config
+     */
     public void load(){
         try {
             configurationNode = configLoader.load();
@@ -40,6 +54,10 @@ public class AreaConfigurationManager extends ObjectConfigurationManager{
         }
     }
 
+    /**
+     * Getter for the area
+     * @return the area
+     */
     public Area getArea() {
         return area;
     }

@@ -20,10 +20,15 @@ import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.text.Text;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+/**
+ * An arena plugin for Sponge server to let the player fight monsters.
+ *
+ * @author Randalf
+ * @version 1.0
+ */
 @Plugin(id = ArenaPlugIn.PLUGIN_ID, name = "Area", version = "1.0", description = "A little arena Plug-In")
 @Singleton
 public class ArenaPlugIn {
@@ -38,12 +43,12 @@ public class ArenaPlugIn {
     Logger logger;
 
     @Listener
-    public void onServerStart(GameStartedServerEvent event) {
-        // Hey! The server has started!
-        // Try instantiating your logger in here.
-        // (There's a guide for that)
-    }
+    public void onServerStart(GameStartedServerEvent event) {}
 
+    /**
+     * When the Plugin gets initialized the function gets executed.
+     * @param event Default GameInitializationEvent from the server
+     */
     @Listener
     public void onInitialization(GameInitializationEvent event) {
         instance = this;
@@ -51,10 +56,17 @@ public class ArenaPlugIn {
         setupSerializer();
     }
 
+    /**
+     * Functionality to get the singleton instance
+     * @return The instance of this Plugin
+     */
     public static ArenaPlugIn getInstance(){
         return instance;
     }
 
+    /**
+     * Routine for setting up all commands
+     */
     private void setupCommands() {
         //Command Spec for starting a Round
         CommandSpec arenaStartCommandSpec = CommandSpec.builder()
@@ -88,6 +100,7 @@ public class ArenaPlugIn {
                 .executor(new AreaCreateCommand())
                 .build();
 
+        //Command Spec for adding a chunk to area
         CommandSpec areaAddChunkCommandSpec = CommandSpec.builder()
                 .description(Text.of("Add Chunk Command"))
                 .permission("io.github.randalf.addChunkToArea")
@@ -95,6 +108,7 @@ public class ArenaPlugIn {
                 .executor(new AreaAddChunkCommand())
                 .build();
 
+        //Command Spec for adding a spawnpoint to area
         CommandSpec areaAddSpawnPointCommandSpec = CommandSpec.builder()
                 .description(Text.of("Add Spawnpoint Command"))
                 .permission("io.github.randalf.addSpawnPointToArea")
@@ -102,18 +116,21 @@ public class ArenaPlugIn {
                 .executor(new AreaAddSpawnPointCommand())
                 .build();
 
+        //Command Spec for listing all areas
         CommandSpec listAreasCommandSpec = CommandSpec.builder()
                 .description(Text.of("List Areas Command"))
                 .permission("io.github.randalf.listAreas")
                 .executor(new ListAreaCommand())
                 .build();
 
+        //Command Spec for listing all arenas
         CommandSpec listArenasCommandSpec = CommandSpec.builder()
                 .description(Text.of("List Arenas Command"))
                 .permission("io.github.randalf.listArenas")
                 .executor(new ListArenaCommand())
                 .build();
 
+        //Command Spec for giving the information of an arena
         CommandSpec arenaInformationCommandSpec = CommandSpec.builder()
                 .description(Text.of("Arena Information Command"))
                 .permission("io.github.randalf.arenaInformation")
@@ -121,6 +138,7 @@ public class ArenaPlugIn {
                 .executor(new ArenaInformationCommand())
                 .build();
 
+        //Command Spec for setting the entity type for a flood arena
         CommandSpec arenaSetFloodModeEntityTypeCommandSpec = CommandSpec.builder()
                 .description(Text.of("Sets Flood Mode Entity Type"))
                 .permission("io.github.randalf.setEntityType")
@@ -128,6 +146,7 @@ public class ArenaPlugIn {
                 .executor(new ArenaSetFloodModeEntityTypeCommand())
                 .build();
 
+        //Command Spec for setting the entity amount for a flood arena
         CommandSpec arenaSetFloodModeEntityAmountCommandSpec = CommandSpec.builder()
                 .description(Text.of("Sets Flood Mode Entity Amount"))
                 .permission("io.github.randalf.setEntityAmount")
@@ -135,6 +154,7 @@ public class ArenaPlugIn {
                 .executor(new ArenaSetFloodModeEntityAmountCommand())
                 .build();
 
+        //Command Spec for adding an option to an arena
         CommandSpec arenaAddOptionCommandSpec = CommandSpec.builder()
                 .description(Text.of("Adds an option to the arena"))
                 .permission("io.github.randalf.addOption")
@@ -142,6 +162,7 @@ public class ArenaPlugIn {
                 .executor(new ArenaAddOptionCommand())
                 .build();
 
+        //Command Spec for removing an option from an arena
         CommandSpec arenaRemoveOptionCommandSpec = CommandSpec.builder()
                 .description(Text.of("Removes an option to the arena"))
                 .permission("io.github.randalf.removeOption")
@@ -149,7 +170,7 @@ public class ArenaPlugIn {
                 .executor(new ArenaRemoveOptionCommand())
                 .build();
 
-
+        //Adding all command Specs to the commang manager
         Sponge.getCommandManager().register(this, arenaStartCommandSpec, "startArena");
         Sponge.getCommandManager().register(this, arenaStopCommandSpec, "stopArena");
         Sponge.getCommandManager().register(this, arenaCreateCommandSpec, "createArena");
@@ -165,12 +186,19 @@ public class ArenaPlugIn {
         Sponge.getCommandManager().register(this, arenaRemoveOptionCommandSpec, "removeOption");
     }
 
+    /**
+     * Routine for registring the Typetoken for Serialization and Deserialization
+     */
     private void setupSerializer() {
         TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Area.class), new AreaSerializer());
         TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Vector3d.class), new Vector3dSerializer());
         TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Vector3i.class), new Vector3iSerializer());
     }
 
+    /**
+     * Getter for the ArenaManager instance
+     * @return
+     */
     public ArenaManager getArenaManager() {
         return ArenaManager.getInstance();
     }

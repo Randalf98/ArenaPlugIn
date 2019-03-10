@@ -10,21 +10,18 @@ import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 
 /**
- * Created by randalf on 28.11.2017.
+ * CommandExecutor for creating an arena
  */
 public class AreaCreateCommand implements CommandExecutor {
 
     /**
-     * Command implementing CommandExecutor.
-     * Creates an area which can be assigned to an arena.
      * Get's the AreaManager and create and saves the new area.
-     *
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        src.sendMessage(Text.of("Area will be created soon - if implemented"));
         String areaName = args.<String>getOne("areaName").get();
+        src.sendMessage(Text.of("Area " + areaName + " will be created"));
         Player player = (Player) src;
         AreaManager.getInstance().createArea(areaName, player);
         return CommandResult.success();

@@ -11,15 +11,23 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.*;
 
+/**
+ * Singleton which deals as a serverwide supplier of area objects
+ */
 public class AreaManager {
 
     private static AreaManager instance = null;
     private HashMap<String, Area> areaMap;
 
-    protected AreaManager() {
-        // Exists only to defeat instantiation.
-    }
+    /**
+     * Protected Constructor exists only to defeat instantiation.
+     */
+    protected AreaManager() {}
 
+    /**
+     * Synchronized getter of the singleton instance of areamanager
+     * @return the instance of areamanager
+     */
     public static AreaManager getInstance() {
         if(instance == null) {
             instance = new AreaManager();
@@ -28,6 +36,12 @@ public class AreaManager {
         return instance;
     }
 
+
+    /**
+     * Checks the given areaname and creates a new area based on the players location
+     * @param areaName the name for the new area
+     * @param player the player which will be used as locator of the arena
+     */
     public void createArea(String areaName,Player player){
         if (!areaMap.containsKey(areaName)){
             if(!AreaConfigurationManager.configExists("Area", areaName)){
@@ -51,6 +65,11 @@ public class AreaManager {
         }
     }
 
+    /**
+     * Checks the given areaname and returns the related area
+     * @param areaName the name of the area
+     * @return the area object stored in the areaMap
+     */
     public Area getArea(String areaName){
         if (areaMap.containsKey(areaName)) {
             return areaMap.get(areaName);
@@ -61,6 +80,9 @@ public class AreaManager {
         }
     }
 
+    /**
+     * loads the areas out of the existing config files
+     */
     private void loadAllAreas(){
         areaMap = new HashMap<>();
         Path configPath = FileSystems.getDefault().getPath("config/area");
@@ -81,6 +103,11 @@ public class AreaManager {
         }
     }
 
+    /**
+     * Adds the chunk from the players position and adds it to the given area
+     * @param areaName the name of the area which will be extended
+     * @param player value of the commanding player used for the chunk location
+     */
     public void addChunkToArena(String areaName, Player player) {
         Area area = getArea(areaName);
         Optional<Chunk> optionalChunk = player.getWorld().getChunk(player.getLocation().getChunkPosition());
@@ -91,6 +118,11 @@ public class AreaManager {
         }
     }
 
+    /**
+     * Adds the position of the player as a spawnpoint to the area
+     * @param areaName the name of the area
+     * @param player player from which the location gets saved
+     */
     public void addSpawnPointToArea(String areaName, Player player) {
         Area area = getArea(areaName);
         if (area.addSpawnLocation(player.getLocation().getPosition())){
@@ -98,10 +130,19 @@ public class AreaManager {
         }
     }
 
+    /**
+     * Saves the given area under the areaName
+     * @param areaName the name of the area
+     * @param area the area object
+     */
     public void saveArea(String areaName, Area area){
         new AreaConfigurationManager(areaName, area).save();
     }
 
+    /**
+     * Gets all keys from the areaMap
+     * @return the keyset of the areaMap
+     */
     public Set <String> getAreaNames() {
         return areaMap.keySet();
     }

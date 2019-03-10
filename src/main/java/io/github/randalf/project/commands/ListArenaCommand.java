@@ -10,15 +10,12 @@ import org.spongepowered.api.text.Text;
 import java.util.Set;
 
 /**
- * Created by randalf on 28.11.2017.
+ * CommandExecutor for listing all arenas
  */
 public class ListArenaCommand implements CommandExecutor {
 
     /**
-     * Command implementing CommandExecutor.
-     * List all existing Arenas
-     * Get's the ArenaManager and lists the existing arenas
-     *
+     * Get's the ArenaManager and returns a list of the existing arenas
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
     @Override

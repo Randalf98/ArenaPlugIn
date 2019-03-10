@@ -9,13 +9,13 @@ import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 
+/**
+ * CommandExecutor for adding a spawnpoint to an area
+ */
 public class AreaAddSpawnPointCommand implements CommandExecutor {
 
     /**
-     * Command implementing CommandExecutor.
-     * Adds a spawnpoint to a given area.
      * Get's the AreaManager and adds a spawnpoint at the players location.
-     *
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
 

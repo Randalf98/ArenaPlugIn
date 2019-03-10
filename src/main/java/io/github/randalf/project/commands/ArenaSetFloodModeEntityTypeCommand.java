@@ -9,12 +9,13 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 
+/**
+ * CommandExecutor for setting the entity tyoe in an arena
+ */
 public class ArenaSetFloodModeEntityTypeCommand implements CommandExecutor {
 
     /**
-     * Command implementing CommandExecutor.
      * Sets EntityType of FloodMode
-     *
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
     @Override

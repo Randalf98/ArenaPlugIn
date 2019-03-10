@@ -8,13 +8,13 @@ import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.text.Text;
 
+/**
+ * CommandExecutor for starting an arena
+ */
 public class ArenaStartCommand implements CommandExecutor {
 
     /**
-     * Command implementing CommandExecutor.
-     * Starts an arena if it exist's
-     * Get's the AreaManager and starts the arena if it exists.
-     *
+     * Get's the ArenaManager and starts the arena if it exists.
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
     @Override

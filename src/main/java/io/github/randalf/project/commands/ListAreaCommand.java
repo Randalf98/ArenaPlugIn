@@ -10,15 +10,13 @@ import org.spongepowered.api.text.Text;
 import java.util.Set;
 
 /**
- * Created by randalf on 28.11.2017.
+ * CommandExecutor for listing all areas
  */
 public class ListAreaCommand implements CommandExecutor {
 
     /**
-     * Command implementing CommandExecutor.
      * List all existing Areas
      * Get's the AreaManager and lists the existing areas
-     *
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
     @Override

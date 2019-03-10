@@ -9,13 +9,13 @@ import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 
+/**
+ * CommandExecutor for adding a chunk to an arena
+ */
 public class AreaAddChunkCommand implements CommandExecutor {
 
     /**
-     * Command implementing CommandExecutor.
-     * Adds chunk to a given Area
      * Get's the areaName and the player who executed the command and adds the chunk to the area
-     *
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
     @Override
