@@ -21,7 +21,7 @@ public class ArenaSpawner {
     private boolean shouldSpawn = true;
     private SpawnMode mode;
     private List<Entity> entitiesList;
-    private int[] lastDiedEntities;
+    private UUID[] lastDiedEntities;
     private int counter;
 
     /**
@@ -35,7 +35,7 @@ public class ArenaSpawner {
         this.listener = new SpawningListener(this, area);
         this.mode = mode;
         entitiesList = new ArrayList<>();
-        lastDiedEntities = new int[10];
+        lastDiedEntities = new UUID[10];
         counter = 0;
     }
 
@@ -99,7 +99,7 @@ public class ArenaSpawner {
      * @param entity Entity
      */
     public void setLastDiedEntity(Entity entity){
-        lastDiedEntities[counter] = entity.hashCode();
+        lastDiedEntities[counter] = entity.getUniqueId();
         counter++;
         if(counter == 10){counter = 0;}
     }
