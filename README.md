@@ -1,7 +1,7 @@
 # SpongeArenaPlugIn
 Additional PlugIn for Sponge Server
 
-This Version of the Arena Plugin Features a Floodmode limited to 10 Zombies at a time.
+This Version of the Arena Plugin Features a Floodmode limited to a configurable amount of an entity at a time.
 
 Commands:
 
