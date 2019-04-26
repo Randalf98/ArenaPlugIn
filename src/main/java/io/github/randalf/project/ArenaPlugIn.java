@@ -31,7 +31,7 @@ import javax.inject.Singleton;
  * @author Randalf
  * @version 1.0
  */
-@Plugin(id = ArenaPlugIn.PLUGIN_ID, name = "Area", version = "1.0", description = "A little arena Plug-In")
+@Plugin(id = ArenaPlugIn.PLUGIN_ID, name = "Arena", version = "1.0", description = "A little arena Plug-In")
 @Singleton
 public class ArenaPlugIn {
 
