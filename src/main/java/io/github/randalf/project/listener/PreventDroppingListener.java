@@ -3,7 +3,7 @@ package io.github.randalf.project.listener;
 import io.github.randalf.project.arenaparts.Arena;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.item.inventory.DropItemEvent;ClassCastException
+import org.spongepowered.api.event.item.inventory.DropItemEvent;
 
 
 /**
