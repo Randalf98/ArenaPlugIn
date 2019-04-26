@@ -129,4 +129,10 @@ public class ArenaSpawner {
      * @return EntityList
      */
     public List<Entity> getEntitiesList(){return entitiesList;}
+
+    public void killAll() {
+        for (Entity entity:entitiesList){
+            entity.remove();
+        }
+    }
 }
