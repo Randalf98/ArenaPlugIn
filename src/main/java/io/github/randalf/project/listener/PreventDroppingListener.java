@@ -3,7 +3,7 @@ package io.github.randalf.project.listener;
 import io.github.randalf.project.arenaparts.Arena;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.item.inventory.DropItemEvent;
+import org.spongepowered.api.event.item.inventory.DropItemEvent;ClassCastException
 
 
 /**
@@ -25,8 +25,12 @@ public class PreventDroppingListener extends ArenaListener {
      */
     @Listener
     public void onItemDrop(DropItemEvent event){
-        if(arena.getSpawner().isLastDiedEntity((Entity) event.getSource())){
-            event.setCancelled(true);
+        try{
+            if(arena.getSpawner().isLastDiedEntity((Entity) event.getSource())){
+                event.setCancelled(true);
+            }
+        } catch (ClassCastException ex){
+            System.out.println(ex.getCause().getMessage());
         }
     }
 }

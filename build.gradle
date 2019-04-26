@@ -14,7 +14,7 @@ repositories {
 }
 
 description = 'An example plugin'
-libsDirName = "H:\\Programming\\Sponge\\mods"
+libsDirName = "D:\\Programming\\Sponge\\mods"
 
 dependencies {
     compile 'org.spongepowered:spongeapi:7.0.0-SNAPSHOT'
