@@ -131,6 +131,7 @@ public class Arena {
         active = false;
         arenaListenerManager.removeListener();
         disableSpawning();
+        spawner.killAll();
     }
 
     /**
@@ -162,7 +163,7 @@ public class Arena {
      * @param name new arenaName
      */
     public void setArenaName(String name) {
-        this.arenaName = arenaName;
+        this.arenaName = name;
     }
 
     /**

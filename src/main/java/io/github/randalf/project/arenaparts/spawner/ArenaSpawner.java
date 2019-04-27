@@ -27,7 +27,6 @@ public class ArenaSpawner {
     /**
      * Basic constructor for the spawner
      * @param arena the arena which contains this spawner
-     * @param area the area from the area
      * @param mode the mode from the arena
      */
     public ArenaSpawner(Arena arena, SpawnMode mode){
@@ -131,4 +130,9 @@ public class ArenaSpawner {
      */
     public List<Entity> getEntitiesList(){return entitiesList;}
 
+    public void killAll() {
+        for (Entity entity:entitiesList){
+            entity.remove();
+        }
+    }
 }

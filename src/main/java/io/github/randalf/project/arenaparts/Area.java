@@ -83,6 +83,19 @@ public class Area {
     }
 
     /**
+     * Removes a chunk from the collection
+     * @param chunk Vector3i which is a chunk from the arena
+     * @return boolean if it worked
+     */
+    public boolean removeChunk(Vector3i chunk){
+        if(areaChunks.contains(chunk)){
+            areaChunks.remove(chunk);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Add a spawn location to the collection
      * @param spawnLocation Vector3d which is a new spawn location
      * @return boolean if it worked
@@ -90,6 +103,19 @@ public class Area {
     public boolean addSpawnLocation(Vector3d spawnLocation){
         if(!spawnLocations.contains(spawnLocation)){
             spawnLocations.add(spawnLocation);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Add a spawn location to the collection
+     * @param spawnLocation Vector3d which is a new spawn location
+     * @return boolean if it worked
+     */
+    public boolean removeSpawnLocation(Vector3d spawnLocation){
+        if(spawnLocations.contains(spawnLocation)){
+            spawnLocations.remove(spawnLocation);
             return true;
         }
         return false;

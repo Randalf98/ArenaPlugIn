@@ -12,7 +12,7 @@ import org.spongepowered.api.text.Text;
 /**
  * CommandExecutor for adding a chunk to an arena
  */
-public class AreaAddChunkCommand implements CommandExecutor {
+public class AreaRemoveChunkCommand implements CommandExecutor {
 
     /**
      * Get's the areaName and the player who executed the command and adds the chunk to the area
@@ -20,10 +20,10 @@ public class AreaAddChunkCommand implements CommandExecutor {
      */
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
+        src.sendMessage(Text.of("Chunk will be removed"));
         String areaName = args.<String>getOne("areaName").get();
-        src.sendMessage(Text.of("Chunk will be added to area " + areaName));
         Player player = (Player) src;
-        AreaManager.getInstance().addChunkToArena(areaName, player);
+        AreaManager.getInstance().removeChunkFromArena(areaName, player);
         return CommandResult.success();
     }
 }

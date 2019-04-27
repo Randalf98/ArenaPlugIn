@@ -21,7 +21,6 @@ public class AreaAddSpawnPointCommand implements CommandExecutor {
 
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        src.sendMessage(Text.of("Chunk will be added soon - if implemented"));
         String areaName = args.<String>getOne("areaName").get();
         Player player = (Player) src;
         AreaManager.getInstance().addSpawnPointToArea(areaName, player);

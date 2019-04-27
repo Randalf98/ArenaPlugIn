@@ -25,8 +25,12 @@ public class PreventDroppingListener extends ArenaListener {
      */
     @Listener
     public void onItemDrop(DropItemEvent event){
-        if(arena.getSpawner().isLastDiedEntity((Entity) event.getSource())){
-            event.setCancelled(true);
+        try{
+            if(arena.getSpawner().isLastDiedEntity((Entity) event.getSource())){
+                event.setCancelled(true);
+            }
+        } catch (ClassCastException ex){
+            System.out.println(ex.getCause().getMessage());
         }
     }
 }

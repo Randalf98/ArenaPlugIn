@@ -24,7 +24,7 @@ public class AreaManipulationListener extends ArenaListener {
     }
 
     /**
-     * istener to react when an event of a ChangeBlockEvent occurs
+     * Listener to react when an event of a ChangeBlockEvent occurs
      * @param event the SpawnEntityEvent containing all necessary information to evaluate if the block change should be ignored
      */
     @Listener

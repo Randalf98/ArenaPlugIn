@@ -26,7 +26,7 @@ public abstract class ObjectConfigurationManager {
      */
     public ObjectConfigurationManager(String objectType, String objectName, Object object){
         this.object = object;
-        Path configPath = FileSystems.getDefault().getPath("config", objectType+"\\" + objectName + ".conf");
+        Path configPath = FileSystems.getDefault().getPath("config", "SpongeArenaPlugIn\\"+objectType+"\\" + objectName + ".conf");
         if(!configPath.toFile().exists()){
             configPath.toFile().getParentFile().mkdirs();
         }
@@ -50,6 +50,6 @@ public abstract class ObjectConfigurationManager {
      * @return the boolean value of the request
      */
     public static boolean configExists(String objectType, String objectName){
-        return FileSystems.getDefault().getPath(objectType, objectName + ".conf").toFile().exists();
+        return FileSystems.getDefault().getPath("SpongeArenaPlugIn\\"+objectType, objectName + ".conf").toFile().exists();
     }
 }
