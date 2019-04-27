@@ -77,7 +77,7 @@ public class ArenaManager {
      */
     private void loadAllArenas(){
         arenaMap = new HashMap<>();
-        Path configPath = FileSystems.getDefault().getPath("config/arena");
+        Path configPath = FileSystems.getDefault().getPath("config/SpongeArenaPlugIn/Arena");
         File directory = configPath.toFile();
 
         File[] fList = directory.listFiles();

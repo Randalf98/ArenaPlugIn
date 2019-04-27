@@ -85,7 +85,7 @@ public class AreaManager {
      */
     private void loadAllAreas(){
         areaMap = new HashMap<>();
-        Path configPath = FileSystems.getDefault().getPath("config/area");
+        Path configPath = FileSystems.getDefault().getPath("config/SpongeArenaPlugIn/Area");
         File directory = configPath.toFile();
 
         File[] fList = directory.listFiles();
