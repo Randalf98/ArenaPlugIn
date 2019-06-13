@@ -77,7 +77,7 @@ public class ArenaManager {
      */
     private void loadAllArenas(){
         arenaMap = new HashMap<>();
-        Path configPath = FileSystems.getDefault().getPath("config/arena");
+        Path configPath = FileSystems.getDefault().getPath("config/SpongeArenaPlugIn/Arena");
         File directory = configPath.toFile();
 
         File[] fList = directory.listFiles();
@@ -141,5 +141,11 @@ public class ArenaManager {
      */
     public Set<String> getArenaNames() {
         return arenaMap.keySet();
+    }
+
+    public void stopAllArenas() {
+        for(Arena arena : arenaMap.values()){
+            stopArena("Stopped arena by Server shutdown", arena);
+        }
     }
 }
