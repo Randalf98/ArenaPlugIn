@@ -22,11 +22,11 @@ public class ListAreaCommand implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         Set<String> areaNames = AreaManager.getInstance().getAreaNames();
-        String listOfAreas = "Existing Areas: \n";
+        StringBuilder listOfAreas = new StringBuilder().append("Existing Areas: \n");
         for(String area: areaNames){
-            listOfAreas += area + "\n";
+            listOfAreas.append(area).append("\n");
         }
-        listOfAreas += "------------------------------";
+        listOfAreas.append("------------------------------");
         src.sendMessage(Text.of(listOfAreas));
         return CommandResult.success();
     }

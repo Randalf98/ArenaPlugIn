@@ -32,9 +32,13 @@ public class ArenaRemoveOptionCommand implements CommandExecutor {
                 src.sendMessage(Text.of(aOptions));
             }
         }
-        if (arenaOption!=null){
-            ArenaManager.getInstance().getArena(arenaName).getALM().removeOption(arenaOption);
-            new ArenaConfigurationManager(arenaName, ArenaManager.getInstance().getArena(arenaName)).save();
+        if(ArenaManager.getInstance().mapContains(arenaName)){
+            if (arenaOption!=null){
+                ArenaManager.getInstance().getArena(arenaName).getALM().removeOption(arenaOption);
+                new ArenaConfigurationManager(arenaName, ArenaManager.getInstance().getArena(arenaName)).save();
+            }
+        } else {
+            src.sendMessage(Text.of("The arena " + arenaName+ " is not existent. \n For a list of all arenas type /arena list arena"));
         }
         return CommandResult.success();
     }

@@ -21,9 +21,13 @@ public class AreaAddChunkCommand implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         String areaName = args.<String>getOne("areaName").get();
-        src.sendMessage(Text.of("Chunk will be added to area " + areaName));
         Player player = (Player) src;
-        AreaManager.getInstance().addChunkToArena(areaName, player);
+        if(AreaManager.getInstance().mapContains(areaName)){
+            AreaManager.getInstance().addChunkToArena(areaName, player);
+            src.sendMessage(Text.of("Chunk was added to area " + areaName));
+        }  else {
+            src.sendMessage(Text.of("Area "  + areaName+  " doesn't exists. \n For a list of all areas type /arena list area"));
+        }
         return CommandResult.success();
     }
 }
