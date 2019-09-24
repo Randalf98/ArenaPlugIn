@@ -1,5 +1,6 @@
 package io.github.randalf.project.commands;
 
+import io.github.randalf.project.arenaparts.Arena;
 import io.github.randalf.project.manager.ArenaManager;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -21,11 +22,17 @@ public class ListArenaCommand implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         Set<String> arenaNames = ArenaManager.getInstance().getArenaNames();
-        String listOfArenas = "Existing Arenas: \n";
+        StringBuilder listOfArenas = new StringBuilder().append("Existing Arenas: \n");
         for(String arena: arenaNames){
-            listOfArenas += arena + "\n";
+            listOfArenas.append(arena).append(" ||| ");
+            if(ArenaManager.getInstance().getArena(arena).isActive()){
+                listOfArenas.append("Active");
+            } else {
+                listOfArenas.append("Inactive");
+            }
+            listOfArenas.append("\n");
         }
-        listOfArenas += "------------------------------";
+        listOfArenas.append("------------------------------");
         src.sendMessage(Text.of(listOfArenas));
         return CommandResult.success();
     }

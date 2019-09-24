@@ -70,4 +70,6 @@ public class Entitys {
     public static EntityType getEntity(String entityType){
         return entityMap.get(entityType.toUpperCase());
     }
+
+    public static boolean contains(String entityType){return entityMap.containsKey(entityType.toUpperCase());}
 }

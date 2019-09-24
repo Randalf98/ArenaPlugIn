@@ -21,11 +21,10 @@ public class ArenaStopCommand implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         String mapName = args.<String>getOne("arenaName").get();
-        src.sendMessage(Text.of("Arena " + mapName +  " will stop now"));
         if(ArenaPlugIn.getInstance().getArenaManager().mapContains(mapName)){
             ArenaPlugIn.getInstance().getArenaManager().stopArena(mapName);
         } else {
-            src.sendMessage(Text.of("Couldn't stop, arena doesn't exist."));
+            src.sendMessage(Text.of("Couldn't stop, because there is no arena with that name \n For a list of all arenas type /arena list arena"));
         }
         return CommandResult.success();
     }

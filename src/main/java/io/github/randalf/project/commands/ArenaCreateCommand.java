@@ -1,5 +1,6 @@
 package io.github.randalf.project.commands;
 
+import io.github.randalf.project.manager.AreaManager;
 import io.github.randalf.project.manager.ArenaManager;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -21,8 +22,12 @@ public class ArenaCreateCommand implements CommandExecutor {
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         String arenaName = args.<String>getOne("arenaName").get();
         String areaName = args.<String>getOne("areaName").get();
-        src.sendMessage(Text.of("Arena " + arenaName + " will be created for the area " + areaName));
-        ArenaManager.getInstance().createArena(arenaName,areaName);
+        if(AreaManager.getInstance().mapContains(areaName)){
+            src.sendMessage(Text.of("Arena " + arenaName + " will be created for the area " + areaName));
+            ArenaManager.getInstance().createArena(arenaName,areaName);
+        } else {
+            src.sendMessage(Text.of("Area "  + areaName+  " doesn't exists. \n For a list of all areas type /arena list area"));
+        }
         return CommandResult.success();
     }
 }

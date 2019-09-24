@@ -23,7 +23,12 @@ public class AreaAddSpawnPointCommand implements CommandExecutor {
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         String areaName = args.<String>getOne("areaName").get();
         Player player = (Player) src;
-        AreaManager.getInstance().addSpawnPointToArea(areaName, player);
+        if(AreaManager.getInstance().mapContains(areaName)){
+            AreaManager.getInstance().addSpawnPointToArea(areaName, player);
+            src.sendMessage(Text.of("Spawnpoint was added to area " + areaName));
+        }  else {
+            src.sendMessage(Text.of("Area "  + areaName+  " doesn't exists. \n For a list of all areas type /arena list area"));
+        }
         return CommandResult.success();
     }
 }
