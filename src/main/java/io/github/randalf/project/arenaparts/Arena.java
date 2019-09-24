@@ -131,6 +131,7 @@ public class Arena {
         active = false;
         arenaListenerManager.removeListener();
         disableSpawning();
+        spawner.killAll();
     }
 
     /**

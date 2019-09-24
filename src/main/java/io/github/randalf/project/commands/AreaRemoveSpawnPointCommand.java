@@ -10,20 +10,20 @@ import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 
 /**
- * CommandExecutor for adding a chunk to an arena
+ * CommandExecutor for removing a spawnpoint from the area
  */
-public class AreaAddChunkCommand implements CommandExecutor {
+public class AreaRemoveSpawnPointCommand implements CommandExecutor {
 
     /**
-     * Get's the areaName and the player who executed the command and adds the chunk to the area
+     * Get's the AreaManager and removes a spawnpoint from the players location.
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
+
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         String areaName = args.<String>getOne("areaName").get();
-        src.sendMessage(Text.of("Chunk will be added to area " + areaName));
         Player player = (Player) src;
-        AreaManager.getInstance().addChunkToArena(areaName, player);
+        AreaManager.getInstance().removeSpawnPointFromArea(areaName, player);
         return CommandResult.success();
     }
 }

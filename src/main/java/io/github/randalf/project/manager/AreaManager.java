@@ -85,7 +85,7 @@ public class AreaManager {
      */
     private void loadAllAreas(){
         areaMap = new HashMap<>();
-        Path configPath = FileSystems.getDefault().getPath("config/area");
+        Path configPath = FileSystems.getDefault().getPath("config/SpongeArenaPlugIn/Area");
         File directory = configPath.toFile();
 
         File[] fList = directory.listFiles();
@@ -104,7 +104,7 @@ public class AreaManager {
     }
 
     /**
-     * Adds the chunk from the players position and adds it to the given area
+     * Gets the chunk from the players position and adds it to the given area
      * @param areaName the name of the area which will be extended
      * @param player value of the commanding player used for the chunk location
      */
@@ -119,6 +119,21 @@ public class AreaManager {
     }
 
     /**
+     * Gets the chunk from the players position and removes it from the given area
+     * @param areaName the name of the area which will be removed
+     * @param player value of the commanding player used for the chunk location
+     */
+    public void removeChunkFromArena(String areaName, Player player) {
+        Area area = getArea(areaName);
+        Optional<Chunk> optionalChunk = player.getWorld().getChunk(player.getLocation().getChunkPosition());
+        if (optionalChunk.isPresent()){
+            if (area.removeChunk(optionalChunk.get().getPosition())){
+                saveArea(areaName, area);
+            }
+        }
+    }
+
+    /**
      * Adds the position of the player as a spawnpoint to the area
      * @param areaName the name of the area
      * @param player player from which the location gets saved
@@ -126,6 +141,18 @@ public class AreaManager {
     public void addSpawnPointToArea(String areaName, Player player) {
         Area area = getArea(areaName);
         if (area.addSpawnLocation(player.getLocation().getPosition())){
+            saveArea(areaName, area);
+        }
+    }
+
+    /**
+     * Removes the position of the player from the spawnpoints of the area
+     * @param areaName the name of the area
+     * @param player player from which the location gets removed
+     */
+    public void removeSpawnPointFromArea(String areaName, Player player) {
+        Area area = getArea(areaName);
+        if (area.removeSpawnLocation(player.getLocation().getPosition())){
             saveArea(areaName, area);
         }
     }
