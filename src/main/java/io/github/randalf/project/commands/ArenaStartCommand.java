@@ -28,7 +28,7 @@ public class ArenaStartCommand implements CommandExecutor {
             ArenaPlugIn.getInstance().getArenaManager().startArena(arenaName);
             src.sendMessage(Text.of("Arena started"));
         } else {
-            src.sendMessage(Text.of("Arena couldn't start because it doesn't exist"));
+            src.sendMessage(Text.of("Arena couldn't start because there is no arena with that name \n For a list of all arenas type /arena list arena"));
         }
         return CommandResult.success();
     }

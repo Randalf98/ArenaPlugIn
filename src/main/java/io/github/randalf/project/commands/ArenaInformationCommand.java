@@ -26,9 +26,9 @@ public class ArenaInformationCommand implements CommandExecutor {
         }
         if(ArenaPlugIn.getInstance().getArenaManager().mapContains(arenaName)){
             Arena arena = ArenaPlugIn.getInstance().getArenaManager().getArena(arenaName);
-            String arenaInfo = "Arena " + arenaName + " contains:\n";
-            arenaInfo += "Area Name: " + arena.getArea().getAreaName() + "\n";
-            arenaInfo += "------------------------------";
+            StringBuilder arenaInfo = new StringBuilder().append("Arena ").append(arenaName).append(" contains:\n");
+            arenaInfo.append("Area Name: ").append(arena.getArea().getAreaName()).append("\n");
+            arenaInfo.append("------------------------------");
             src.sendMessage(Text.of(arenaInfo));
         } else {
             src.sendMessage(Text.of("Arena doesn't exists"));

@@ -21,7 +21,9 @@ public class AreaCreateCommand implements CommandExecutor {
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         String areaName = args.<String>getOne("areaName").get();
-        src.sendMessage(Text.of("Area " + areaName + " will be created"));
+        if(!AreaManager.getInstance().mapContains(areaName)){
+            src.sendMessage(Text.of("Area " + areaName + " will be created"));
+        }
         Player player = (Player) src;
         AreaManager.getInstance().createArea(areaName, player);
         return CommandResult.success();

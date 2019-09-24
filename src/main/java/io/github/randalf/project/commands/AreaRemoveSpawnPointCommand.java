@@ -23,7 +23,11 @@ public class AreaRemoveSpawnPointCommand implements CommandExecutor {
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         String areaName = args.<String>getOne("areaName").get();
         Player player = (Player) src;
-        AreaManager.getInstance().removeSpawnPointFromArea(areaName, player);
+        if(AreaManager.getInstance().mapContains(areaName)){
+            AreaManager.getInstance().removeSpawnPointFromArea(areaName, player);
+        }  else {
+            src.sendMessage(Text.of("Area "  + areaName+  " doesn't exists. \n For a list of all areas type /arena list area"));
+        }
         return CommandResult.success();
     }
 }

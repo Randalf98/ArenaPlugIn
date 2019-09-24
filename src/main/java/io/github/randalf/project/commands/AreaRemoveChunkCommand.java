@@ -23,7 +23,11 @@ public class AreaRemoveChunkCommand implements CommandExecutor {
         src.sendMessage(Text.of("Chunk will be removed"));
         String areaName = args.<String>getOne("areaName").get();
         Player player = (Player) src;
-        AreaManager.getInstance().removeChunkFromArena(areaName, player);
+        if(AreaManager.getInstance().mapContains(areaName)){
+            AreaManager.getInstance().removeChunkFromArena(areaName, player);
+        }  else {
+            src.sendMessage(Text.of("Area "  + areaName+  " doesn't exists. \n For a list of all areas type /arena list area"));
+        }
         return CommandResult.success();
     }
 }

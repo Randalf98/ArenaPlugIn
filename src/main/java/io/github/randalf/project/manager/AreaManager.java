@@ -167,6 +167,15 @@ public class AreaManager {
     }
 
     /**
+     * Checks if an areaName has a correlating arena in the areamap
+     * @param areaName the name which will be checked
+     * @return boolean value if the map contains the arenaName
+     */
+    public boolean mapContains(String areaName) {
+        return areaMap.containsKey(areaName);
+    }
+
+    /**
      * Gets all keys from the areaMap
      * @return the keyset of the areaMap
      */
