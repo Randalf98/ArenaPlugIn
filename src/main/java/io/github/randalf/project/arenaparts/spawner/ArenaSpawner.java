@@ -134,5 +134,6 @@ public class ArenaSpawner {
         for (Entity entity:entitiesList){
             entity.remove();
         }
+        entitiesList.removeAll(entitiesList);
     }
 }

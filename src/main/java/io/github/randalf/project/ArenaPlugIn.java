@@ -18,8 +18,7 @@ import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.game.state.GameInitializationEvent;
-import org.spongepowered.api.event.game.state.GameStartedServerEvent;
+import org.spongepowered.api.event.game.state.*;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.text.Text;
 import javax.inject.Inject;
@@ -56,6 +55,11 @@ public class ArenaPlugIn {
         instance = this;
         setupCommands();
         setupSerializer();
+    }
+
+    @Listener
+    public void onGameStoppingServerEvent(GameStoppingServerEvent event){
+        ArenaPlugIn.getInstance().getArenaManager().stopAllArenas();
     }
 
     /**

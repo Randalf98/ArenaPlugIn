@@ -142,4 +142,10 @@ public class ArenaManager {
     public Set<String> getArenaNames() {
         return arenaMap.keySet();
     }
+
+    public void stopAllArenas() {
+        for(Arena arena : arenaMap.values()){
+            stopArena("Stopped arena by Server shutdown", arena);
+        }
+    }
 }
