@@ -32,23 +32,12 @@ public class SpawningListener extends ArenaListener {
     @Listener
     public void onDeadEntity(DestructEntityEvent event) {
         Entity  e = event.getTargetEntity();
-        if(arena.getSpawner().getEntitiesList().contains(e) && (event.getCause().first(EntityDamageSource.class).isPresent() || event.getCause().first(IndirectEntityDamageSource.class).isPresent())){
-            Player player = null;
-            if(event.getCause().first(IndirectEntityDamageSource.class).isPresent()){
-                player = (Player)event.getCause().first(IndirectEntityDamageSource.class).get().getIndirectSource();
-            } else if (event.getCause().first(EntityDamageSource.class).get().getSource().getType().equals(EntityTypes.PLAYER)){
-                player = (Player)event.getCause().first(EntityDamageSource.class).get().getSource();
-            }
-            if(player != null){
-                Vector3i playerPosition = player.getLocation().getChunkPosition();
-                if (arena.getArea().contains(playerPosition)){
-                    arena.getSpawner().spawnEnemys();
-                }
-                arena.getSpawner().setLastDiedEntity(e);
-            }
+        if(arena.getSpawner().getEntitiesList().contains(e)){
+            arena.getSpawner().spawnEnemys();
+            arena.getSpawner().setLastDiedEntity(e);
         }
         try{
             arena.getSpawner().getEntitiesList().remove(e);
-        } catch(Exception ignored){}
+        } catch(Exception ex){System.out.println(ex.getMessage());}
     }
 }
