@@ -22,7 +22,7 @@ public class AreaManager {
     /**
      * Protected Constructor exists only to defeat instantiation.
      */
-    protected AreaManager() {}
+    private AreaManager() {}
 
     /**
      * Synchronized getter of the singleton instance of areamanager
@@ -162,7 +162,7 @@ public class AreaManager {
      * @param areaName the name of the area
      * @param area the area object
      */
-    public void saveArea(String areaName, Area area){
+    private void saveArea(String areaName, Area area){
         new AreaConfigurationManager(areaName, area).save();
     }
 

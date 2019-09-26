@@ -13,8 +13,7 @@ import java.nio.file.Path;
 public abstract class ObjectConfigurationManager {
     @Inject
     @DefaultConfig(sharedRoot = false)
-
-    protected HoconConfigurationLoader configLoader;
+    HoconConfigurationLoader configLoader;
     protected Object object;
 
     /**
@@ -24,7 +23,7 @@ public abstract class ObjectConfigurationManager {
      * @param objectName name of the object which will be de/serialized
      * @param object the object which will be de/serialized
      */
-    public ObjectConfigurationManager(String objectType, String objectName, Object object){
+    ObjectConfigurationManager(String objectType, String objectName, Object object){
         this.object = object;
         Path configPath = FileSystems.getDefault().getPath("config", "SpongeArenaPlugIn\\"+objectType+"\\" + objectName + ".conf");
         if(!configPath.toFile().exists()){
@@ -49,7 +48,7 @@ public abstract class ObjectConfigurationManager {
      * @param objectName name of the object which will be de/serialized
      * @return the boolean value of the request
      */
-    public static boolean configExists(String objectType, String objectName){
+    static boolean configExists(String objectType, String objectName){
         return FileSystems.getDefault().getPath("SpongeArenaPlugIn\\"+objectType, objectName + ".conf").toFile().exists();
     }
 }

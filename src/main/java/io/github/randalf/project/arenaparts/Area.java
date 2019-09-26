@@ -38,7 +38,6 @@ public class Area {
      * Default constructor for an area
      */
     public Area(){
-        //Default values
         Player player = ((Player)Sponge.getGame().getServer().getOnlinePlayers().toArray()[0]);
         setStartPoint(player.getLocation().getPosition());
         setWorldUUID(player.getLocation().getExtent().getUniqueId());
