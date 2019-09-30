@@ -42,7 +42,7 @@ public class ArenaManager {
      * @param message message around the stopping circumstances
      * @param arena the stopping arena
      */
-    public void stopArena(String message, Arena arena){
+    private void stopArena(String message, Arena arena){
         arena.stopArena();
         MessageChannel.TO_CONSOLE.send(Text.of(message));
     }

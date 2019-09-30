@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * The entity class holds the resembling strings to the entitytypes
  */
-public class Entitys {
+class Entitys {
 
     private static Map<String, EntityType> entityMap = new HashMap<>();
     static {
@@ -67,7 +67,7 @@ public class Entitys {
      * @param entityType string which should be a valid entitytype
      * @return the correct entitytype
      */
-    public static EntityType getEntity(String entityType){
+    static EntityType getEntity(String entityType){
         return entityMap.get(entityType.toUpperCase());
     }
 
