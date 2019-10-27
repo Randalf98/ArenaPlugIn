@@ -76,7 +76,7 @@ public class FloodMode implements SpawnMode {
     private void cleanEntitiesList() {
         List<Entity> entitiesToRemove = new ArrayList<>();
         for (Entity e : toBeSpawnedEntitiesList){
-            if(((Living)e).getHealthData().health().get().equals(0.0d)){
+            if(((Living)e).getHealthData().health().get().equals(0.0d)||!e.isLoaded()){
                 entitiesToRemove.add(e);
             }
         }

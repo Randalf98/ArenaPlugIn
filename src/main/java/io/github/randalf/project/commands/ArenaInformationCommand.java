@@ -28,6 +28,8 @@ public class ArenaInformationCommand implements CommandExecutor {
             Arena arena = ArenaPlugIn.getInstance().getArenaManager().getArena(arenaName);
             String arenaInfo = "Arena " + arenaName + " contains:\n";
             arenaInfo += "Area Name: " + arena.getArea().getAreaName() + "\n";
+            arenaInfo += "Arena Mode: " + arena.getMode().toString() + "\n";
+            arenaInfo += "Active Status: " + arena.isActive() + "\n";
             arenaInfo += "------------------------------";
             src.sendMessage(Text.of(arenaInfo));
         } else {

@@ -173,4 +173,8 @@ public class AreaManager {
     public Set <String> getAreaNames() {
         return areaMap.keySet();
     }
+
+    public boolean mapContains(String areaName) {
+        return areaMap.containsKey(areaName);
+    }
 }

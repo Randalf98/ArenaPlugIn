@@ -20,6 +20,7 @@ import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartedServerEvent;
+import org.spongepowered.api.event.game.state.GameStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.text.Text;
 import javax.inject.Inject;
@@ -56,6 +57,15 @@ public class ArenaPlugIn {
         instance = this;
         setupCommands();
         setupSerializer();
+    }
+
+    /**
+     * When the Plugin gets initialized the function gets executed.
+     * @param event Default GameInitializationEvent from the server
+     */
+    @Listener
+    public void onTermination(GameStoppingEvent event) {
+        this.getArenaManager().stopAllArenas();
     }
 
     /**
@@ -183,9 +193,25 @@ public class ArenaPlugIn {
         //Command Spec for giving the information of an arena
         CommandSpec arenaInformationCommandSpec = CommandSpec.builder()
                 .description(Text.of("Arena Information Command"))
-                .permission("io.github.randalf.arena.information")
+                .permission("io.github.randalf.arena.information.arena")
                 .arguments(GenericArguments.remainingJoinedStrings(Text.of("arenaName")))
                 .executor(new ArenaInformationCommand())
+                .build();
+
+        //Command Spec for giving the information of an arena
+        CommandSpec areaInformationCommandSpec = CommandSpec.builder()
+                .description(Text.of("Area Information Command"))
+                .permission("io.github.randalf.arena.information.area")
+                .arguments(GenericArguments.remainingJoinedStrings(Text.of("areaName")))
+                .executor(new AreaInformationCommand())
+                .build();
+
+        //Command Spec for list commands
+        CommandSpec informationCommandSpec = CommandSpec.builder()
+                .description(Text.of("Get Information about Area/Arena"))
+                .permission("io.github.randalf.arena.information")
+                .child(areaInformationCommandSpec, "area")
+                .child(arenaInformationCommandSpec, "arena")
                 .build();
 
         //Command Spec for setting the entity type for a flood arena
@@ -246,7 +272,7 @@ public class ArenaPlugIn {
                 .child(chunkCommandSpec, "chunk")
                 .child(spawnpointCommandSpec, "spawnpoint")
                 .child(listCommandSpec, "list")
-                .child(arenaInformationCommandSpec, "information")
+                .child(informationCommandSpec, "information")
                 .child(setCommandSpec, "set")
                 .child(optionCommandSpec, "option")
                 .build();
