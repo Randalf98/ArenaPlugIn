@@ -27,7 +27,7 @@ public class ArenaInformationCommand implements CommandExecutor {
         if(ArenaPlugIn.getInstance().getArenaManager().mapContains(arenaName)){
             Arena arena = ArenaPlugIn.getInstance().getArenaManager().getArena(arenaName);
             String arenaInfo = "Arena " + arenaName + " contains:\n";
-            arenaInfo += "Area Name: " + arena.getArea().getAreaName() + "\n";
+            arenaInfo += "Zone Name: " + arena.getZone().getZoneName() + "\n";
             arenaInfo += "Arena Mode: " + arena.getMode().toString() + "\n";
             arenaInfo += "Active Status: " + arena.isActive() + "\n";
             arenaInfo += "------------------------------";

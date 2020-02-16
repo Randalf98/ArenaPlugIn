@@ -1,6 +1,6 @@
 package io.github.randalf.project.commands;
 
-import io.github.randalf.project.manager.AreaManager;
+import io.github.randalf.project.manager.ZoneManager;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -12,18 +12,18 @@ import org.spongepowered.api.text.Text;
 /**
  * CommandExecutor for creating an arena
  */
-public class AreaCreateCommand implements CommandExecutor {
+public class ZoneCreateCommand implements CommandExecutor {
 
     /**
-     * Get's the AreaManager and create and saves the new area.
+     * Get's the ZoneManager and create and saves the new zone.
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        String areaName = args.<String>getOne("areaName").get();
-        src.sendMessage(Text.of("Area " + areaName + " will be created"));
+        String zoneName = args.<String>getOne("zoneName").get();
+        src.sendMessage(Text.of("Zone " + zoneName + " will be created"));
         Player player = (Player) src;
-        AreaManager.getInstance().createArea(areaName, player);
+        ZoneManager.getInstance().createZone(zoneName, player);
         return CommandResult.success();
     }
 }

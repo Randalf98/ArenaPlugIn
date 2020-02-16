@@ -31,7 +31,7 @@ public class ArenaListenerManager {
             case XP:
                 return (new PreventXPDroppingListener(arena));
             case BUILDING:
-                return (new AreaManipulationListener(arena));
+                return (new ZoneManipulationListener(arena));
         }
         return null;
     }

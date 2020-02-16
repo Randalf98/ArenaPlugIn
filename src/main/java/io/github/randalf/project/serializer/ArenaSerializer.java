@@ -21,7 +21,7 @@ public class ArenaSerializer implements TypeSerializer<Arena>{
     @Override
     public Arena deserialize(TypeToken<?> typeToken, ConfigurationNode configurationNode) throws ObjectMappingException {
         String arenaName = configurationNode.getNode("arenaName").getValue(TypeToken.of(String.class));
-        String areaName = configurationNode.getNode("areaName").getValue(TypeToken.of(String.class));
+        String zoneName = configurationNode.getNode("zoneName").getValue(TypeToken.of(String.class));
         String mode =  configurationNode.getNode("arenaMode").getValue(TypeToken.of(String.class));
         Set<ArenaOptions> options = EnumSet.noneOf(ArenaOptions.class);
         for(ArenaOptions arenaOption: ArenaOptions.values()){
@@ -32,16 +32,16 @@ public class ArenaSerializer implements TypeSerializer<Arena>{
         if(mode.equals("FloodMode")){
             EntityType entityType = configurationNode.getNode("arenaEnemies").getValue(TypeToken.of(EntityType.class));
             int entityAmount = configurationNode.getNode("arenaEnemyAmount").getValue(TypeToken.of(Integer.class));
-            return new Arena(arenaName, areaName, mode, entityType, entityAmount, options);
+            return new Arena(arenaName, zoneName, mode, entityType, entityAmount, options);
         } else {
-            return new Arena(arenaName, areaName, options);
+            return new Arena(arenaName, zoneName, options);
         }
     }
 
     @Override
     public void serialize(TypeToken<?> typeToken, Arena arena, ConfigurationNode configurationNode) throws ObjectMappingException {
         configurationNode.getNode("arenaName").setValue(TypeToken.of(String.class), arena.getName());
-        configurationNode.getNode("areaName").setValue(TypeToken.of(String.class), arena.getArea().getAreaName());
+        configurationNode.getNode("zoneName").setValue(TypeToken.of(String.class), arena.getZone().getZoneName());
         String mode = arena.getMode().getClass().getSimpleName();
         configurationNode.getNode("arenaMode").setValue(TypeToken.of(String.class), mode);
         Set<ArenaOptions> arenaOptions = arena.getALM().getOptions();

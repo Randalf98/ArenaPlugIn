@@ -56,7 +56,7 @@ public class FloodMode implements SpawnMode {
      */
     @Override
     public List<Entity> getNextEntities(Vector3d location) {
-        Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getArea().getWorldUUID());
+        Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getZone().getWorldUUID());
         List<Entity> entitiesToBeSpawned = new ArrayList<>();
         if(optionalWorld.isPresent()){
             cleanEntitiesList();
@@ -87,8 +87,8 @@ public class FloodMode implements SpawnMode {
      * Create the entity which will work as base for all spawning enemies
      */
     private void createEntity(){
-        Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getArea().getWorldUUID());
-        Optional<Vector3d> optionalLocation = arena.getArea().getSpawnLocations().stream().findFirst();
+        Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getZone().getWorldUUID());
+        Optional<Vector3d> optionalLocation = arena.getZone().getSpawnLocations().stream().findFirst();
         if (optionalWorld.isPresent() && optionalLocation.isPresent()){
             World world = optionalWorld.get();
             entity = world.createEntity(entityType, optionalLocation.get());

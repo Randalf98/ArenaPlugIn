@@ -1,8 +1,6 @@
 package io.github.randalf.project.listener;
 
-import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.Arena;
-import io.github.randalf.project.arenaparts.spawner.ArenaSpawner;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.event.Listener;

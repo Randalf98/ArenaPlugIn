@@ -1,6 +1,5 @@
 package io.github.randalf.project.listener;
 
-import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.Arena;
 import org.spongepowered.api.block.BlockSnapshot;
 import org.spongepowered.api.data.Transaction;
@@ -11,15 +10,15 @@ import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
 /**
- * Listener used to detect and prevent manipulation of the area
+ * Listener used to detect and prevent manipulation of the zone
  */
-public class AreaManipulationListener extends ArenaListener {
+public class ZoneManipulationListener extends ArenaListener {
 
     /**
      * Constructor for achieving the functionality of the listener
      * @param arena arena object
      */
-    public AreaManipulationListener(Arena arena) {
+    public ZoneManipulationListener(Arena arena) {
         super(arena);
     }
 
@@ -36,7 +35,7 @@ public class AreaManipulationListener extends ArenaListener {
         for (Transaction<BlockSnapshot> transaction : event.getTransactions()){
             Location<World> location = transaction.getOriginal().getLocation().orElse(null);
             if (location != null) {
-                if(arena.getArea().contains(location.getChunkPosition())){
+                if(arena.getZone().contains(location.getChunkPosition())){
                     event.setCancelled(true);
                     break;
                 }

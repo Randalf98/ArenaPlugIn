@@ -3,11 +3,11 @@ package io.github.randalf.project;
 import com.flowpowered.math.vector.Vector3d;
 import com.flowpowered.math.vector.Vector3i;
 import com.google.common.reflect.TypeToken;
-import io.github.randalf.project.arenaparts.Area;
+import io.github.randalf.project.arenaparts.Zone;
 import io.github.randalf.project.arenaparts.Arena;
 import io.github.randalf.project.commands.*;
 import io.github.randalf.project.manager.ArenaManager;
-import io.github.randalf.project.serializer.AreaSerializer;
+import io.github.randalf.project.serializer.ZoneSerializer;
 import io.github.randalf.project.serializer.ArenaSerializer;
 import io.github.randalf.project.serializer.Vector3dSerializer;
 import io.github.randalf.project.serializer.Vector3iSerializer;
@@ -90,83 +90,83 @@ public class ArenaPlugIn {
                 .executor(new ArenaStopCommand())
                 .build();
 
-        //Command Spec for creating a Area
+        //Command Spec for creating a Zone
         CommandSpec arenaCreateCommandSpec = CommandSpec.builder()
                 .description(Text.of("Arena Create Command"))
                 .permission("io.github.randalf.arena.create.arena")
-                .arguments(GenericArguments.string(Text.of("arenaName")),GenericArguments.string(Text.of("areaName")))
+                .arguments(GenericArguments.string(Text.of("arenaName")),GenericArguments.string(Text.of("zoneName")))
                 .executor(new ArenaCreateCommand())
                 .build();
 
-        //Command Spec for creating a Area
-        CommandSpec areaCreateCommandSpec = CommandSpec.builder()
-                .description(Text.of("Area Create Command"))
-                .permission("io.github.randalf.arena.create.area")
-                .arguments(GenericArguments.remainingJoinedStrings(Text.of("areaName")))
-                .executor(new AreaCreateCommand())
+        //Command Spec for creating a Zone
+        CommandSpec zoneCreateCommandSpec = CommandSpec.builder()
+                .description(Text.of("Zone Create Command"))
+                .permission("io.github.randalf.arena.create.zone")
+                .arguments(GenericArguments.remainingJoinedStrings(Text.of("zoneName")))
+                .executor(new ZoneCreateCommand())
                 .build();
 
         //Command Spec for creating commands
         CommandSpec createCommandSpec = CommandSpec.builder()
-                .description(Text.of("Create Arena/Area"))
+                .description(Text.of("Create Arena/Zone"))
                 .permission("io.github.randalf.arena.create")
                 .child(arenaCreateCommandSpec, "arena")
-                .child(areaCreateCommandSpec, "area")
+                .child(zoneCreateCommandSpec, "zone")
                 .build();
 
-        //Command Spec for adding a chunk to area
-        CommandSpec areaAddChunkCommandSpec = CommandSpec.builder()
+        //Command Spec for adding a chunk to zone
+        CommandSpec zoneAddChunkCommandSpec = CommandSpec.builder()
                 .description(Text.of("Add Chunk Command"))
                 .permission("io.github.randalf.arena.chunk.add")
-                .arguments(GenericArguments.remainingJoinedStrings(Text.of("areaName")))
-                .executor(new AreaAddChunkCommand())
+                .arguments(GenericArguments.remainingJoinedStrings(Text.of("zoneName")))
+                .executor(new ZoneAddChunkCommand())
                 .build();
 
-        //Command Spec for removing a chunk from the area
-        CommandSpec areaRemoveChunkCommandSpec = CommandSpec.builder()
+        //Command Spec for removing a chunk from the zone
+        CommandSpec zoneRemoveChunkCommandSpec = CommandSpec.builder()
                 .description(Text.of("Remove Chunk Command"))
                 .permission("io.github.randalf.arena.chunk.remove")
-                .arguments(GenericArguments.remainingJoinedStrings(Text.of("areaName")))
-                .executor(new AreaRemoveChunkCommand())
+                .arguments(GenericArguments.remainingJoinedStrings(Text.of("zoneName")))
+                .executor(new ZoneRemoveChunkCommand())
                 .build();
 
         //Command Spec for chunk commands
         CommandSpec chunkCommandSpec = CommandSpec.builder()
-                .description(Text.of("Manage Area Chunks"))
+                .description(Text.of("Manage Zone Chunks"))
                 .permission("io.github.randalf.arena.chunk")
-                .child(areaAddChunkCommandSpec, "add")
-                .child(areaRemoveChunkCommandSpec, "remove")
+                .child(zoneAddChunkCommandSpec, "add")
+                .child(zoneRemoveChunkCommandSpec, "remove")
                 .build();
 
-        //Command Spec for adding a spawnpoint to area
-        CommandSpec areaAddSpawnPointCommandSpec = CommandSpec.builder()
+        //Command Spec for adding a spawnpoint to zone
+        CommandSpec zoneAddSpawnPointCommandSpec = CommandSpec.builder()
                 .description(Text.of("Add Spawnpoint Command"))
                 .permission("io.github.randalf.arena.spawnpoint.add")
-                .arguments(GenericArguments.remainingJoinedStrings(Text.of("areaName")))
-                .executor(new AreaAddSpawnPointCommand())
+                .arguments(GenericArguments.remainingJoinedStrings(Text.of("zoneName")))
+                .executor(new ZoneAddSpawnPointCommand())
                 .build();
 
-        //Command Spec for removing a spawnpoint from the area
-        CommandSpec areaRemoveSpawnPointCommandSpec = CommandSpec.builder()
+        //Command Spec for removing a spawnpoint from the zone
+        CommandSpec zoneRemoveSpawnPointCommandSpec = CommandSpec.builder()
                 .description(Text.of("Remove Spawnpoint Command"))
                 .permission("io.github.randalf.arena.spawnpoint.remove")
-                .arguments(GenericArguments.remainingJoinedStrings(Text.of("areaName")))
-                .executor(new AreaRemoveSpawnPointCommand())
+                .arguments(GenericArguments.remainingJoinedStrings(Text.of("zoneName")))
+                .executor(new ZoneRemoveSpawnPointCommand())
                 .build();
 
         //Command Spec for spawnpoint commands
         CommandSpec spawnpointCommandSpec = CommandSpec.builder()
-                .description(Text.of("Manage Area Chunks"))
+                .description(Text.of("Manage Zone Chunks"))
                 .permission("io.github.randalf.arena.spawnpoint")
-                .child(areaAddSpawnPointCommandSpec, "add")
-                .child(areaRemoveSpawnPointCommandSpec, "remove")
+                .child(zoneAddSpawnPointCommandSpec, "add")
+                .child(zoneRemoveSpawnPointCommandSpec, "remove")
                 .build();
 
-        //Command Spec for listing all areas
-        CommandSpec listAreasCommandSpec = CommandSpec.builder()
-                .description(Text.of("List Areas Command"))
-                .permission("io.github.randalf.arena.list.area")
-                .executor(new ListAreaCommand())
+        //Command Spec for listing all zones
+        CommandSpec listZonesCommandSpec = CommandSpec.builder()
+                .description(Text.of("List Zones Command"))
+                .permission("io.github.randalf.arena.list.zone")
+                .executor(new ListZoneCommand())
                 .build();
 
         //Command Spec for listing all arenas
@@ -178,9 +178,9 @@ public class ArenaPlugIn {
 
         //Command Spec for list commands
         CommandSpec listCommandSpec = CommandSpec.builder()
-                .description(Text.of("Manage Area Chunks"))
+                .description(Text.of("Manage Zone Chunks"))
                 .permission("io.github.randalf.arena.list")
-                .child(listAreasCommandSpec, "area")
+                .child(listZonesCommandSpec, "zone")
                 .child(listArenasCommandSpec, "arena")
                 .build();
 
@@ -193,18 +193,18 @@ public class ArenaPlugIn {
                 .build();
 
         //Command Spec for giving the information of an arena
-        CommandSpec areaInformationCommandSpec = CommandSpec.builder()
-                .description(Text.of("Area Information Command"))
-                .permission("io.github.randalf.arena.information.area")
-                .arguments(GenericArguments.remainingJoinedStrings(Text.of("areaName")))
-                .executor(new AreaInformationCommand())
+        CommandSpec zoneInformationCommandSpec = CommandSpec.builder()
+                .description(Text.of("Zone Information Command"))
+                .permission("io.github.randalf.arena.information.zone")
+                .arguments(GenericArguments.remainingJoinedStrings(Text.of("zoneName")))
+                .executor(new ZoneInformationCommand())
                 .build();
 
         //Command Spec for list commands
         CommandSpec informationCommandSpec = CommandSpec.builder()
-                .description(Text.of("Get Information about Area/Arena"))
+                .description(Text.of("Get Information about Zone/Arena"))
                 .permission("io.github.randalf.arena.information")
-                .child(areaInformationCommandSpec, "area")
+                .child(zoneInformationCommandSpec, "zone")
                 .child(arenaInformationCommandSpec, "arena")
                 .build();
 
@@ -226,7 +226,7 @@ public class ArenaPlugIn {
 
         //Command Spec for set commands
         CommandSpec setCommandSpec = CommandSpec.builder()
-                .description(Text.of("Manage Area Chunks"))
+                .description(Text.of("Manage Zone Chunks"))
                 .permission("io.github.randalf.arena.set")
                 .child(arenaSetFloodModeEntityTypeCommandSpec, "entitytype")
                 .child(arenaSetFloodModeEntityAmountCommandSpec, "entityamount")
@@ -250,7 +250,7 @@ public class ArenaPlugIn {
 
         //Command Spec for options commands
         CommandSpec optionCommandSpec = CommandSpec.builder()
-                .description(Text.of("Manage Area Chunks"))
+                .description(Text.of("Manage Zone Chunks"))
                 .permission("io.github.randalf.arena.option")
                 .child(arenaAddOptionCommandSpec, "add")
                 .child(arenaRemoveOptionCommandSpec, "remove")
@@ -258,7 +258,7 @@ public class ArenaPlugIn {
 
         //Command Spec for removing an option from an arena
         CommandSpec arenaCommandSpec = CommandSpec.builder()
-                .description(Text.of("Manage Arena/Area"))
+                .description(Text.of("Manage Arena/Zone"))
                 .permission("io.github.randalf.arena")
                 .child(arenaStartCommandSpec, "start")
                 .child(arenaStopCommandSpec, "stop")
@@ -279,7 +279,7 @@ public class ArenaPlugIn {
      */
     private void setupSerializer() {
         TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Arena.class), new ArenaSerializer());
-        TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Area.class), new AreaSerializer());
+        TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Zone.class), new ZoneSerializer());
         TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Vector3d.class), new Vector3dSerializer());
         TypeSerializers.getDefaultSerializers().registerType(TypeToken.of(Vector3i.class), new Vector3iSerializer());
     }

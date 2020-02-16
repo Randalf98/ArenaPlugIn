@@ -1,7 +1,6 @@
 package io.github.randalf.project.arenaparts.spawner;
 
 import com.flowpowered.math.vector.Vector3d;
-import io.github.randalf.project.arenaparts.Area;
 import io.github.randalf.project.arenaparts.Arena;
 import io.github.randalf.project.listener.*;
 import org.apache.commons.lang3.ArrayUtils;
@@ -43,10 +42,10 @@ public class ArenaSpawner {
      */
     public void spawnEnemys(){
         if(shouldSpawn){
-            ArrayList<Vector3d> spawnLocations = new ArrayList<>(arena.getArea().getSpawnLocations());
-            Vector3d location = getBestSpawnLocation(spawnLocations, arena.getArea().getPlayerInArea());
+            ArrayList<Vector3d> spawnLocations = new ArrayList<>(arena.getZone().getSpawnLocations());
+            Vector3d location = getBestSpawnLocation(spawnLocations, arena.getZone().getPlayerInZone());
             for(Entity e: mode.getNextEntities(location)){
-                Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getArea().getWorldUUID());
+                Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getZone().getWorldUUID());
                 if (optionalWorld.isPresent()){
                     World world = optionalWorld.get();
                     entitiesList.add(e);
@@ -59,18 +58,18 @@ public class ArenaSpawner {
     /**
      * Getter for the most appropriate location to spawn the enemies
      * @param spawnLocations list of all possible spawnlocations
-     * @param playerInArea list of all player in the area
+     * @param playerInZone list of all player in the zone
      * @return the most appropiate location
      */
-    private Vector3d getBestSpawnLocation(ArrayList<Vector3d> spawnLocations, ArrayList<Player> playerInArea) {
+    private Vector3d getBestSpawnLocation(ArrayList<Vector3d> spawnLocations, ArrayList<Player> playerInZone) {
         Vector3d furthestLocation = spawnLocations.get(0);
         double meanDistance = 0;
         for(Vector3d v : spawnLocations){
             double meanDistanceForLocation = 0;
-            for (Player p : playerInArea){
+            for (Player p : playerInZone){
                 meanDistanceForLocation += p.getLocation().getPosition().distanceSquared(v);
             }
-            meanDistanceForLocation = meanDistanceForLocation/playerInArea.size();
+            meanDistanceForLocation = meanDistanceForLocation/playerInZone.size();
             if (meanDistanceForLocation > meanDistance){
                 meanDistance = meanDistanceForLocation;
                 furthestLocation=v;

@@ -13,39 +13,39 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Data object for a area
+ * Data object for a zone
  * Holding all information necessary for an instance
  */
 @ConfigSerializable
-public class Area {
+public class Zone {
 
-    @Setting(comment = "Name of the area")
-    private String areaName;
+    @Setting(comment = "Name of the zone")
+    private String zoneName;
 
     @Setting(comment = "Startpoint from the location")
     private Vector3d startPoint;
 
-    @Setting(comment = "UUID from the world of the area")
+    @Setting(comment = "UUID from the world of the zone")
     private UUID worldUUID;
 
-    @Setting(comment = "The Chunks of the area")
-    private Collection<Vector3i> areaChunks;
+    @Setting(comment = "The Chunks of the zone")
+    private Collection<Vector3i> zoneChunks;
 
-    @Setting(comment = "The spawn locations of the area")
+    @Setting(comment = "The spawn locations of the zone")
     private Collection<Vector3d> spawnLocations;
 
     /**
-     * Default constructor for an area
+     * Default constructor for an zone
      */
-    public Area(){
+    public Zone(){
         Player player = ((Player)Sponge.getGame().getServer().getOnlinePlayers().toArray()[0]);
         setStartPoint(player.getLocation().getPosition());
         setWorldUUID(player.getLocation().getExtent().getUniqueId());
 
-        Collection<Vector3i> areaChunks = new ArrayList<>();
+        Collection<Vector3i> zoneChunks = new ArrayList<>();
         Optional<Chunk> optChunk = player.getWorld().getChunk(player.getLocation().getChunkPosition());
-        optChunk.ifPresent(chunk -> areaChunks.add(chunk.getPosition()));
-        setAreaChunks(areaChunks);
+        optChunk.ifPresent(chunk -> zoneChunks.add(chunk.getPosition()));
+        setZoneChunks(zoneChunks);
 
         Collection<Vector3d> spawnLocations = new ArrayList<>();
         spawnLocations.add(player.getLocation().getPosition());
@@ -53,18 +53,18 @@ public class Area {
     }
 
     /**
-     * Constructor for area with specific values
-     * @param areaName name of the area
-     * @param startPoint initial location for the area
+     * Constructor for zone with specific values
+     * @param zoneName name of the zone
+     * @param startPoint initial location for the zone
      * @param worldUUID world UUID in which it takes place
-     * @param areaChunks all chunks which are assigned to the area
-     * @param spawnLocations all locations which are assigned to the area
+     * @param zoneChunks all chunks which are assigned to the zone
+     * @param spawnLocations all locations which are assigned to the zone
      */
-    public Area(String areaName, Vector3d startPoint, UUID worldUUID, Collection<Vector3i> areaChunks, Collection<Vector3d> spawnLocations){
-        setAreaName(areaName);
+    public Zone(String zoneName, Vector3d startPoint, UUID worldUUID, Collection<Vector3i> zoneChunks, Collection<Vector3d> spawnLocations){
+        setZoneName(zoneName);
         setStartPoint(startPoint);
         setWorldUUID(worldUUID);
-        setAreaChunks(areaChunks);
+        setZoneChunks(zoneChunks);
         setSpawnLocations(spawnLocations);
     }
 
@@ -74,8 +74,8 @@ public class Area {
      * @return boolean if it worked
      */
     public boolean addChunk(Vector3i chunk){
-        if(!areaChunks.contains(chunk)){
-            areaChunks.add(chunk);
+        if(!zoneChunks.contains(chunk)){
+            zoneChunks.add(chunk);
             return true;
         }
         return false;
@@ -87,8 +87,8 @@ public class Area {
      * @return boolean if it worked
      */
     public boolean removeChunk(Vector3i chunk){
-        if(areaChunks.contains(chunk)){
-            areaChunks.remove(chunk);
+        if(zoneChunks.contains(chunk)){
+            zoneChunks.remove(chunk);
             return true;
         }
         return false;
@@ -121,10 +121,10 @@ public class Area {
     }
 
     /**
-     * Request of getting every player which is in the area
-     * @return List of players which are in the area
+     * Request of getting every player which is in the zone
+     * @return List of players which are in the zone
      */
-    public ArrayList<Player> getPlayerInArea() {
+    public ArrayList<Player> getPlayerInZone() {
         ArrayList<Player> playerList = new ArrayList<>();
         for (Player p : Sponge.getServer().getOnlinePlayers()){
             if(contains(p.getLocation().getChunkPosition())){
@@ -135,28 +135,28 @@ public class Area {
     }
 
     /**
-     * Checks the position of the player against the area chunks
+     * Checks the position of the player against the zone chunks
      * @param playerPosition position which needs to be checked
      * @return boolean value if the given vector is in collection
      */
     public boolean contains(Vector3i playerPosition){
-        return areaChunks.contains(playerPosition);
+        return zoneChunks.contains(playerPosition);
     }
 
     /**
-     * Getter for the areaName
+     * Getter for the zoneName
      * @return
      */
-    public String getAreaName() {
-        return areaName;
+    public String getZoneName() {
+        return zoneName;
     }
 
     /**
-     * Setter for the areaName
-     * @param areaName
+     * Setter for the zoneName
+     * @param zoneName
      */
-    public void setAreaName(String areaName) {
-        this.areaName = areaName;
+    public void setZoneName(String zoneName) {
+        this.zoneName = zoneName;
     }
 
     /**
@@ -192,19 +192,19 @@ public class Area {
     }
 
     /**
-     * Getter for the collection of areachunks
+     * Getter for the collection of zoneChunks
      * @return
      */
-    public Collection<Vector3i> getAreaChunks() {
-        return areaChunks;
+    public Collection<Vector3i> getZoneChunks() {
+        return zoneChunks;
     }
 
     /**
-     * Setter for the areaChunks
-     * @param areaChunks
+     * Setter for the zoneChunks
+     * @param zoneChunks
      */
-    public void setAreaChunks(Collection<Vector3i> areaChunks) {
-        this.areaChunks = areaChunks;
+    public void setZoneChunks(Collection<Vector3i> zoneChunks) {
+        this.zoneChunks = zoneChunks;
     }
 
     /**

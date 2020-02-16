@@ -1,32 +1,32 @@
 package io.github.randalf.project.manager;
 
 import com.google.common.reflect.TypeToken;
-import io.github.randalf.project.arenaparts.Area;
-import io.github.randalf.project.serializer.AreaSerializer;
+import io.github.randalf.project.arenaparts.Zone;
+import io.github.randalf.project.serializer.ZoneSerializer;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import org.spongepowered.api.config.DefaultConfig;
 import javax.inject.Inject;
 import java.nio.file.Path;
 
 /**
- * ConfigurationManager for Area de/serialization
+ * ConfigurationManager for Zone de/serialization
  */
-public class AreaConfigurationManager extends ObjectConfigurationManager{
+public class ZoneConfigurationManager extends ObjectConfigurationManager{
     @Inject
     @DefaultConfig(sharedRoot = false)
     private Path configRoot;
 
     private CommentedConfigurationNode configurationNode;
-    private static final String OBJECT_TYPE = "Area";
-    private Area area = (Area) object;
+    private static final String OBJECT_TYPE = "Zone";
+    private Zone zone = (Zone) object;
 
     /**
      * Constructor for ACM
-     * @param objectName Name of the given area
-     * @param area area which should get saved or loaded
+     * @param objectName Name of the given zone
+     * @param zone zone which should get saved or loaded
      */
-    public AreaConfigurationManager(String objectName, Area area){
-        super(OBJECT_TYPE, objectName, area);
+    public ZoneConfigurationManager(String objectName, Zone zone){
+        super(OBJECT_TYPE, objectName, zone);
     }
 
     /**
@@ -35,7 +35,7 @@ public class AreaConfigurationManager extends ObjectConfigurationManager{
     public void save(){
         try {
             configurationNode = configLoader.load();
-            new AreaSerializer().serialize(TypeToken.of(Area.class), area, configurationNode);
+            new ZoneSerializer().serialize(TypeToken.of(Zone.class), zone, configurationNode);
             configLoader.save(configurationNode);
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,17 +48,17 @@ public class AreaConfigurationManager extends ObjectConfigurationManager{
     public void load(){
         try {
             configurationNode = configLoader.load();
-            area = new AreaSerializer().deserialize(TypeToken.of(Area.class), configurationNode);
+            zone = new ZoneSerializer().deserialize(TypeToken.of(Zone.class), configurationNode);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Getter for the area
-     * @return the area
+     * Getter for the zone
+     * @return the zone
      */
-    public Area getArea() {
-        return area;
+    public Zone getZone() {
+        return zone;
     }
 }

@@ -1,29 +1,33 @@
 package io.github.randalf.project.commands;
 
-import io.github.randalf.project.manager.AreaManager;
+import io.github.randalf.project.manager.ZoneManager;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
-import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
+import java.util.Set;
 
 /**
- * CommandExecutor for adding a chunk to an arena
+ * CommandExecutor for listing all zones
  */
-public class AreaAddChunkCommand implements CommandExecutor {
+public class ListZoneCommand implements CommandExecutor {
 
     /**
-     * Get's the areaName and the player who executed the command and adds the chunk to the area
+     * List all existing Zones
+     * Get's the ZoneManager and lists the existing zones
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        String areaName = args.<String>getOne("areaName").get();
-        src.sendMessage(Text.of("Chunk will be added to area " + areaName));
-        Player player = (Player) src;
-        AreaManager.getInstance().addChunkToArena(areaName, player);
+        Set<String> zoneNames = ZoneManager.getInstance().getZoneNames();
+        String listOfZones = "Existing Zones: \n";
+        for(String zone: zoneNames){
+            listOfZones += zone + "\n";
+        }
+        listOfZones += "------------------------------";
+        src.sendMessage(Text.of(listOfZones));
         return CommandResult.success();
     }
 }

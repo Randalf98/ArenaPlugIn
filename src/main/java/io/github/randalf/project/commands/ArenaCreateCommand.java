@@ -14,15 +14,15 @@ import org.spongepowered.api.text.Text;
 public class ArenaCreateCommand implements CommandExecutor {
 
     /**
-     * Get's the ArenaManager and create and saves the new arena with a given area.
+     * Get's the ArenaManager and create and saves the new arena with a given zone.
      * @see CommandExecutor#execute(CommandSource, CommandContext);
      */
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
         String arenaName = args.<String>getOne("arenaName").get();
-        String areaName = args.<String>getOne("areaName").get();
-        src.sendMessage(Text.of("Arena " + arenaName + " will be created for the area " + areaName));
-        ArenaManager.getInstance().createArena(arenaName,areaName);
+        String zoneName = args.<String>getOne("zoneName").get();
+        src.sendMessage(Text.of("Arena " + arenaName + " will be created for the zone " + zoneName));
+        ArenaManager.getInstance().createArena(arenaName,zoneName);
         return CommandResult.success();
     }
 }

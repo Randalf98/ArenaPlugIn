@@ -4,7 +4,7 @@ import io.github.randalf.project.arenaparts.spawner.ArenaSpawner;
 import io.github.randalf.project.arenaparts.spawner.FloodMode;
 import io.github.randalf.project.arenaparts.spawner.SpawnMode;
 import io.github.randalf.project.listener.ArenaListener;
-import io.github.randalf.project.manager.AreaManager;
+import io.github.randalf.project.manager.ZoneManager;
 import org.spongepowered.api.entity.EntityType;
 import java.util.EnumMap;
 import java.util.Set;
@@ -15,22 +15,22 @@ import java.util.Set;
  */
 public class Arena {
         private String arenaName;
-        private Area area;
+        private Zone zone;
         private SpawnMode mode;
         private ArenaSpawner spawner;
-        private AreaManager areaManager;
+        private ZoneManager zoneManager;
         private ArenaListenerManager arenaListenerManager;
         private boolean active;
 
     /**
      * Basic Constructor for Arena
      * @param arenaName name of the arena
-     * @param areaString name of the area
+     * @param zoneString name of the zone
      */
-    public Arena(String arenaName, String areaString) {
+    public Arena(String arenaName, String zoneString) {
         this.arenaName = arenaName;
-        areaManager = AreaManager.getInstance();
-        area = areaManager.getArea(areaString);
+        zoneManager = ZoneManager.getInstance();
+        zone = zoneManager.getZone(zoneString);
         mode = new FloodMode(this);
         spawner = new ArenaSpawner(this, mode);
         EnumMap<ArenaOptions, ArenaListener> arenaListeners = new EnumMap<>(ArenaOptions.class);
@@ -40,13 +40,13 @@ public class Arena {
     /**
      * Constructor for arena with options
      * @param arenaName name of the arena
-     * @param areaString name of the area
+     * @param zoneString name of the zone
      * @param options List of active options for the arena
      */
-    public Arena(String arenaName, String areaString, Set<ArenaOptions> options) {
+    public Arena(String arenaName, String zoneString, Set<ArenaOptions> options) {
         this.arenaName = arenaName;
-        areaManager = AreaManager.getInstance();
-        area = areaManager.getArea(areaString);
+        zoneManager = ZoneManager.getInstance();
+        zone = zoneManager.getZone(zoneString);
         mode = new FloodMode(this);
         spawner = new ArenaSpawner(this, mode);
         EnumMap<ArenaOptions, ArenaListener> arenaListeners = new EnumMap<>(ArenaOptions.class);
@@ -58,15 +58,15 @@ public class Arena {
     /**
      * Constructor for arena with mode
      * @param arenaName name of the arena
-     * @param areaString name of the area
+     * @param zoneString name of the zone
      * @param modus flood or round mode
      * @param et type of entity
      * @param enemyAmount amount of enemys in the arena
      */
-    public Arena(String arenaName, String areaString,String modus, EntityType et, int enemyAmount) {
+    public Arena(String arenaName, String zoneString,String modus, EntityType et, int enemyAmount) {
         this.arenaName = arenaName;
-        areaManager = AreaManager.getInstance();
-        area = areaManager.getArea(areaString);
+        zoneManager = ZoneManager.getInstance();
+        zone = zoneManager.getZone(zoneString);
         if(modus.equals("FloodMode")){
             mode = new FloodMode(this, et , enemyAmount);
         } else {
@@ -78,16 +78,16 @@ public class Arena {
     /**
      * Constructor for arena with mode and options
      * @param arenaName name of the arena
-     * @param areaString name of the area
+     * @param zoneString name of the zone
      * @param modus flood or round mode
      * @param et type of entity
      * @param enemyAmount amount of enemys in the arena
      * @param options List of active options for the arena
      */
-    public Arena(String arenaName, String areaString,String modus, EntityType et, int enemyAmount, Set<ArenaOptions> options) {
+    public Arena(String arenaName, String zoneString,String modus, EntityType et, int enemyAmount, Set<ArenaOptions> options) {
         this.arenaName = arenaName;
-        areaManager = AreaManager.getInstance();
-        area = areaManager.getArea(areaString);
+        zoneManager = ZoneManager.getInstance();
+        zone = zoneManager.getZone(zoneString);
         if(modus.equals("FloodMode")){
             mode = new FloodMode(this, et , enemyAmount);
         } else {
@@ -135,19 +135,19 @@ public class Arena {
     }
 
     /**
-     * Getter for the area of the arena
-     * @return the area of the arena
+     * Getter for the zone of the arena
+     * @return the zone of the arena
      */
-    public Area getArea() {
-        return area;
+    public Zone getZone() {
+        return zone;
     }
 
     /**
-     * Setter for the area of the arena
-     * @param area new arena for the area
+     * Setter for the zone of the arena
+     * @param zone new arena for the zone
      */
-    public void setArea(Area area) {
-        this.area = area;
+    public void setZone(Zone zone) {
+        this.zone = zone;
     }
 
     /**
