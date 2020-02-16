@@ -113,11 +113,7 @@ public class Zone {
      * @return boolean if it worked
      */
     public boolean removeSpawnLocation(Vector3d spawnLocation){
-        if(spawnLocations.contains(spawnLocation)){
-            spawnLocations.remove(spawnLocation);
-            return true;
-        }
-        return false;
+        return spawnLocations.removeIf(sl -> sl.distanceSquared(spawnLocation)<1);
     }
 
     /**

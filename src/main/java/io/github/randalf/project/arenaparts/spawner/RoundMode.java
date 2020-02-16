@@ -19,4 +19,9 @@ public class RoundMode implements SpawnMode {
     	//TODO: implement
         return null;
     }
+
+    @Override
+    public void createEntity() {
+        //TODO: implement
+    }
 }

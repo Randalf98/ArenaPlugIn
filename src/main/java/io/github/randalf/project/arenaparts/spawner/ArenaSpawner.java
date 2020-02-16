@@ -41,9 +41,8 @@ public class ArenaSpawner {
      * Gathering all new entities and spawning them
      */
     public void spawnEnemys(){
-        if(shouldSpawn){
-            ArrayList<Vector3d> spawnLocations = new ArrayList<>(arena.getZone().getSpawnLocations());
-            Vector3d location = getBestSpawnLocation(spawnLocations, arena.getZone().getPlayerInZone());
+        if(shouldSpawn && !arena.getZone().getSpawnLocations().isEmpty()){
+            Vector3d location = getBestSpawnLocation(arena.getZone().getPlayerInZone());
             for(Entity e: mode.getNextEntities(location)){
                 Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getZone().getWorldUUID());
                 if (optionalWorld.isPresent()){
@@ -57,14 +56,13 @@ public class ArenaSpawner {
 
     /**
      * Getter for the most appropriate location to spawn the enemies
-     * @param spawnLocations list of all possible spawnlocations
      * @param playerInZone list of all player in the zone
-     * @return the most appropiate location
+     * @return the most appropriate location
      */
-    private Vector3d getBestSpawnLocation(ArrayList<Vector3d> spawnLocations, ArrayList<Player> playerInZone) {
-        Vector3d furthestLocation = spawnLocations.get(0);
+    private Vector3d getBestSpawnLocation(ArrayList<Player> playerInZone) {
+        Vector3d furthestLocation = null;
         double meanDistance = 0;
-        for(Vector3d v : spawnLocations){
+        for(Vector3d v : arena.getZone().getSpawnLocations()){
             double meanDistanceForLocation = 0;
             for (Player p : playerInZone){
                 meanDistanceForLocation += p.getLocation().getPosition().distanceSquared(v);
@@ -88,6 +86,7 @@ public class ArenaSpawner {
      */
     public void start(){
         shouldSpawn = true;
+        mode.createEntity();
         spawnEnemys();
     }
 

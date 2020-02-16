@@ -12,5 +12,7 @@ import com.flowpowered.math.vector.Vector3d;
 public interface SpawnMode {
 	
     List<Entity> getNextEntities(Vector3d location);
+
+    void createEntity();
     
 }

@@ -34,7 +34,7 @@ public class ZoneConfigurationManager extends ObjectConfigurationManager{
      */
     public void save(){
         try {
-            configurationNode = configLoader.load();
+            configurationNode = configLoader.createEmptyNode();
             new ZoneSerializer().serialize(TypeToken.of(Zone.class), zone, configurationNode);
             configLoader.save(configurationNode);
         } catch (Exception e) {
