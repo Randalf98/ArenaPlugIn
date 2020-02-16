@@ -43,8 +43,7 @@ public class ArenaSpawner {
      */
     public void spawnEnemys(){
         if(shouldSpawn){
-            ArrayList<Vector3d> spawnLocations = new ArrayList<>();
-            spawnLocations.addAll(arena.getArea().getSpawnLocations());
+            ArrayList<Vector3d> spawnLocations = new ArrayList<>(arena.getArea().getSpawnLocations());
             Vector3d location = getBestSpawnLocation(spawnLocations, arena.getArea().getPlayerInArea());
             for(Entity e: mode.getNextEntities(location)){
                 Optional<World> optionalWorld = Sponge.getServer().getWorld(arena.getArea().getWorldUUID());
@@ -134,5 +133,6 @@ public class ArenaSpawner {
         for (Entity entity:entitiesList){
             entity.remove();
         }
+        entitiesList.clear();
     }
 }

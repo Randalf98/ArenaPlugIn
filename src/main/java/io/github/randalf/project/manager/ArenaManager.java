@@ -63,12 +63,6 @@ public class ArenaManager {
         stopArena("Stopped arena by User command", arenaMap.get(arenaName));
     }
 
-    public void stopAllArenas() {
-        for(Arena arena: arenaMap.values()){
-            stopArena("Stopped arena by Systemshutdown", arena);
-        }
-    }
-
     /**
      * Checks if an arenaName has a correlating arena in the arenamap
      * @param arenaName the name which will be checked
@@ -147,5 +141,11 @@ public class ArenaManager {
      */
     public Set<String> getArenaNames() {
         return arenaMap.keySet();
+    }
+
+    public void stopAllArenas() {
+        for(Arena arena : arenaMap.values()){
+            stopArena("Stopped arena by Server shutdown", arena);
+        }
     }
 }

@@ -18,9 +18,7 @@ import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.game.state.GameInitializationEvent;
-import org.spongepowered.api.event.game.state.GameStartedServerEvent;
-import org.spongepowered.api.event.game.state.GameStoppingEvent;
+import org.spongepowered.api.event.game.state.*;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.text.Text;
 import javax.inject.Inject;
@@ -59,13 +57,9 @@ public class ArenaPlugIn {
         setupSerializer();
     }
 
-    /**
-     * When the Plugin gets initialized the function gets executed.
-     * @param event Default GameInitializationEvent from the server
-     */
     @Listener
-    public void onTermination(GameStoppingEvent event) {
-        this.getArenaManager().stopAllArenas();
+    public void onGameStoppingServerEvent(GameStoppingServerEvent event){
+        ArenaPlugIn.getInstance().getArenaManager().stopAllArenas();
     }
 
     /**

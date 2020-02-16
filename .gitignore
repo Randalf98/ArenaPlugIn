@@ -16,6 +16,7 @@ target/
 build/
 .gradle/*
 gradle/*
+*.gradle
 
 out/
 out/*
